@@ -24,7 +24,6 @@ class FirestoreService: ObservableObject {
 	// MARK:- Firestore Operations
 	func getDocuments<T: Codable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
-			
 			if let documents = querySnapshot?.documents {
 				
 				var modelArray = [T]()

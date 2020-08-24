@@ -10,17 +10,19 @@ import Foundation
 import Combine
 
 final class UserDataRepository: ObservableObject {
-	static let shared                    = UserDataRepository()
+	static let shared                       = UserDataRepository()
 	
-	@Published private(set) var userData : UserData?
-	@Published private var authService   = AuthService.shared
-	private var cancellables             = Set<AnyCancellable>()
+	@Published private(set) var isDeterminingAuthState = true
+	@Published private(set) var userData    : UserData?
+	@Published private var authService      = AuthService.shared
+	@Published private var firestoreService = FirestoreService.shared
+	private var cancellables                = Set<AnyCancellable>()
 
 	private init() { registerSubscribers() }
 	
 	// MARK:- UserData CRUD
 	private func loadUserData(uid: String) {
-		FirestoreService.shared.getDocument(collection: .users, documentID: uid) { (result: Result<UserData, Error>) in
+		firestoreService.getDocument(collection: .users, documentID: uid) { (result: Result<UserData, Error>) in
 			switch result {
 				case .success(let user): self.initializeUser(user)
 				case .failure(_): self.signOut()
@@ -38,11 +40,18 @@ final class UserDataRepository: ObservableObject {
 			.receive(on: DispatchQueue.main)
 			.sink {
 				switch $0 {
-				case .signedIn(let uid): self.loadUserData(uid: uid)
-				default: self.deInitializeUser()
+					case .signedIn(let uid): self.loadUserData(uid: uid)
+					default: self.deInitializeUser()
 				}
-		}
-		.store(in: &cancellables)
+				
+				if $0 == .undetermined {
+					self.isDeterminingAuthState = true
+				} else {
+					self.isDeterminingAuthState = false
+				}
+			}
+			.store(in: &cancellables)
+		
 	}
 	
 	private func initializeUser(_ user: UserData) {

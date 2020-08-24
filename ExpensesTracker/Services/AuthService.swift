@@ -12,7 +12,6 @@ import Combine
 
 class AuthService: ObservableObject {
 	static let shared                     = AuthService()
-	var authUser                          : User? { Auth.auth().currentUser }
 	
 	@Published private(set) var authState : AuthState = .undetermined
 	private var authStateChangeHandler    : AuthStateDidChangeListenerHandle?
@@ -59,9 +58,11 @@ class AuthService: ObservableObject {
 		self.authStateChangeHandler = Auth.auth().addStateDidChangeListener { (auth, user) in
 			guard let userID = user?.uid else {
 				self.setAuthState(.signedOut)
+				print("AuthService: User Signed Out.")
 				return
 			}
 			
+			print("AuthService: UID: [\(userID)] Signed In.")
 			self.setAuthState(.signedIn(uid: userID))
 		}
 	}
