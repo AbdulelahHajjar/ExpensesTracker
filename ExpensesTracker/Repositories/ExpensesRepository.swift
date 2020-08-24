@@ -32,7 +32,9 @@ final class ExpensesRepository: ObservableObject {
 		firestoreService.getDocuments(collection: .users_expenses(id: userID), attachListener: true) { (result: Result<[Expense], Error>) in
 			DispatchQueue.main.async {
 				switch result {
-					case .success(let expenses): self.expenses = expenses
+					case .success(let expenses):
+						self.expenses = expenses
+						print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s")")
 					case .failure(_): break
 				}
 			}

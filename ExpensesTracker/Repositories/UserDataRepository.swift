@@ -56,9 +56,11 @@ final class UserDataRepository: ObservableObject {
 	
 	private func initializeUser(_ user: UserData) {
 		DispatchQueue.main.async { self.userData = user }
+		print("UserDataRepository: Initialized UID \(user.id)")
 	}
 	
 	private func deInitializeUser() {
+		print("UserDataRepository: Deinitialized UID \(self.userData?.id ?? "[NO ID]")")
 		DispatchQueue.main.async { self.userData = nil }
 	}
 }

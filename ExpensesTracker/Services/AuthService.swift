@@ -58,11 +58,9 @@ class AuthService: ObservableObject {
 		self.authStateChangeHandler = Auth.auth().addStateDidChangeListener { (auth, user) in
 			guard let userID = user?.uid else {
 				self.setAuthState(.signedOut)
-				print("AuthService: User Signed Out.")
 				return
 			}
 			
-			print("AuthService: UID: [\(userID)] Signed In.")
 			self.setAuthState(.signedIn(uid: userID))
 		}
 	}
