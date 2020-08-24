@@ -21,17 +21,21 @@ class FirestoreService: ObservableObject {
 	
 	private init() { registerSubscribers() }
 	
-	// MARK:- Documents CRUD
+	// MARK:- Firestore Operations
 	func getDocuments<T: Codable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
+			
 			if let documents = querySnapshot?.documents {
+				
 				var modelArray = [T]()
+				
 				for document in documents {
 					let decodeResult = self.decode(documentSnapshot: document, as: T.self)
 					switch decodeResult {
 						case .success(let model): modelArray.append(model)
 						default: break
 					}
+					
 				}
 				completion(.success(modelArray))
 			}

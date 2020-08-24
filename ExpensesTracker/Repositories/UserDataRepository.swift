@@ -10,43 +10,46 @@ import Foundation
 import Combine
 
 final class UserDataRepository: ObservableObject {
-	static let shared = UserDataRepository()
+	static let shared                    = UserDataRepository()
 	
-	@Published private var authService = AuthService.shared
-	@Published private(set) var user   : UserData?
-	
-	private var cancellables           = Set<AnyCancellable>()
+	@Published private(set) var userData : UserData?
+	@Published private var authService   = AuthService.shared
+	private var cancellables             = Set<AnyCancellable>()
 
-	private init() {
-		authService.$authState
-			.receive(on: DispatchQueue.main)
-			.sink {
-				switch $0 {
-					case .signedIn(let uid): self.retrieveUser(uid: uid)
-					default: self.deInitializeUser()
-				}
+	private init() { registerSubscribers() }
+	
+	// MARK:- UserData CRUD
+	private func loadUserData(uid: String) {
+		FirestoreService.shared.getDocument(collection: .users, documentID: uid) { (result: Result<UserData, Error>) in
+			switch result {
+				case .success(let user): self.initializeUser(user)
+				case .failure(_): self.signOut()
 			}
-			.store(in: &cancellables)
-	}
-	
-	private func initializeUser(_ user: UserData) {
-		DispatchQueue.main.async { self.user = user }
-	}
-	
-	private func deInitializeUser() {
-		DispatchQueue.main.async { self.user = nil }
+		}
 	}
 	
 	func signOut() {
 		authService.signOut()
 	}
 	
-	private func retrieveUser(uid: String) {
-		FirestoreService.shared.getDocument(collection: .users, documentID: uid) { (result: Result<UserData, Error>) in
-			switch result {
-			case .success(let user): self.initializeUser(user)
-			case .failure(_): self.signOut()
-			}
+	// MARK:- Helpers
+	private func registerSubscribers() {
+		authService.$authState
+			.receive(on: DispatchQueue.main)
+			.sink {
+				switch $0 {
+				case .signedIn(let uid): self.loadUserData(uid: uid)
+				default: self.deInitializeUser()
+				}
 		}
+		.store(in: &cancellables)
+	}
+	
+	private func initializeUser(_ user: UserData) {
+		DispatchQueue.main.async { self.userData = user }
+	}
+	
+	private func deInitializeUser() {
+		DispatchQueue.main.async { self.userData = nil }
 	}
 }

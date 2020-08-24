@@ -20,7 +20,7 @@ class InitialViewModel: ObservableObject {
 	init() { setUpSubscribers() }
 	
 	func setUpSubscribers() {
-		userDataRepository.$user
+		userDataRepository.$userData
 			.receive(on: DispatchQueue.main)
 			.sink { self.isSignedIn.send($0 != nil) }
 			.store(in: &cancellables)

@@ -11,10 +11,11 @@ import Firebase
 import Combine
 
 class AuthService: ObservableObject {
-	static let shared = AuthService()
+	static let shared                     = AuthService()
+	var authUser                          : User? { Auth.auth().currentUser }
 	
-	@Published private(set) var authState = AuthState.undetermined
-	private var authStateChangeHandler : AuthStateDidChangeListenerHandle?
+	@Published private(set) var authState : AuthState = .undetermined
+	private var authStateChangeHandler    : AuthStateDidChangeListenerHandle?
 	
 	private init() { registerStateListener() }
 	

@@ -10,37 +10,41 @@ import Foundation
 import Combine
 
 final class ExpensesRepository: ObservableObject {
-	@Published var userDataRepository = UserDataRepository.shared
-	@Published var firestoreService = FirestoreService.shared
-	
-	static var shared = ExpensesRepository()
-	
-	private var cancellables = Set<AnyCancellable>()
+	static let shared                         = ExpensesRepository()
 
-	init() {
-		userDataRepository.$user
+	@Published private(set) var expenses      = [Expense]()
+	@Published private var firestoreService   = FirestoreService.shared
+	@Published private var userDataRepository = UserDataRepository.shared
+	private var cancellables                  = Set<AnyCancellable>()
+	
+	private init() { registerSubscribers() }
+	
+	// MARK:- Expenses CRUD
+	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> ()) {
+		guard let user = userDataRepository.userData else { return }
+		firestoreService.saveDocument(collection: .users_expenses(id: user.id), documentID: expense.id, model: expense, completion: completion)
+	}
+	
+	// MARK:- Helpers
+	private func loadExpenses() {
+		guard let userID = userDataRepository.userData?.id else { return }
+		
+		firestoreService.getDocuments(collection: .users_expenses(id: userID), attachListener: true) { (result: Result<[Expense], Error>) in
+			DispatchQueue.main.async {
+				switch result {
+					case .success(let expenses): self.expenses = expenses
+					case .failure(_): break
+				}
+			}
+		}
+	}
+	
+	private func registerSubscribers() {
+		userDataRepository.$userData
 			.receive(on: DispatchQueue.main)
 			.sink {
-				if $0 != nil { self.attachDataListener() }
-			}
-			.store(in: &cancellables)
-	}
-	
-	func attachDataListener() {
-		if let user = userDataRepository.user {
-			firestoreService.getDocuments(collection: .users_expenses(id: user.id), attachListener: true) { (result: Result<[Expense], Error>) in
-				print("Getting expenses for \(user.displayName ?? "")")
-			}
-		} else {
-			print("there is no user to get expenses for")
+				if $0 != nil { self.loadExpenses() }
 		}
-	}
-	
-	func addExpense(_ expense: Expense) {
-		if let user = userDataRepository.user {
-			firestoreService.saveDocument(collection: .users_expenses(id: user.id), documentID: expense.id, model: expense) { error in
-				print(error == nil ? "Expense saved!" : "Error while saving expense")
-			}
-		}
+		.store(in: &cancellables)
 	}
 }
