@@ -15,7 +15,7 @@ struct SignUpView: View {
 	
     var body: some View {
 		Form {
-			TextField("Name", text: $viewModel.name)
+			TextField("Name", text: $viewModel.displayName)
 			
 			TextField("Email", text: $viewModel.email)
 				.keyboardType(.emailAddress)

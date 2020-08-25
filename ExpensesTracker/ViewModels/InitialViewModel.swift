@@ -11,11 +11,10 @@ import Firebase
 import Combine
 
 class InitialViewModel: ObservableObject {
+	
 	@Published private var userDataRepository = UserDataRepository.shared
-	
-	private(set) var showHomeView = CurrentValueSubject<Bool, Never>(false)
 	@Published private(set) var showLoadingOverlay = true
-	
+	private(set) var showHomeView = CurrentValueSubject<Bool, Never>(false)
 	private var cancellables = Set<AnyCancellable>()
 	
 	init() { registerSubscribers() }

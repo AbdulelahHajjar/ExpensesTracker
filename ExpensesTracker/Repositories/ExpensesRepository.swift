@@ -46,7 +46,7 @@ final class ExpensesRepository: ObservableObject {
 			.receive(on: DispatchQueue.main)
 			.sink {
 				if $0 != nil { self.loadExpenses() }
-		}
-		.store(in: &cancellables)
+			}
+			.store(in: &cancellables)
 	}
 }

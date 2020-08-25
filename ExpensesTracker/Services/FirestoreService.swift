@@ -24,19 +24,21 @@ class FirestoreService: ObservableObject {
 	func getDocuments<T: Codable & Identifiable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
 		
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
-			if let documents = querySnapshot?.documents {
-				
-				var modelArray = [T]()
-				
-				for document in documents {
-					let decodeResult = self.decode(documentSnapshot: document, as: T.self)
-					switch decodeResult {
-						case .success(let model): modelArray.append(model)
-						default: break
-					}
-				}
-				completion(.success(modelArray))
+			guard let documents = querySnapshot?.documents else {
+				completion(.failure(FirestoreError.unknown))
+				return
 			}
+			
+			var modelArray = [T]()
+			
+			for document in documents {
+				let decodeResult = self.decode(documentSnapshot: document, as: T.self)
+				switch decodeResult {
+				case .success(let model): modelArray.append(model)
+				default: break
+				}
+			}
+			completion(.success(modelArray))
 		}
 		
 		if attachListener {
@@ -50,10 +52,13 @@ class FirestoreService: ObservableObject {
 	
 	func getDocument<T: Codable & Identifiable>(collection: FirestoreCollection, documentID: String, attachListener: Bool, completion: @escaping (Result<T, Error>) -> ()) {
 		let handler: FIRDocumentSnapshotBlock = { (documentSnapshot, error) in
-			if let documentSnapshot = documentSnapshot {
-				let decodeResult = self.decode(documentSnapshot: documentSnapshot, as: T.self)
-				completion(decodeResult)
+			guard let documentSnapshot = documentSnapshot else {
+				completion(.failure(FirestoreError.unknown))
+				return
 			}
+			
+			let decodeResult = self.decode(documentSnapshot: documentSnapshot, as: T.self)
+			completion(decodeResult)
 		}
 		
 		if attachListener {

@@ -11,7 +11,6 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
 	@Published private var expensesRepository = ExpensesRepository.shared
-	@Published private var firestoreService = FirestoreService.shared
 	
 	@Published private(set) var expenses = [Expense]()
 	
@@ -23,7 +22,7 @@ final class HomeViewModel: ObservableObject {
 	
 	private func registerSubscribers() {
 		expensesRepository.$expenses
-			.sink { self.expenses = $0 }
+			.assign(to: \.expenses, on: self)			
 			.store(in: &cancellables)
 	}
 	

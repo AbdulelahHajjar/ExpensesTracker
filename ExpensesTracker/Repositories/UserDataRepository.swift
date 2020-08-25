@@ -30,8 +30,12 @@ final class UserDataRepository: ObservableObject {
 		}
 	}
 	
+	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> ()) {
+		authService.signUp(displayName: displayName, email: email, password: password, completion: completion)
+	}
+	
 	func signIn(email: String, password: String, completion: @escaping (Error?) -> ()) {
-		authService.signIn(email: email, password: password) { completion($0) }
+		authService.signIn(email: email, password: password, completion: completion)
 	}
 	
 	func signOut() {
@@ -47,12 +51,7 @@ final class UserDataRepository: ObservableObject {
 					case .signedIn(let uid): self.loadUserData(uid: uid)
 					default: self.deInitializeUser()
 				}
-				
-				if $0 == .undetermined {
-					self.isDeterminingAuthState = true
-				} else {
-					self.isDeterminingAuthState = false
-				}
+				self.isDeterminingAuthState = $0 == .undetermined ? true : false
 			}
 			.store(in: &cancellables)
 	}
@@ -63,6 +62,7 @@ final class UserDataRepository: ObservableObject {
 	}
 	
 	private func deInitializeUser() {
+		if self.userData == nil { return }
 		print("UserDataRepository: Deinitialized UID \(self.userData?.id ?? "[NO ID]")")
 		DispatchQueue.main.async { self.userData = nil }
 	}

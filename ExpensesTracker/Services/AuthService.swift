@@ -64,7 +64,7 @@ class AuthService: ObservableObject {
 		}
 	}
 	
-	func setAuthState(_ authState: AuthState) {
+	private func setAuthState(_ authState: AuthState) {
 		DispatchQueue.main.async { self.authState = authState }
 	}
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 final class SignInViewModel: ObservableObject {
-	@Published var userDataRepository = UserDataRepository.shared
+	@Published private var userDataRepository = UserDataRepository.shared
 	
 	@Published var email = ""
 	@Published var password = ""

@@ -167,10 +167,10 @@
 		EBF0482D24F479C700A0F04A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EBF0483A24F47A6D00A0F04A /* HomeView.swift */,
 				EBF0483B24F47A6D00A0F04A /* InitialView.swift */,
-				EBF0483924F47A6D00A0F04A /* SignInView.swift */,
 				EBF0483824F47A6D00A0F04A /* SignUpView.swift */,
+				EBF0483924F47A6D00A0F04A /* SignInView.swift */,
+				EBF0483A24F47A6D00A0F04A /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,10 +178,10 @@
 		EBF0482E24F479CA00A0F04A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				EBF0484024F47A7700A0F04A /* HomeViewModel.swift */,
 				EBF0484124F47A7700A0F04A /* InitialViewModel.swift */,
-				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
 				EBF0484224F47A7800A0F04A /* SignUpViewModel.swift */,
+				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
+				EBF0484024F47A7700A0F04A /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
