@@ -6,7 +6,6 @@
 //  Copyright © 2020 Abdulelah Hajjar. All rights reserved.
 //
 
-import Foundation
 import Firebase
 import Combine
 
@@ -33,7 +32,7 @@ class AuthService: ObservableObject {
 			profileChangeRequest.commitChanges { _ in }
 			
 			let firestoreUser = UserData(id: authUser.uid, email: email, displayName: displayName)
-			FirestoreService.shared.saveDocument(collection: .users, documentID: firestoreUser.id, model: firestoreUser, completion: completion)
+			FirestoreService.shared.saveDocument(collection: .users, model: firestoreUser, completion: completion)
 		}
 	}
 	

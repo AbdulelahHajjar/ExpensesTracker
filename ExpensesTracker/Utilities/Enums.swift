@@ -12,12 +12,10 @@ enum FirestoreCollection {
 	case users
 	case users_expenses(userID: String)
 	
-	var firestorePath: String {
+	var collectionPath: String {
 		switch self {
-		case .users:
-			return "users"
-		case .users_expenses(let id):
-			return "users/\(id)/expenses"
+			case .users: return "users"
+			case .users_expenses(let userID): return "users/\(userID)/expenses"
 		}
 	}
 }

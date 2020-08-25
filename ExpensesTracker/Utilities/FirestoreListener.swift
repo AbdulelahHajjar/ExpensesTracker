@@ -11,7 +11,7 @@ import Firebase
 
 struct FirestoreListener {
 	let listenerRegistration: ListenerRegistration
-	let collection: FirestoreCollection
+	let firestorePath: String
 	
 	func removeListener() { listenerRegistration.remove() }
 }

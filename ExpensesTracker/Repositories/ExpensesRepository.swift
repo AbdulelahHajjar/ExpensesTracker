@@ -22,7 +22,7 @@ final class ExpensesRepository: ObservableObject {
 	// MARK:- Expenses CRUD
 	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }
-		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), documentID: expense.id, model: expense, completion: completion)
+		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
 	}
 	
 	// MARK:- Helpers

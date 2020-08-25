@@ -6,7 +6,6 @@
 //  Copyright © 2020 Abdulelah Hajjar. All rights reserved.
 //
 
-import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import Combine
@@ -22,7 +21,8 @@ class FirestoreService: ObservableObject {
 	private init() { registerSubscribers() }
 	
 	// MARK:- Firestore Operations
-	func getDocuments<T: Codable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
+	func getDocuments<T: Codable & Identifiable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
+		
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
 			if let documents = querySnapshot?.documents {
 				
@@ -34,7 +34,6 @@ class FirestoreService: ObservableObject {
 						case .success(let model): modelArray.append(model)
 						default: break
 					}
-					
 				}
 				completion(.success(modelArray))
 			}
@@ -42,27 +41,32 @@ class FirestoreService: ObservableObject {
 		
 		if attachListener {
 			//TODO: Find a better way to manage listeners
-			let listener = db.collection(collection.firestorePath).addSnapshotListener(handler)
-			if snapshotListeners.map({ $0.collection }).contains(where: { $0.firestorePath == collection.firestorePath }) == false {
-				snapshotListeners.append(.init(listenerRegistration: listener, collection: collection))
-			}
+			let listener = db.collection(collection.collectionPath).addSnapshotListener(handler)
+			appendListenersArray(listener: listener, firestorePath: collection.collectionPath)
 		} else {
-			db.collection(collection.firestorePath).getDocuments(completion: handler)
+			db.collection(collection.collectionPath).getDocuments(completion: handler)
 		}
 	}
 	
-	func getDocument<T: Codable>(collection: FirestoreCollection, documentID: String, completion: @escaping (Result<T, Error>) -> ()) {
-		db.collection(collection.firestorePath).document(documentID).getDocument { (documentSnapshot, error) in
+	func getDocument<T: Codable & Identifiable>(collection: FirestoreCollection, documentID: String, attachListener: Bool, completion: @escaping (Result<T, Error>) -> ()) {
+		let handler: FIRDocumentSnapshotBlock = { (documentSnapshot, error) in
 			if let documentSnapshot = documentSnapshot {
 				let decodeResult = self.decode(documentSnapshot: documentSnapshot, as: T.self)
 				completion(decodeResult)
 			}
 		}
+		
+		if attachListener {
+			let listener = db.collection(collection.collectionPath).document(documentID).addSnapshotListener(handler)
+			appendListenersArray(listener: listener, firestorePath: collection.collectionPath)
+		} else {
+			db.collection(collection.collectionPath).document(documentID).getDocument(completion: handler)
+		}
 	}
 	
-	func saveDocument<T: Codable>(collection: FirestoreCollection, documentID: String, model: T, completion: @escaping (Error?) -> ()) {
+	func saveDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> ()) {
 		do {
-			try db.collection(collection.firestorePath).document(documentID).setData(from: model, merge: false)
+			try db.collection(collection.collectionPath).document("\(model.id)").setData(from: model, merge: false)
 			completion(nil)
 		} catch {
 			completion(error)
@@ -73,6 +77,12 @@ class FirestoreService: ObservableObject {
 	private func decode<T: Codable>(documentSnapshot: DocumentSnapshot, as: T.Type) -> Result<T, Error> {
 		if let model = try? documentSnapshot.data(as: T.self) { return .success(model) }
 		else { return .failure(FirestoreError.invalidDocument)}
+	}
+	
+	private func appendListenersArray(listener: ListenerRegistration, firestorePath: String) {
+		if snapshotListeners.map({ $0.firestorePath }).contains(where: { $0 == firestorePath }) == false {
+			snapshotListeners.append(.init(listenerRegistration: listener, firestorePath: firestorePath))
+		}
 	}
 	
 	private func removeAllListeners() {
