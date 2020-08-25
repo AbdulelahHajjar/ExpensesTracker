@@ -9,12 +9,15 @@
 import Foundation
 
 final class SignInViewModel: ObservableObject {
-	@Published var authService = AuthService.shared
+	@Published var userDataRepository = UserDataRepository.shared
 	
 	@Published var email = ""
 	@Published var password = ""
 	
-	func signIn(completion: @escaping (Error?) -> ()) {
-		authService.signIn(email: email, password: password) { completion($0) }
+	func signIn() {
+		// TODO: Check if valid email and password
+		userDataRepository.signIn(email: email, password: password) { error in
+			// TODO: Manage Completion Handler
+		}
 	}
 }

@@ -10,7 +10,7 @@ import Foundation
 
 enum FirestoreCollection {
 	case users
-	case users_expenses(id: String)
+	case users_expenses(userID: String)
 	
 	var firestorePath: String {
 		switch self {

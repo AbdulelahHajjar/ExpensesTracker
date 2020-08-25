@@ -30,6 +30,10 @@ final class UserDataRepository: ObservableObject {
 		}
 	}
 	
+	func signIn(email: String, password: String, completion: @escaping (Error?) -> ()) {
+		authService.signIn(email: email, password: password) { completion($0) }
+	}
+	
 	func signOut() {
 		authService.signOut()
 	}

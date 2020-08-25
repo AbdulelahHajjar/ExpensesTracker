@@ -13,23 +13,22 @@ import Combine
 class InitialViewModel: ObservableObject {
 	@Published private var userDataRepository = UserDataRepository.shared
 	
-	@Published var isSignedIn: Bool = false
-	@Published var showLoadingOverlay = true
+	private(set) var showHomeView = CurrentValueSubject<Bool, Never>(false)
+	@Published private(set) var showLoadingOverlay = true
 	
 	private var cancellables = Set<AnyCancellable>()
 	
 	init() { registerSubscribers() }
 	
-	func registerSubscribers() {
+	private func registerSubscribers() {
 		userDataRepository.$userData
 			.receive(on: DispatchQueue.main)
-			.map { $0 != nil }
-			.assign(to: \.isSignedIn, on: self)
+			.sink { self.showHomeView.send($0 != nil) }
 			.store(in: &cancellables)
 		
 		userDataRepository.$isDeterminingAuthState
 			.receive(on: DispatchQueue.main)
-			.debounce(for: 1.4, scheduler: RunLoop.main)
+			.debounce(for: 1.5, scheduler: RunLoop.main)
 			.assign(to: \.showLoadingOverlay, on: self)
 			.store(in: &cancellables)
 	}

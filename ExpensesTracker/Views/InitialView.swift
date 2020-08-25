@@ -13,6 +13,7 @@ struct InitialView: View {
 	
 	@State private var showSignUp = false
 	@State private var showSignIn = false
+	@State private var showHome = false
 	
     var body: some View {
 		NavigationView {
@@ -35,8 +36,9 @@ struct InitialView: View {
 					SignInView(viewModel: .init())
 				}
 				
-				NavigationLink(destination: HomeView(viewModel: .init()).navigationBarBackButtonHidden(true), isActive: $viewModel.isSignedIn) { EmptyView() }
+				NavigationLink(destination: HomeView(viewModel: .init()).navigationBarBackButtonHidden(true), isActive: $showHome) { EmptyView() }
 			}
+			.onReceive(viewModel.showHomeView) { self.showHome = $0 }
 		}
 		.overlay(
 			Color.red

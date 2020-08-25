@@ -22,14 +22,14 @@ final class ExpensesRepository: ObservableObject {
 	// MARK:- Expenses CRUD
 	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }
-		firestoreService.saveDocument(collection: .users_expenses(id: user.id), documentID: expense.id, model: expense, completion: completion)
+		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), documentID: expense.id, model: expense, completion: completion)
 	}
 	
 	// MARK:- Helpers
 	private func loadExpenses() {
 		guard let userID = userDataRepository.userData?.id else { return }
 		
-		firestoreService.getDocuments(collection: .users_expenses(id: userID), attachListener: true) { (result: Result<[Expense], Error>) in
+		firestoreService.getDocuments(collection: .users_expenses(userID: userID), attachListener: true) { (result: Result<[Expense], Error>) in
 			DispatchQueue.main.async {
 				switch result {
 					case .success(let expenses):

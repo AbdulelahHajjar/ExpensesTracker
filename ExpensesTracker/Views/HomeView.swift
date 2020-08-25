@@ -7,32 +7,39 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct HomeView: View {
 	@ObservedObject var viewModel: HomeViewModel
 	
     var body: some View {
-		VStack {
-			Text("Hello, World!")
-			Button(action: {
-				AuthService.shared.signOut()
-			}) {
-				Text("Sign Out")
-			}
-			
-			Button(action: {
-				self.viewModel.addExpense(Expense(amount: 1, timestamp: .init(date: Date()), category: nil, store: nil))
-			}) {
-				Text("Add Expense")
-			}
-			
-			Button(action: {
-
-			}) {
-				Text("Reset User")
+		List {
+			ForEach(viewModel.expenses) { expense in
+				VStack {
+					Text("\(expense.amount)")
+					Text("\(expense.timestamp.dateValue().shortDateTime)")
+					Text("\(expense.id)")
+				}
 			}
 		}
 		.navigationBarTitle("Home")
+		.navigationBarItems(trailing:
+			
+			HStack {
+				Button(action: {
+					self.viewModel.addExpense(Expense(amount: Double.random(in: 0...10), timestamp: Timestamp(date: Date()), category: nil, store: nil))
+				}) {
+					Text("Add Expense")
+				}
+				
+				Button(action: {
+					AuthService.shared.signOut()
+				}) {
+					Text("Log Out")
+				}
+			}
+			
+		)
     }
 }
 

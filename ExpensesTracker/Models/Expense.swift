@@ -12,6 +12,7 @@ import Firebase
 
 struct Expense: Identifiable, Codable {
 	let id = UUID().uuidString
+	
 	var amount    : Double
 	var timestamp : Timestamp
 //	var location  : CLLocation?

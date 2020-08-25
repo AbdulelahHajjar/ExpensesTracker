@@ -28,3 +28,36 @@ extension FirestoreError: LocalizedError {
 		}
 	}
 }
+
+extension Date {
+	func localizedDescription(dateStyle: DateFormatter.Style = .medium,
+							  timeStyle: DateFormatter.Style = .medium,
+							  in timeZone : TimeZone = .current,
+							  locale   : Locale = .current) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.locale = locale
+		dateFormatter.timeZone = timeZone
+		dateFormatter.dateStyle = dateStyle
+		dateFormatter.timeStyle = timeStyle
+		return dateFormatter.string(from: self)
+	}
+	var localizedDescription: String { localizedDescription() }
+}
+
+extension Date {
+	
+	var fullDate: String   { localizedDescription(dateStyle: .full,   timeStyle: .none) }
+	var longDate: String   { localizedDescription(dateStyle: .long,   timeStyle: .none) }
+	var mediumDate: String { localizedDescription(dateStyle: .medium, timeStyle: .none) }
+	var shortDate: String  { localizedDescription(dateStyle: .short,  timeStyle: .none) }
+	
+	var fullTime: String   { localizedDescription(dateStyle: .none,   timeStyle: .full) }
+	var longTime: String   { localizedDescription(dateStyle: .none,   timeStyle: .long) }
+	var mediumTime: String { localizedDescription(dateStyle: .none,   timeStyle: .medium) }
+	var shortTime: String  { localizedDescription(dateStyle: .none,   timeStyle: .short) }
+	
+	var fullDateTime: String   { localizedDescription(dateStyle: .full,   timeStyle: .full) }
+	var longDateTime: String   { localizedDescription(dateStyle: .long,   timeStyle: .long) }
+	var mediumDateTime: String { localizedDescription(dateStyle: .medium, timeStyle: .medium) }
+	var shortDateTime: String  { localizedDescription(dateStyle: .short,  timeStyle: .short) }
+}

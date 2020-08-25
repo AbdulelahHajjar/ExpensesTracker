@@ -7,12 +7,29 @@
 //
 
 import Foundation
+import Combine
 
 final class HomeViewModel: ObservableObject {
-	@Published var expensesRepository = ExpensesRepository.shared
-	@Published var firestoreService = FirestoreService.shared
+	@Published private var expensesRepository = ExpensesRepository.shared
+	@Published private var firestoreService = FirestoreService.shared
+	
+	@Published private(set) var expenses = [Expense]()
+	
+	var cancellables = Set<AnyCancellable>()
+	
+	init() {
+		registerSubscribers()
+	}
+	
+	private func registerSubscribers() {
+		expensesRepository.$expenses
+			.sink { self.expenses = $0 }
+			.store(in: &cancellables)
+	}
 	
 	func addExpense(_ expense: Expense) {
-		
+		self.expensesRepository.addExpense(expense) { error in
+			// TODO: Implement handling
+		}
 	}
 }

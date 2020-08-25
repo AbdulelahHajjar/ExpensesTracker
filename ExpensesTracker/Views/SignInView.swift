@@ -25,10 +25,7 @@ struct SignInView: View {
     }
 	
 	func signIn() {
-		viewModel.signIn { error in
-			// TODO:- Implement error handling
-			self.presentationMode.wrappedValue.dismiss()
-		}
+		viewModel.signIn()
 	}
 }
 
