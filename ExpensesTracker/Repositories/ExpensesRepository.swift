@@ -19,13 +19,13 @@ final class ExpensesRepository: ObservableObject {
 	
 	private init() { registerSubscribers() }
 	
-	// MARK:- Expenses CRUD
-	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> ()) {
+	// MARK: - Expenses CRUD
+	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
 		guard let user = userDataRepository.userData else { return }
 		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
 	}
 	
-	// MARK:- Helpers
+	// MARK: - Helpers
 	private func loadExpenses() {
 		guard let userID = userDataRepository.userData?.id else { return }
 		

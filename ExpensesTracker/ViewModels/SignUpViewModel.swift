@@ -15,7 +15,7 @@ class SignUpViewModel: ObservableObject {
 	@Published var email    = ""
 	@Published var password = ""
 	
-	func signUp(completion: @escaping (Error?) -> ()) {
+	func signUp(completion: @escaping (Error?) -> (Void)) {
 		userDataRepository.signUp(displayName: displayName, email: email, password: password) { error in
 			
 		}

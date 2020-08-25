@@ -20,8 +20,10 @@ class FirestoreService: ObservableObject {
 	
 	private init() { registerSubscribers() }
 	
-	// MARK:- Firestore Operations
-	func getDocuments<T: Codable & Identifiable>(collection: FirestoreCollection, attachListener: Bool, completion: @escaping (Result<[T], Error>) -> ()) {
+	// MARK: - Firestore Operations
+	func getDocuments<T: Codable & Identifiable>(collection: FirestoreCollection,
+												 attachListener: Bool,
+												 completion: @escaping (Result<[T], Error>) -> (Void)) {
 		
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
@@ -50,7 +52,11 @@ class FirestoreService: ObservableObject {
 		}
 	}
 	
-	func getDocument<T: Codable & Identifiable>(collection: FirestoreCollection, documentID: String, attachListener: Bool, completion: @escaping (Result<T, Error>) -> ()) {
+	func getDocument<T: Codable & Identifiable>(collection: FirestoreCollection,
+												documentID: String,
+												attachListener: Bool,
+												completion: @escaping (Result<T, Error>) -> (Void)) {
+		
 		let handler: FIRDocumentSnapshotBlock = { (documentSnapshot, error) in
 			guard let documentSnapshot = documentSnapshot else {
 				completion(.failure(FirestoreError.unknown))
@@ -69,7 +75,7 @@ class FirestoreService: ObservableObject {
 		}
 	}
 	
-	func saveDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> ()) {
+	func saveDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> (Void)) {
 		do {
 			try db.collection(collection.collectionPath).document("\(model.id)").setData(from: model, merge: false)
 			completion(nil)
@@ -78,7 +84,7 @@ class FirestoreService: ObservableObject {
 		}
 	}
 	
-	// MARK:- Helpers
+	// MARK: - Helpers
 	private func decode<T: Codable>(documentSnapshot: DocumentSnapshot, as: T.Type) -> Result<T, Error> {
 		if let model = try? documentSnapshot.data(as: T.self) { return .success(model) }
 		else { return .failure(FirestoreError.invalidDocument)}

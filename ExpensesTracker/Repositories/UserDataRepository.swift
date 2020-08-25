@@ -20,7 +20,7 @@ final class UserDataRepository: ObservableObject {
 
 	private init() { registerSubscribers() }
 	
-	// MARK:- UserData CRUD
+	// MARK: - UserData CRUD
 	private func loadUserData(uid: String) {
 		firestoreService.getDocument(collection: .users, documentID: uid, attachListener: true) { (result: Result<UserData, Error>) in
 			switch result {
@@ -30,11 +30,11 @@ final class UserDataRepository: ObservableObject {
 		}
 	}
 	
-	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> ()) {
+	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> (Void)) {
 		authService.signUp(displayName: displayName, email: email, password: password, completion: completion)
 	}
 	
-	func signIn(email: String, password: String, completion: @escaping (Error?) -> ()) {
+	func signIn(email: String, password: String, completion: @escaping (Error?) -> (Void)) {
 		authService.signIn(email: email, password: password, completion: completion)
 	}
 	
@@ -42,7 +42,7 @@ final class UserDataRepository: ObservableObject {
 		authService.signOut()
 	}
 	
-	// MARK:- Helpers
+	// MARK: - Helpers
 	private func registerSubscribers() {
 		authService.$authState
 			.receive(on: DispatchQueue.main)

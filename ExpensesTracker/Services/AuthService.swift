@@ -17,8 +17,8 @@ class AuthService: ObservableObject {
 	
 	private init() { registerStateListener() }
 	
-	// MARK:- Authentication Operations
-	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> ()) {
+	// MARK: - Authentication Operations
+	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> (Void)) {
 		if Auth.auth().currentUser != nil { return }
 		
 		Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -36,7 +36,7 @@ class AuthService: ObservableObject {
 		}
 	}
 	
-	func signIn(email: String, password: String, completion: @escaping (Error?) -> ()) {
+	func signIn(email: String, password: String, completion: @escaping (Error?) -> (Void)) {
 		if Auth.auth().currentUser != nil { return }
 		
 		Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
@@ -48,7 +48,7 @@ class AuthService: ObservableObject {
 		try? Auth.auth().signOut()
 	}
 	
-	// MARK:- Helpers
+	// MARK: - Helpers
 	private func registerStateListener() {
 		if let handler = authStateChangeHandler {
 			Auth.auth().removeStateDidChangeListener(handler)
