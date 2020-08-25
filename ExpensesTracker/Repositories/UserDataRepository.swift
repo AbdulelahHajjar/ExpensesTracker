@@ -22,7 +22,7 @@ final class UserDataRepository: ObservableObject {
 	
 	// MARK:- UserData CRUD
 	private func loadUserData(uid: String) {
-		firestoreService.getDocument(collection: .users, documentID: uid, attachListener: false) { (result: Result<UserData, Error>) in
+		firestoreService.getDocument(collection: .users, documentID: uid, attachListener: true) { (result: Result<UserData, Error>) in
 			switch result {
 				case .success(let user): self.initializeUser(user)
 				case .failure(_): self.signOut()

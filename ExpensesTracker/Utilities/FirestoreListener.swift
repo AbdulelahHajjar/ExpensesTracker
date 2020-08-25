@@ -11,7 +11,14 @@ import Firebase
 
 struct FirestoreListener {
 	let listenerRegistration: ListenerRegistration
-	let firestorePath: String
+	let listenerType: ListenerType
 	
-	func removeListener() { listenerRegistration.remove() }
+	func removeListener() {
+		listenerRegistration.remove()
+	}
+}
+
+enum ListenerType: Equatable {
+	case collectionListener(collectionPath: String)
+	case documentListener(collectionPath: String, documentID: String)
 }

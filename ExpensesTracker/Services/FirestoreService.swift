@@ -42,7 +42,7 @@ class FirestoreService: ObservableObject {
 		if attachListener {
 			//TODO: Find a better way to manage listeners
 			let listener = db.collection(collection.collectionPath).addSnapshotListener(handler)
-			appendListenersArray(listener: listener, firestorePath: collection.collectionPath)
+			appendListenersArray(listener: listener, listenerType: .collectionListener(collectionPath: collection.collectionPath))
 		} else {
 			db.collection(collection.collectionPath).getDocuments(completion: handler)
 		}
@@ -58,7 +58,7 @@ class FirestoreService: ObservableObject {
 		
 		if attachListener {
 			let listener = db.collection(collection.collectionPath).document(documentID).addSnapshotListener(handler)
-			appendListenersArray(listener: listener, firestorePath: collection.collectionPath)
+			appendListenersArray(listener: listener, listenerType: .documentListener(collectionPath: collection.collectionPath, documentID: documentID))
 		} else {
 			db.collection(collection.collectionPath).document(documentID).getDocument(completion: handler)
 		}
@@ -79,9 +79,9 @@ class FirestoreService: ObservableObject {
 		else { return .failure(FirestoreError.invalidDocument)}
 	}
 	
-	private func appendListenersArray(listener: ListenerRegistration, firestorePath: String) {
-		if snapshotListeners.map({ $0.firestorePath }).contains(where: { $0 == firestorePath }) == false {
-			snapshotListeners.append(.init(listenerRegistration: listener, firestorePath: firestorePath))
+	private func appendListenersArray(listener: ListenerRegistration, listenerType: ListenerType) {
+		if snapshotListeners.map({ $0.listenerType }).contains(listenerType) == false {
+			snapshotListeners.append(.init(listenerRegistration: listener, listenerType: listenerType))
 		}
 	}
 	
