@@ -30,3 +30,9 @@ struct Expense: Identifiable, Codable {
 
 struct Category: Codable {}
 struct Store: Codable {}
+
+#if DEBUG
+extension Expense {
+	static let placeholder = Expense(amount: 0, timestamp: Timestamp(date: .init()), category: nil, store: nil)
+}
+#endif

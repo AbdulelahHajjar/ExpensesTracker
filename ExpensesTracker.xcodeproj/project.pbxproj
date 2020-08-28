@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3714B011E6986A0CCF46BD1C /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A067AC110A170D6F81F8F6A /* Pods_ExpensesTracker.framework */; };
 		EB2FB10C24F992390088AE1B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10B24F992390088AE1B /* HomeView.swift */; };
+		EB2FB10E24F995760088AE1B /* ExpensesBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* ExpensesBottomSheetViewModel.swift */; };
+		EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11124F997600088AE1B /* ExpenseCell.swift */; };
+		EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */; };
+		EB2FB11624F997F90088AE1B /* ExpensesBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11524F997F90088AE1B /* ExpensesBottomSheetView.swift */; };
 		EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */; };
 		EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */; };
 		EBDAAA3E24F477DE0040E1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA3D24F477DE0040E1D6 /* Assets.xcassets */; };
@@ -38,6 +42,10 @@
 		321F74D7AEF046852725563D /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
 		5A067AC110A170D6F81F8F6A /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2FB10B24F992390088AE1B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EB2FB10D24F995760088AE1B /* ExpensesBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesBottomSheetViewModel.swift; sourceTree = "<group>"; };
+		EB2FB11124F997600088AE1B /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
+		EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCellViewModel.swift; sourceTree = "<group>"; };
+		EB2FB11524F997F90088AE1B /* ExpensesBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesBottomSheetView.swift; sourceTree = "<group>"; };
 		EBDAAA3424F477DD0040E1D6 /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +121,23 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		EB2FB10F24F9973E0088AE1B /* Reusables */ = {
+			isa = PBXGroup;
+			children = (
+				EB2FB11124F997600088AE1B /* ExpenseCell.swift */,
+				EB2FB11524F997F90088AE1B /* ExpensesBottomSheetView.swift */,
+			);
+			path = Reusables;
+			sourceTree = "<group>";
+		};
+		EB2FB11024F997500088AE1B /* Reusables */ = {
+			isa = PBXGroup;
+			children = (
+				EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */,
+			);
+			path = Reusables;
+			sourceTree = "<group>";
+		};
 		EBDAAA2B24F477DD0040E1D6 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +192,7 @@
 		EBF0482D24F479C700A0F04A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB2FB10F24F9973E0088AE1B /* Reusables */,
 				EBF0483B24F47A6D00A0F04A /* InitialView.swift */,
 				EBF0483824F47A6D00A0F04A /* SignUpView.swift */,
 				EBF0483924F47A6D00A0F04A /* SignInView.swift */,
@@ -178,10 +204,12 @@
 		EBF0482E24F479CA00A0F04A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EB2FB11024F997500088AE1B /* Reusables */,
 				EBF0484124F47A7700A0F04A /* InitialViewModel.swift */,
 				EBF0484224F47A7800A0F04A /* SignUpViewModel.swift */,
 				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
 				EBF0484024F47A7700A0F04A /* HomeViewModel.swift */,
+				EB2FB10D24F995760088AE1B /* ExpensesBottomSheetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -352,8 +380,11 @@
 				EBF0485424F47A9000A0F04A /* Extensions.swift in Sources */,
 				EBF0484E24F47A8A00A0F04A /* FirestoreService.swift in Sources */,
 				EBF0484524F47A7800A0F04A /* InitialViewModel.swift in Sources */,
+				EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */,
 				EBF0485524F47A9000A0F04A /* FirestoreListener.swift in Sources */,
 				EBF0484B24F47A8300A0F04A /* ExpensesRepository.swift in Sources */,
+				EB2FB10E24F995760088AE1B /* ExpensesBottomSheetViewModel.swift in Sources */,
+				EB2FB11624F997F90088AE1B /* ExpensesBottomSheetView.swift in Sources */,
 				EBF0484424F47A7800A0F04A /* HomeViewModel.swift in Sources */,
 				EBF0485324F47A9000A0F04A /* Enums.swift in Sources */,
 				EBF0483F24F47A6D00A0F04A /* InitialView.swift in Sources */,
@@ -363,6 +394,7 @@
 				EBF0484A24F47A8300A0F04A /* UserDataRepository.swift in Sources */,
 				EBF0484724F47A7800A0F04A /* SignInViewModel.swift in Sources */,
 				EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */,
+				EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */,
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
 				EBF0484F24F47A8A00A0F04A /* AuthService.swift in Sources */,
