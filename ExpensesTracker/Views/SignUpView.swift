@@ -35,17 +35,8 @@ struct SignUpView: View {
 	}
 }
 
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
 		SignUpView(viewModel: SignUpViewModel())
     }
-}
-
-struct Student: Identifiable {
-	var name: String
-	var id: String
-	var dob: Date
-	var grades: [String]
 }

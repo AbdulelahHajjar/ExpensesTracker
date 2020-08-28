@@ -134,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */,
+				EB2FB10D24F995760088AE1B /* ExpensesBottomSheetViewModel.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -209,7 +210,6 @@
 				EBF0484224F47A7800A0F04A /* SignUpViewModel.swift */,
 				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
 				EBF0484024F47A7700A0F04A /* HomeViewModel.swift */,
-				EB2FB10D24F995760088AE1B /* ExpensesBottomSheetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
