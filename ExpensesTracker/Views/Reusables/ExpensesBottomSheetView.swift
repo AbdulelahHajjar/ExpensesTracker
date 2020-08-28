@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ExpensesBottomSheetView: View {
 	@ObservedObject var viewModel: ExpensesBottomSheetViewModel
-	@State var expandExpensesList = false
+	@State var isShowingBottomSheet = false
 	@State var translation = CGSize.zero
 	
 	var body: some View {
@@ -28,7 +28,7 @@ struct ExpensesBottomSheetView: View {
 					ExpenseCell(viewModel: .init(expense: expense))
 				}
 			}
-			.disabled(true)
+			.disabled(!isShowingBottomSheet)
 			
 			Spacer()
 		}
@@ -38,16 +38,16 @@ struct ExpensesBottomSheetView: View {
 		.clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
 		.shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: 0)
 		.edgesIgnoringSafeArea(.all)
-		.offset(y: expandExpensesList ? 100 : 1.4 * screen.height / 3)
+		.offset(y: isShowingBottomSheet ? 100 : 1.4 * screen.height / 3)
 		.offset(y: translation.height)
 		.gesture(
 			DragGesture()
 				.onChanged { value in
 					withAnimation(.easeInOut(duration: 0.2)) {
-						if self.expandExpensesList == false && (value.translation.height > 40 || value.translation.height < -screen.height / 2.4) {
+						if self.isShowingBottomSheet == false && (value.translation.height > 40 || value.translation.height < -screen.height / 2.4) {
 							self.translation = .zero
 						}
-						else if self.expandExpensesList == true && (value.translation.height < -40 || value.translation.height > 1.4 * screen.height / 3) {
+						else if self.isShowingBottomSheet == true && (value.translation.height < -40 || value.translation.height > 1.4 * screen.height / 3) {
 							self.translation = .zero
 						} else {
 							self.translation = value.translation
@@ -59,9 +59,9 @@ struct ExpensesBottomSheetView: View {
 				withAnimation(.easeInOut(duration: 0.2)) {
 					self.translation = .zero
 					if value.translation.height < -80 {
-						self.expandExpensesList = true
+						self.isShowingBottomSheet = true
 					} else if value.translation.height > 80 {
-						self.expandExpensesList = false
+						self.isShowingBottomSheet = false
 					}
 				}
 			}
