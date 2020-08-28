@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 /// Source: https://forums.swift.org/t/does-assign-to-produce-memory-leaks/29546/11
 extension Publisher where Failure == Never {
@@ -71,3 +72,5 @@ extension Date {
 	var mediumDateTime: String { localizedDescription(dateStyle: .medium, timeStyle: .medium) }
 	var shortDateTime: String  { localizedDescription(dateStyle: .short,  timeStyle: .short) }
 }
+
+let screen = UIScreen.main.bounds

@@ -26,7 +26,7 @@ struct InitialView: View {
 				.sheet(isPresented: $showSignUp) {
 					SignUpView(viewModel: .init())
 				}
-				
+								
 				Button(action: {
 					self.showSignIn = true
 				}) {
@@ -44,7 +44,7 @@ struct InitialView: View {
 			Color.red
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.edgesIgnoringSafeArea(.all)
-				.opacity(viewModel.showLoadingOverlay ? 1 : 0)
+				.opacity(viewModel.extendLaunchScreen ? 1 : 0)
 		)
 	}
 }

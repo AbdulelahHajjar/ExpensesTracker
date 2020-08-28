@@ -13,7 +13,7 @@ import Combine
 class InitialViewModel: ObservableObject {
 	
 	@Published private var userDataRepository = UserDataRepository.shared
-	@Published private(set) var showLoadingOverlay = true
+	@Published private(set) var extendLaunchScreen = true
 	private(set) var showHomeView = CurrentValueSubject<Bool, Never>(false)
 	private var cancellables = Set<AnyCancellable>()
 	
@@ -28,7 +28,7 @@ class InitialViewModel: ObservableObject {
 		userDataRepository.$isDeterminingAuthState
 			.receive(on: DispatchQueue.main)
 			.debounce(for: 1.5, scheduler: RunLoop.main)
-			.assign(to: \.showLoadingOverlay, on: self)
+			.assign(to: \.extendLaunchScreen, on: self)
 			.store(in: &cancellables)
 	}
 	
