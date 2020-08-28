@@ -12,9 +12,15 @@ struct HomeView: View {
 	@ObservedObject var viewModel: HomeViewModel
 	
 	var body: some View {
-		VStack {
-			Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
+		ZStack {
+			Color(#colorLiteral(red: 0.5261384894, green: 0.8862745166, blue: 0.5152329912, alpha: 1))
 				.edgesIgnoringSafeArea(.all)
+			Button(action: {
+				self.viewModel.temporarySignOut()
+			}) {
+				Text("Log Out")
+			}
+			.offset(y: -100)
 		}
 		.overlay(
 			ExpensesBottomSheetView(viewModel: .init(expenses: viewModel.expenses))

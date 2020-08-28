@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 final class HomeViewModel: ObservableObject {
+	@Published private var authService = AuthService.shared
 	@Published private var expensesRepository = ExpensesRepository.shared
 	
 	@Published private(set) var expenses = [Expense]()
@@ -30,5 +31,9 @@ final class HomeViewModel: ObservableObject {
 		self.expensesRepository.addExpense(expense) { error in
 			// TODO: Implement handling
 		}
+	}
+	
+	func temporarySignOut() {
+		authService.signOut()
 	}
 }

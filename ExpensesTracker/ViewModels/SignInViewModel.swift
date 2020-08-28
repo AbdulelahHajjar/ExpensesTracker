@@ -14,10 +14,13 @@ final class SignInViewModel: ObservableObject {
 	@Published var email = ""
 	@Published var password = ""
 	
+	@Published private(set) var dismissModal = false
+	
 	func signIn() {
 		// TODO: Check if valid email and password
 		userDataRepository.signIn(email: email, password: password) { error in
 			// TODO: Manage Completion Handler
+			self.dismissModal = true
 		}
 	}
 }

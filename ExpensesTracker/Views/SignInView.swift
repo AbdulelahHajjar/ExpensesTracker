@@ -22,6 +22,11 @@ struct SignInView: View {
 			
 			Button(action: signIn) { Text("Sign In") }
 		}
+		.onReceive(viewModel.$dismissModal) { value in
+			if value == true {
+				self.presentationMode.wrappedValue.dismiss()
+			}
+		}
     }
 	
 	func signIn() {
