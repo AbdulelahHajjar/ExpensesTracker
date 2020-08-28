@@ -13,6 +13,8 @@
 		EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11124F997600088AE1B /* ExpenseCell.swift */; };
 		EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */; };
 		EB2FB11624F997F90088AE1B /* ExpensesBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11524F997F90088AE1B /* ExpensesBottomSheetView.swift */; };
+		EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */; };
+		EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA224F99F3000324B41 /* AddExpenseView.swift */; };
 		EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */; };
 		EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */; };
 		EBDAAA3E24F477DE0040E1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA3D24F477DE0040E1D6 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		EB2FB11124F997600088AE1B /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
 		EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCellViewModel.swift; sourceTree = "<group>"; };
 		EB2FB11524F997F90088AE1B /* ExpensesBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesBottomSheetView.swift; sourceTree = "<group>"; };
+		EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
+		EB792EA224F99F3000324B41 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		EBDAAA3424F477DD0040E1D6 /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				EBF0483824F47A6D00A0F04A /* SignUpView.swift */,
 				EBF0483924F47A6D00A0F04A /* SignInView.swift */,
 				EB2FB10B24F992390088AE1B /* HomeView.swift */,
+				EB792EA224F99F3000324B41 /* AddExpenseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				EBF0484224F47A7800A0F04A /* SignUpViewModel.swift */,
 				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
 				EBF0484024F47A7700A0F04A /* HomeViewModel.swift */,
+				EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				EBF0483D24F47A6D00A0F04A /* SignInView.swift in Sources */,
 				EBF0485424F47A9000A0F04A /* Extensions.swift in Sources */,
 				EBF0484E24F47A8A00A0F04A /* FirestoreService.swift in Sources */,
+				EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */,
 				EBF0484524F47A7800A0F04A /* InitialViewModel.swift in Sources */,
 				EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */,
 				EBF0485524F47A9000A0F04A /* FirestoreListener.swift in Sources */,
@@ -397,6 +404,7 @@
 				EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */,
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
+				EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */,
 				EBF0484F24F47A8A00A0F04A /* AuthService.swift in Sources */,
 				EB2FB10C24F992390088AE1B /* HomeView.swift in Sources */,
 			);

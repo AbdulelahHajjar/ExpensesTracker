@@ -11,16 +11,29 @@ import SwiftUI
 struct HomeView: View {
 	@ObservedObject var viewModel: HomeViewModel
 	
+	@State private var isShowingAddExpenseView = false
+	
 	var body: some View {
 		ZStack {
 			Color(#colorLiteral(red: 0.5261384894, green: 0.8862745166, blue: 0.5152329912, alpha: 1))
 				.edgesIgnoringSafeArea(.all)
+			
 			Button(action: {
 				self.viewModel.temporarySignOut()
 			}) {
 				Text("Log Out")
 			}
-			.offset(y: -100)
+			.offset(y: -200)
+			
+			Button(action: {
+				self.isShowingAddExpenseView = true
+			}) {
+				Text("Add Expense")
+			}
+			.offset(y: -250)
+			.sheet(isPresented: $isShowingAddExpenseView) {
+				AddExpenseView(viewModel: .init())
+			}
 		}
 		.overlay(
 			ExpensesBottomSheetView(viewModel: .init(expenses: viewModel.expenses))

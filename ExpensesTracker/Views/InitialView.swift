@@ -44,7 +44,12 @@ struct InitialView: View {
 			Color.red
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.edgesIgnoringSafeArea(.all)
+				.overlay(
+					Text("LaunchScreen extension")
+				)
+				.animation(nil)
 				.opacity(viewModel.extendLaunchScreen ? 1 : 0)
+				.animation(.default)
 		)
 	}
 }
