@@ -11,7 +11,7 @@ import CoreLocation
 import Firebase
 
 struct Expense: Identifiable, Codable {
-	let id = UUID().uuidString
+	let id		  : String
 	
 	var amount    : Double
 	var timestamp : Timestamp
@@ -33,6 +33,6 @@ struct Store: Codable {}
 
 #if DEBUG
 extension Expense {
-	static let placeholder = Expense(amount: 0, timestamp: Timestamp(date: .init()), category: nil, store: nil)
+	static let placeholder = Expense(id: UUID().uuidString, amount: 0, timestamp: Timestamp(date: .init()), category: nil, store: nil)
 }
 #endif

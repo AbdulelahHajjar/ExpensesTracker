@@ -9,9 +9,11 @@
 import Foundation
 
 final class ExpenseCellViewModel: ObservableObject {
+	@Published var expensesRepository = ExpensesRepository.shared
 	var expense: Expense
 	
-	var amount: String { "\(expense.amount)" }
+	var id: String { expense.id }
+	var amount: String { String(format: "%.2f", expense.amount) }
 	var timestamp: String { expense.timestamp.dateValue().shortDateTime }
 	var category: String { "nil" }
 	var store: String { "nil" }
@@ -19,5 +21,11 @@ final class ExpenseCellViewModel: ObservableObject {
 	
 	init(expense: Expense) {
 		self.expense = expense
+	}
+	
+	func deleteExpense() {
+		expensesRepository.deleteExpense(expense) { error in
+			// TODO: Implement error handling
+		}
 	}
 }

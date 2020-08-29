@@ -34,10 +34,25 @@ struct DashboardView: View {
 			.sheet(isPresented: $isShowingAddExpenseView) {
 				AddExpenseView(viewModel: .init())
 			}
+			
+			NewBottomSheetView {
+				VStack {
+					HStack {
+						Text("Expenses")
+						Spacer()
+						Image(systemName: "chevron.up")
+					}
+					
+					if self.viewModel.expenses.isEmpty == false {
+						ScrollView {
+							ForEach(self.viewModel.expenses) { expense in
+								ExpenseCell(viewModel: .init(expense: expense))
+							}
+						}
+					}
+				}
+			}
 		}
-		.overlay(
-			BottomSheetView(viewModel: .init(expenses: viewModel.expenses))
-		)
 	}
 }
 

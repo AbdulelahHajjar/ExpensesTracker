@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3714B011E6986A0CCF46BD1C /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A067AC110A170D6F81F8F6A /* Pods_ExpensesTracker.framework */; };
+		EB22DC4624FABD6B00EE3EAF /* NewBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4524FABD6B00EE3EAF /* NewBottomSheetView.swift */; };
+		EB22DC4824FB0E6D00EE3EAF /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */; };
+		EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */; };
 		EB2FB10C24F992390088AE1B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10B24F992390088AE1B /* DashboardView.swift */; };
 		EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */; };
 		EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11124F997600088AE1B /* ExpenseCell.swift */; };
@@ -44,6 +47,9 @@
 		2C85EF9B2867B11F9F3CCCDE /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		321F74D7AEF046852725563D /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
 		5A067AC110A170D6F81F8F6A /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB22DC4524FABD6B00EE3EAF /* NewBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBottomSheetView.swift; sourceTree = "<group>"; };
+		EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
+		EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB2FB10B24F992390088AE1B /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		EB2FB11124F997600088AE1B /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
@@ -132,6 +138,7 @@
 			children = (
 				EB2FB11124F997600088AE1B /* ExpenseCell.swift */,
 				EB2FB11524F997F90088AE1B /* BottomSheetView.swift */,
+				EB22DC4524FABD6B00EE3EAF /* NewBottomSheetView.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 				EB2FB10B24F992390088AE1B /* DashboardView.swift */,
 				EB792EA224F99F3000324B41 /* AddExpenseView.swift */,
 				EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */,
+				EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 				EBF0484324F47A7800A0F04A /* SignInViewModel.swift */,
 				EBF0484024F47A7700A0F04A /* DashboardViewModel.swift */,
 				EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */,
+				EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -385,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB22DC4824FB0E6D00EE3EAF /* EditExpenseView.swift in Sources */,
 				EBF0483D24F47A6D00A0F04A /* SignInView.swift in Sources */,
 				EBF0485424F47A9000A0F04A /* Extensions.swift in Sources */,
 				EBF0484E24F47A8A00A0F04A /* FirestoreService.swift in Sources */,
@@ -392,6 +402,7 @@
 				EBF0484524F47A7800A0F04A /* InitialViewModel.swift in Sources */,
 				EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */,
 				EBF0485524F47A9000A0F04A /* FirestoreListener.swift in Sources */,
+				EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */,
 				EBF0484B24F47A8300A0F04A /* ExpensesRepository.swift in Sources */,
 				EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */,
 				EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */,
@@ -409,6 +420,7 @@
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
 				EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */,
+				EB22DC4624FABD6B00EE3EAF /* NewBottomSheetView.swift in Sources */,
 				EBF0484F24F47A8A00A0F04A /* AuthService.swift in Sources */,
 				EB2FB10C24F992390088AE1B /* DashboardView.swift in Sources */,
 			);

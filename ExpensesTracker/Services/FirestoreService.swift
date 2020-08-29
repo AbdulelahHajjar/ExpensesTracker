@@ -84,6 +84,10 @@ class FirestoreService: ObservableObject {
 		}
 	}
 	
+	func deleteDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> (Void)) {
+		db.collection(collection.collectionPath).document("\(model.id)").delete(completion: completion)
+	}
+	
 	// MARK: - Helpers
 	private func decode<T: Codable>(documentSnapshot: DocumentSnapshot, as: T.Type) -> Result<T, Error> {
 		if let model = try? documentSnapshot.data(as: T.self) { return .success(model) }

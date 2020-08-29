@@ -11,15 +11,42 @@ import SwiftUI
 struct ExpenseCell: View {
 	@ObservedObject var viewModel: ExpenseCellViewModel
 	
+	@State private var isShowingEditExpenseView = false
+	
 	var body: some View {
 		VStack(alignment: .leading) {
-			Text(viewModel.amount)
-			Text(viewModel.timestamp)
-			Text(viewModel.category)
-			Text(viewModel.store)
-			Text(viewModel.location)
-			
-			Color.black
+			HStack {
+				VStack {
+					Text(viewModel.id)
+					Text(viewModel.amount)
+					Text(viewModel.timestamp)
+				}
+				
+				Spacer()
+				
+				Button(action: {
+					self.isShowingEditExpenseView = true
+				}) {
+					Image(systemName: "pencil.circle")
+						.resizable()
+						.scaledToFit()
+						.frame(width: 30, height: 30)
+				}
+				.sheet(isPresented: $isShowingEditExpenseView) {
+					EditExpenseView(viewModel: .init(expense: self.viewModel.expense))
+				}
+				
+				Button(action: {
+					self.viewModel.deleteExpense()
+				}) {
+					Image(systemName: "trash.circle")
+						.resizable()
+						.scaledToFit()
+						.frame(width: 30, height: 30)
+						.foregroundColor(.red)
+				}
+			}
+			Color.gray
 				.frame(height: 1)
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)

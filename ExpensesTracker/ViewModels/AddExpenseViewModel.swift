@@ -18,7 +18,7 @@ final class AddExpenseViewModel: ObservableObject {
 	var doubleAmount: Double { Double(amount) ?? -1 }
 	
 	func createExpense() {
-		expensesRepository.addExpense(Expense(amount: doubleAmount, timestamp: Timestamp(date: date), category: nil, store: nil)) { error in
+		expensesRepository.addExpense(Expense(id: UUID().uuidString, amount: doubleAmount, timestamp: Timestamp(date: date), category: nil, store: nil)) { error in
 			// TODO: Error handling
 		}
 	}

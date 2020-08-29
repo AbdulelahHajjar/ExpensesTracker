@@ -25,6 +25,15 @@ final class ExpensesRepository: ObservableObject {
 		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
 	}
 	
+	func updateExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
+		addExpense(expense, completion: completion)
+	}
+	
+	func deleteExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
+		guard let user = userDataRepository.userData else { return }
+		firestoreService.deleteDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
+	}
+	
 	// MARK: - Helpers
 	private func loadExpenses() {
 		guard let userID = userDataRepository.userData?.id else { return }

@@ -41,8 +41,7 @@ struct BottomSheetView: View {
 					ExpenseCell(viewModel: .init(expense: expense))
 				}
 			}
-			.disabled(!isShowingBottomSheet)
-			
+			.frame(height: screen.height - expandedSheetOffset)
 			Spacer()
 		}
 		.padding(.vertical, 32)
