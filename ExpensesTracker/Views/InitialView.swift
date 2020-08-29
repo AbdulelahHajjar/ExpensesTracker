@@ -36,7 +36,7 @@ struct InitialView: View {
 					SignInView(viewModel: .init())
 				}
 				
-				NavigationLink(destination: HomeView(viewModel: .init()).navigationBarBackButtonHidden(true), isActive: $showHome) { EmptyView() }
+				NavigationLink(destination: RootTabView().navigationBarBackButtonHidden(true), isActive: $showHome) { EmptyView() }
 			}
 			.onReceive(viewModel.showHomeView) { self.showHome = $0 }
 		}

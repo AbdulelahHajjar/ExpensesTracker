@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ExpensesBottomSheetViewModel: ObservableObject {
+final class BottomSheetViewModel: ObservableObject {
 	@Published private(set) var expenses = [Expense]()
 	
 	init(expenses: [Expense]) {

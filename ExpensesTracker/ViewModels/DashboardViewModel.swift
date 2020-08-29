@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  DashboardViewModel.swift
 //  ExpensesTracker
 //
 //  Created by Abdulelah Hajjar on 24/08/2020.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-final class HomeViewModel: ObservableObject {
+final class DashboardViewModel: ObservableObject {
 	@Published private var authService = AuthService.shared
 	@Published private var expensesRepository = ExpensesRepository.shared
 	

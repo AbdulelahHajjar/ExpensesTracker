@@ -1,5 +1,5 @@
 //
-//  NewHomeView.swift
+//  DashboardView.swift
 //  ExpensesTracker
 //
 //  Created by Abdulelah Hajjar on 26/08/2020.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
-	@ObservedObject var viewModel: HomeViewModel
+struct DashboardView: View {
+	@ObservedObject var viewModel: DashboardViewModel
 	
 	@State private var isShowingAddExpenseView = false
 	
@@ -36,13 +36,13 @@ struct HomeView: View {
 			}
 		}
 		.overlay(
-			ExpensesBottomSheetView(viewModel: .init(expenses: viewModel.expenses))
+			BottomSheetView(viewModel: .init(expenses: viewModel.expenses))
 		)
 	}
 }
 
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeView(viewModel: .init())
+		DashboardView(viewModel: .init())
 	}
 }
