@@ -17,9 +17,9 @@ struct RootTabView: View {
 					Text("Dashboard")
 				}
 			
-			Text("3")
+			SettingsView(viewModel: .init())
 				.tabItem {
-					Image(systemName: "house.fill")
+					Image(systemName: "gear")
 					Text("Settings")
 				}
 		}

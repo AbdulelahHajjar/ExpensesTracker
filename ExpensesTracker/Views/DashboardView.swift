@@ -25,22 +25,20 @@ struct DashboardView: View {
 			}
 			.offset(y: -200)
 			
-			Button(action: {
-				self.isShowingAddExpenseView = true
-			}) {
-				Text("Add Expense")
-			}
-			.offset(y: -250)
-			.sheet(isPresented: $isShowingAddExpenseView) {
-				AddExpenseView(viewModel: .init())
-			}
-			
-			NewBottomSheetView {
+			BottomSheetView {
 				VStack {
 					HStack {
 						Text("Expenses")
 						Spacer()
-						Image(systemName: "chevron.up")
+						
+						Button(action: {
+							self.isShowingAddExpenseView = true
+						}) {
+							Image(systemName: "plus.circle")
+						}
+						.sheet(isPresented: self.$isShowingAddExpenseView) {
+							AddExpenseView(viewModel: .init())
+						}
 					}
 					
 					if self.viewModel.expenses.isEmpty == false {
