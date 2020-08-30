@@ -53,8 +53,10 @@ struct ExpenseCell: View {
 	}
 }
 
+#if DEBUG
 struct ExpenseCell_Previews: PreviewProvider {
     static var previews: some View {
 		ExpenseCell(viewModel: .init(expense: .placeholder))
     }
 }
+#endif

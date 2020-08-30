@@ -15,15 +15,8 @@ struct DashboardView: View {
 	
 	var body: some View {
 		ZStack {
-			Color(#colorLiteral(red: 0.5261384894, green: 0.8862745166, blue: 0.5152329912, alpha: 1))
+			Color(#colorLiteral(red: 0.1568627451, green: 0.8117647059, blue: 0.7019607843, alpha: 1))
 				.edgesIgnoringSafeArea(.all)
-			
-			Button(action: {
-				self.viewModel.temporarySignOut()
-			}) {
-				Text("Log Out")
-			}
-			.offset(y: -200)
 			
 			BottomSheetView {
 				VStack {

@@ -32,8 +32,10 @@ struct EditExpenseView: View {
     }
 }
 
+#if DEBUG
 struct ExpenseEditorView_Previews: PreviewProvider {
     static var previews: some View {
 		EditExpenseView(viewModel: .init(expense: .placeholder))
     }
 }
+#endif
