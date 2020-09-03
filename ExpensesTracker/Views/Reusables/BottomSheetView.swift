@@ -9,24 +9,24 @@
 import SwiftUI
 
 struct BottomSheetView<Content: View>: View {
-	var content: () -> Content
-	var extendedHeightMultiplier: CGFloat = 0.75
+	var content: Content
+	var extendedHeightMultiplier: CGFloat = 0.85
 	var contractedHeightMultiplier: CGFloat = 0.50
 	
 	@State private var isExtended = false
 	@State private var dragHeight: CGFloat = .zero
 	private var contractedOffsetValue: CGFloat { (extendedHeightMultiplier - contractedHeightMultiplier) * screen.height }
-	private var dragLeeway: CGFloat = 20
-	private var maxExtendingDrag: CGFloat { (extendedHeightMultiplier - contractedHeightMultiplier) * screen.height}
+	private var dragLeeway: CGFloat = 30
+	private var maxExtendingDrag: CGFloat { (extendedHeightMultiplier - contractedHeightMultiplier) * screen.height + dragLeeway }
 	private var dragTrigger = 60
 	
-	init(content: @escaping () -> Content) { self.content = content }
+	init(content: @escaping () -> Content) { self.content = content() }
 	
     var body: some View {
 		VStack {
 			Spacer()
 			
-			content()
+			content
 			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 			.padding(.vertical, 32)
 			.padding(.horizontal, 28)
@@ -40,25 +40,22 @@ struct BottomSheetView<Content: View>: View {
 				DragGesture()
 					.onChanged { value in
 						withAnimation(.easeInOut(duration: 0.24)) {
-							if !self.isExtended && value.translation.height > self.dragLeeway ||
-								self.isExtended && value.translation.height < -self.dragLeeway {
-								self.dragHeight = .zero
-								return
-							}
-							
 							if abs(value.translation.height) > self.maxExtendingDrag {
-								self.isExtended.toggle()
-								self.dragHeight = .zero
 								return
 							}
-							
 							self.dragHeight = value.translation.height
 						}
 					}
 					.onEnded { value in
+						print(value.translation.height)
+						print(self.isExtended)
 						withAnimation(.easeInOut(duration: 0.24)) {
-							if abs(self.dragHeight) > 60 {
-								self.isExtended.toggle()
+							if value.translation.height < -80 && !self.isExtended {
+								print("here")
+								self.isExtended = true
+							}
+							else if value.translation.height > 80 && self.isExtended {
+								self.isExtended = false
 							}
 							self.dragHeight = .zero
 						}

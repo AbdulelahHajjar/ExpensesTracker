@@ -3,7 +3,8 @@ platform :ios, '13.0'
 
 config_cocoapods_binary_cache(
   prebuild_config: "Debug",
-  dev_pods_enabled: false
+  dev_pods_enabled: false,
+  device_build_enabled: true
 )
 
 target 'ExpensesTracker' do
