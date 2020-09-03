@@ -17,7 +17,10 @@ final class ExpensesRepository: ObservableObject {
 	@Published private var userDataRepository = UserDataRepository.shared
 	private var cancellables                  = Set<AnyCancellable>()
 	
-	private init() { registerSubscribers() }
+	private init() {
+		//Disabling to convert to budgets sub-collection.
+		//registerSubscribers()
+	}
 	
 	// MARK: - Expenses CRUD
 	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
