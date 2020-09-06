@@ -66,8 +66,8 @@ struct BottomSheetView<Content: View>: View {
     }
 }
 
-struct NewBottomSheetView_Previews: PreviewProvider {
+struct BottomSheetView_Previews: PreviewProvider {
     static var previews: some View {
-		DashboardView(viewModel: .init())
+		BottomSheetView { Text("Hey") }
     }
 }

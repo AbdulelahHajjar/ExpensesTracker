@@ -15,6 +15,7 @@ final class ExpensesRepository: ObservableObject {
 	@Published private(set) var expenses      = [Expense]()
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
+	@Published private var budgetsRepository = BudgetsRepository.shared
 	private var cancellables                  = Set<AnyCancellable>()
 	
 	private init() {
@@ -23,41 +24,42 @@ final class ExpensesRepository: ObservableObject {
 	}
 	
 	// MARK: - Expenses CRUD
-	func addExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
+	func addExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
 		guard let user = userDataRepository.userData else { return }
-		firestoreService.saveDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
+		firestoreService.saveDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
 	}
 	
-	func updateExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
-		addExpense(expense, completion: completion)
+	func updateExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
+		addExpense(expense, budgetID: budgetID, completion: completion)
 	}
 	
-	func deleteExpense(_ expense: Expense, completion: @escaping (Error?) -> (Void)) {
+	func deleteExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
 		guard let user = userDataRepository.userData else { return }
-		firestoreService.deleteDocument(collection: .users_expenses(userID: user.id), model: expense, completion: completion)
+		firestoreService.deleteDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
 	}
 	
 	// MARK: - Helpers
-	private func loadExpenses() {
-		guard let userID = userDataRepository.userData?.id else { return }
+	private func loadExpenses(userID: String?, budgetID: String?) {
+		guard let userID = userID, let budgetID = budgetID else { return }
 		
-		firestoreService.getDocuments(collection: .users_expenses(userID: userID), attachListener: true) { (result: Result<[Expense], Error>) in
+		firestoreService.getDocuments(collection: .users_budgets_expenses(userID: userID, budgetID: budgetID), attachListener: true) { (result: Result<[Expense], Error>) in
 			DispatchQueue.main.async {
 				switch result {
 					case .success(let expenses):
 						self.expenses = expenses
 						print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s")")
-					case .failure(_): break
+					case .failure(_):
+						self.expenses = []
 				}
 			}
 		}
 	}
 	
 	private func registerSubscribers() {
-		userDataRepository.$userData
+		budgetsRepository.$dashboardBudgetID
 			.receive(on: DispatchQueue.main)
 			.sink {
-				if $0 != nil { self.loadExpenses() }
+				if $0 != nil { self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)}
 			}
 			.store(in: &cancellables)
 	}

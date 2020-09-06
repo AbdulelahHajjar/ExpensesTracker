@@ -23,11 +23,12 @@ final class EditExpenseViewModel: ObservableObject {
 		self.date = expense.timestamp.dateValue()
 	}
 	
+	#warning("broken")
 	func updateExpense() {
-		expense.amount = Double(amount) ?? -1
-		expense.timestamp = Timestamp(date: date)
-		expensesRepository.updateExpense(expense) { error in
-			// TODO: Implement error handling
-		}
+//		expense.amount = Double(amount) ?? -1
+//		expense.timestamp = Timestamp(date: date)
+//		expensesRepository.updateExpense(expense) { error in
+//			// TODO: Implement error handling
+//		}
 	}
 }

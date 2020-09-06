@@ -23,9 +23,10 @@ final class ExpenseCellViewModel: ObservableObject {
 		self.expense = expense
 	}
 	
+	#warning("broken")
 	func deleteExpense() {
-		expensesRepository.deleteExpense(expense) { error in
-			// TODO: Implement error handling
-		}
+//		expensesRepository.deleteExpense(expense) { error in
+//			// TODO: Implement error handling
+//		}
 	}
 }
