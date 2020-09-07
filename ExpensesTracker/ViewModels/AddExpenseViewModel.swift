@@ -11,16 +11,18 @@ import Firebase
 
 final class AddExpenseViewModel: ObservableObject {
 	@Published private var expensesRepository = ExpensesRepository.shared
+	@Published private var budgetsRepository = BudgetsRepository.shared
 	
 	@Published var amount: String = ""
 	@Published var date: Date = Date()
 	
 	var doubleAmount: Double { Double(amount) ?? -1 }
 	
-	#warning("broken")
-	func createExpense() {
-//		expensesRepository.addExpense(Expense(id: UUID().uuidString, amount: doubleAmount, timestamp: Timestamp(date: date), category: nil, store: nil)) { error in
-//			// TODO: Error handling
-//		}
+	func addExpense() {
+		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+		let expense = Expense(id: UUID().uuidString, amount: doubleAmount, timestamp: Timestamp(date: date), category: nil, store: nil)
+		expensesRepository.addExpense(expense: expense, budgetID: budgetID) { error in
+			// TODO: Error handling
+		}
 	}
 }

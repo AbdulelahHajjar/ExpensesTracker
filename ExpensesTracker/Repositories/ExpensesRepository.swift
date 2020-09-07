@@ -20,20 +20,20 @@ final class ExpensesRepository: ObservableObject {
 	
 	private init() {
 		//Disabling to convert to budgets sub-collection.
-		//registerSubscribers()
+		registerSubscribers()
 	}
 	
 	// MARK: - Expenses CRUD
-	func addExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
+	func addExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }
 		firestoreService.saveDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
 	}
 	
-	func updateExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
-		addExpense(expense, budgetID: budgetID, completion: completion)
+	func updateExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
+		addExpense(expense: expense, budgetID: budgetID, completion: completion)
 	}
 	
-	func deleteExpense(_ expense: Expense, budgetID: String, completion: @escaping (Error?) -> (Void)) {
+	func deleteExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }
 		firestoreService.deleteDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
 	}

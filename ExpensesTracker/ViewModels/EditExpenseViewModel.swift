@@ -11,6 +11,7 @@ import Firebase
 
 final class EditExpenseViewModel: ObservableObject {
 	@Published var expensesRepository = ExpensesRepository.shared
+	@Published var budgetsRepository = BudgetsRepository.shared
 	
 	var expense: Expense
 	
@@ -23,12 +24,12 @@ final class EditExpenseViewModel: ObservableObject {
 		self.date = expense.timestamp.dateValue()
 	}
 	
-	#warning("broken")
 	func updateExpense() {
-//		expense.amount = Double(amount) ?? -1
-//		expense.timestamp = Timestamp(date: date)
-//		expensesRepository.updateExpense(expense) { error in
-//			// TODO: Implement error handling
-//		}
+		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+		expense.amount = Double(amount) ?? -1
+		expense.timestamp = Timestamp(date: date)
+		expensesRepository.updateExpense(expense: expense, budgetID: budgetID) { error in
+			// TODO: Implement error handling
+		}
 	}
 }

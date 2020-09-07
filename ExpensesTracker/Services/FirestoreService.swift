@@ -45,10 +45,10 @@ class FirestoreService: ObservableObject {
 		
 		if attachListener {
 			//TODO: Find a better way to manage listeners
-			let listener = db.collection(collection.collectionPath).addSnapshotListener(handler)
-			appendListenersArray(listener: listener, listenerType: .collectionListener(collectionPath: collection.collectionPath))
+			let listener = db.collection(collection.path).addSnapshotListener(handler)
+			appendListenersArray(listener: listener, listenerType: .collectionListener(collectionPath: collection.path))
 		} else {
-			db.collection(collection.collectionPath).getDocuments(completion: handler)
+			db.collection(collection.path).getDocuments(completion: handler)
 		}
 	}
 	
@@ -68,16 +68,16 @@ class FirestoreService: ObservableObject {
 		}
 		
 		if attachListener {
-			let listener = db.collection(collection.collectionPath).document(documentID).addSnapshotListener(handler)
-			appendListenersArray(listener: listener, listenerType: .documentListener(collectionPath: collection.collectionPath, documentID: documentID))
+			let listener = db.collection(collection.path).document(documentID).addSnapshotListener(handler)
+			appendListenersArray(listener: listener, listenerType: .documentListener(collectionPath: collection.path, documentID: documentID))
 		} else {
-			db.collection(collection.collectionPath).document(documentID).getDocument(completion: handler)
+			db.collection(collection.path).document(documentID).getDocument(completion: handler)
 		}
 	}
 	
 	func saveDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> (Void)) {
 		do {
-			try db.collection(collection.collectionPath).document("\(model.id)").setData(from: model, merge: false)
+			try db.collection(collection.path).document("\(model.id)").setData(from: model, merge: false)
 			completion(nil)
 		} catch {
 			completion(error)
@@ -85,7 +85,7 @@ class FirestoreService: ObservableObject {
 	}
 	
 	func deleteDocument<T: Codable & Identifiable>(collection: FirestoreCollection, model: T, completion: @escaping (Error?) -> (Void)) {
-		db.collection(collection.collectionPath).document("\(model.id)").delete(completion: completion)
+		db.collection(collection.path).document("\(model.id)").delete(completion: completion)
 	}
 	
 	// MARK: - Helpers

@@ -13,10 +13,10 @@ enum FirestoreCollection {
 	case users_budgets_expenses(userID: String, budgetID: String) //deleteLater
 	case users_budgets(userID: String)
 	
-	var collectionPath: String {
+	var path: String {
 		switch self {
 			case .users: return "users"
-			case .users_budgets_expenses(userID: let userID, budgetID: let budgetID): return "users/\(userID)/budgets/\(budgetID)"
+			case .users_budgets_expenses(userID: let userID, budgetID: let budgetID): return "users/\(userID)/budgets/\(budgetID)/expenses"
 			case .users_budgets(let userID): return "users/\(userID)/budgets"
 		}
 	}

@@ -10,9 +10,8 @@ import Foundation
 import Combine
 
 final class DashboardViewModel: ObservableObject {
-	@Published var budgetsRepository = BudgetsRepository.shared
-	
-	@Published private(set) var dashboardBudget: Budget? = nil
+	@Published private var budgetsRepository = BudgetsRepository.shared
+	@Published private(set) var dashboardBudget: Budget? = .placeholder
 	@Published private(set) var activeBudgets: [Budget] = []
 	
 	private var cancellables = Set<AnyCancellable>()

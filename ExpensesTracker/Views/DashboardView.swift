@@ -15,11 +15,55 @@ struct DashboardView: View {
 	@State private var isShowingBudgetSelector = false
 	
     var body: some View {
-		NavigationView {
+		VStack(alignment: .leading) {
+			HStack {
+				Button(action: {
+					self.isShowingBudgetSelector = true
+				}) {
+					Text("Select Budget")
+				}
+				.sheet(isPresented: $isShowingBudgetSelector) {
+					Form {
+						ForEach(self.viewModel.activeBudgets) { budget in
+							Button(action: {
+								self.viewModel.setDashboardBudget(id: budget.id)
+								self.isShowingBudgetSelector = false
+							}) {
+								Text(budget.name)
+									.foregroundColor(.black)
+							}
+						}
+					}
+					.navigationBarTitle("", displayMode: .inline)
+				}
+				
+				Color.gray.frame(width: 1, height: 10)
+				
+				Button(action: {
+					self.isShowingAddBudgetView = true
+				}) {
+					Text("Add Budget")
+				}
+				.sheet(isPresented: $isShowingAddBudgetView) {
+					AddBudgetView(viewModel: .init())
+				}
+				
+				Color.gray.frame(width: 1, height: 10)
+				
+				Button(action: {
+					self.viewModel.deleteDashboardBudget()
+				}) {
+					Text("Delete Budget")
+						.foregroundColor(.red)
+				}
+				.sheet(isPresented: $isShowingAddBudgetView) {
+					AddBudgetView(viewModel: .init())
+				}
+			}
 			if viewModel.dashboardBudget == nil {
 				Text("You currently have no budgets.")
 			} else {
-				VStack(alignment: .leading) {
+				Group {
 					Text("Raw Budget Values:")
 						.fontWeight(.semibold)
 					Text("Name:\t\t\t\t\t\(viewModel.dashboardBudget?.name ?? "[NA]")")
@@ -32,59 +76,13 @@ struct DashboardView: View {
 					Text("Is Active:\t\t\t\t\(String(viewModel.dashboardBudget?.isActive ?? false))")
 				}
 				
-				Color.gray
-					.frame(height: 1)
-			}
-		}
-		.overlay(
-			VStack {
-				HStack {
-					Button(action: {
-						self.isShowingBudgetSelector = true
-					}) {
-						Text("Select Budget")
-					}
-					.sheet(isPresented: $isShowingBudgetSelector) {
-						Form {
-							ForEach(self.viewModel.activeBudgets) { budget in
-								Button(action: {
-									self.viewModel.setDashboardBudget(id: budget.id)
-									self.isShowingBudgetSelector = false
-								}) {
-									Text(budget.name)
-										.foregroundColor(.black)
-								}
-							}
-						}
-						.navigationBarTitle("", displayMode: .inline)
-					}
-					
-					Color.gray.frame(width: 1, height: 10)
-					
-					Button(action: {
-						self.isShowingAddBudgetView = true
-					}) {
-						Text("Add Budget")
-					}
-					.sheet(isPresented: $isShowingAddBudgetView) {
-						AddBudgetView(viewModel: .init())
-					}
-					
-					Color.gray.frame(width: 1, height: 10)
-					
-					Button(action: {
-						self.viewModel.deleteDashboardBudget()
-					}) {
-						Text("Delete Budget")
-							.foregroundColor(.red)
-					}
-					.sheet(isPresented: $isShowingAddBudgetView) {
-						AddBudgetView(viewModel: .init())
-					}
+				NavigationLink(destination: ExpensesListView(viewModel: .init())) {
+					Text("Expenses List For This Budget")
 				}
+				
 				Spacer()
 			}
-		)
+		}
     }
 }
 

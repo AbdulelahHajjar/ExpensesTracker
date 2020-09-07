@@ -17,9 +17,11 @@
 		EB22DC4824FB0E6D00EE3EAF /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */; };
 		EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */; };
 		EB25E67124FB8F3C00F194F0 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB25E67024FB8F3C00F194F0 /* SettingsViewModel.swift */; };
+		EB27213B250578CB000F5B88 /* ExpenseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27213A250578CB000F5B88 /* ExpenseCellViewModel.swift */; };
+		EB27213F250578FC000F5B88 /* ExpenseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27213E250578FC000F5B88 /* ExpenseCellView.swift */; };
+		EB2F4A2B2505293B00BC94EC /* ExpensesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */; };
+		EB2F4A2D2505297400BC94EC /* ExpensesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F4A2C2505297400BC94EC /* ExpensesListViewModel.swift */; };
 		EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */; };
-		EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11124F997600088AE1B /* ExpenseCell.swift */; };
-		EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */; };
 		EB4468EC2503E577000275AC /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468EB2503E577000275AC /* DashboardView.swift */; };
 		EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */; };
 		EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */; };
@@ -61,9 +63,11 @@
 		EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
 		EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB25E67024FB8F3C00F194F0 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		EB27213A250578CB000F5B88 /* ExpenseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCellViewModel.swift; sourceTree = "<group>"; };
+		EB27213E250578FC000F5B88 /* ExpenseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCellView.swift; sourceTree = "<group>"; };
+		EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListView.swift; sourceTree = "<group>"; };
+		EB2F4A2C2505297400BC94EC /* ExpensesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListViewModel.swift; sourceTree = "<group>"; };
 		EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
-		EB2FB11124F997600088AE1B /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
-		EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCellViewModel.swift; sourceTree = "<group>"; };
 		EB4468EB2503E577000275AC /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
@@ -140,7 +144,7 @@
 		EB2FB10F24F9973E0088AE1B /* Reusables */ = {
 			isa = PBXGroup;
 			children = (
-				EB2FB11124F997600088AE1B /* ExpenseCell.swift */,
+				EB27213E250578FC000F5B88 /* ExpenseCellView.swift */,
 				EB22DC4524FABD6B00EE3EAF /* BottomSheetView.swift */,
 			);
 			path = Reusables;
@@ -149,8 +153,8 @@
 		EB2FB11024F997500088AE1B /* Reusables */ = {
 			isa = PBXGroup;
 			children = (
-				EB2FB11324F997DC0088AE1B /* ExpenseCellViewModel.swift */,
 				EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */,
+				EB27213A250578CB000F5B88 /* ExpenseCellViewModel.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -220,6 +224,7 @@
 				EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */,
 				EB13DB7E24FB914000B38B8B /* SettingsView.swift */,
 				EB4468EB2503E577000275AC /* DashboardView.swift */,
+				EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */,
 				EB25E67024FB8F3C00F194F0 /* SettingsViewModel.swift */,
 				EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */,
+				EB2F4A2C2505297400BC94EC /* ExpensesListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -401,13 +407,14 @@
 				EBF0485424F47A9000A0F04A /* Extensions.swift in Sources */,
 				EBF0484E24F47A8A00A0F04A /* FirestoreService.swift in Sources */,
 				EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */,
+				EB2F4A2B2505293B00BC94EC /* ExpensesListView.swift in Sources */,
 				EBF0484524F47A7800A0F04A /* InitialViewModel.swift in Sources */,
-				EB2FB11224F997600088AE1B /* ExpenseCell.swift in Sources */,
 				EBF0485524F47A9000A0F04A /* FirestoreListener.swift in Sources */,
 				EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */,
 				EBF0484B24F47A8300A0F04A /* ExpensesRepository.swift in Sources */,
 				EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */,
 				EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */,
+				EB2F4A2D2505297400BC94EC /* ExpensesListViewModel.swift in Sources */,
 				EBF0485324F47A9000A0F04A /* Enums.swift in Sources */,
 				EB25E67124FB8F3C00F194F0 /* SettingsViewModel.swift in Sources */,
 				EBF0483F24F47A6D00A0F04A /* InitialView.swift in Sources */,
@@ -415,10 +422,11 @@
 				EBF0483C24F47A6D00A0F04A /* SignUpView.swift in Sources */,
 				EBF0483624F47A6400A0F04A /* UserData.swift in Sources */,
 				EBF0484A24F47A8300A0F04A /* UserDataRepository.swift in Sources */,
+				EB27213B250578CB000F5B88 /* ExpenseCellViewModel.swift in Sources */,
+				EB27213F250578FC000F5B88 /* ExpenseCellView.swift in Sources */,
 				EBF0484724F47A7800A0F04A /* SignInViewModel.swift in Sources */,
 				EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */,
 				EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */,
-				EB2FB11424F997DC0088AE1B /* ExpenseCellViewModel.swift in Sources */,
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
