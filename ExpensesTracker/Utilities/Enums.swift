@@ -10,12 +10,14 @@ import Foundation
 
 enum FirestoreCollection {
 	case users
-	case users_expenses(userID: String)
+	case users_budgets_expenses(userID: String, budgetID: String) //deleteLater
+	case users_budgets(userID: String)
 	
-	var collectionPath: String {
+	var path: String {
 		switch self {
 			case .users: return "users"
-			case .users_expenses(let userID): return "users/\(userID)/expenses"
+			case .users_budgets_expenses(userID: let userID, budgetID: let budgetID): return "users/\(userID)/budgets/\(budgetID)/expenses"
+			case .users_budgets(let userID): return "users/\(userID)/budgets"
 		}
 	}
 }
@@ -30,3 +32,5 @@ enum AuthState: Equatable {
 	case signedOut
 	case signedIn(uid: String)
 }
+
+

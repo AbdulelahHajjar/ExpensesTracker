@@ -2,29 +2,25 @@
 //  ExpenseCellViewModel.swift
 //  ExpensesTracker
 //
-//  Created by Abdulelah Hajjar on 28/08/2020.
+//  Created by Abdulelah Hajjar on 06/09/2020.
 //  Copyright © 2020 Abdulelah Hajjar. All rights reserved.
 //
 
 import Foundation
 
-final class ExpenseCellViewModel: ObservableObject {
-	@Published var expensesRepository = ExpensesRepository.shared
-	var expense: Expense
+final class ExpenseCellViewModel: ObservableObject, Identifiable {
+	@Published private var expensesRepository = ExpensesRepository.shared
+	@Published private var budgetsRepository = BudgetsRepository.shared
 	
-	var id: String { expense.id }
-	var amount: String { String(format: "%.2f", expense.amount) }
-	var timestamp: String { expense.timestamp.dateValue().shortDateTime }
-	var category: String { "nil" }
-	var store: String { "nil" }
-	var location: String { "nil" }
+	private(set) var expense: Expense
 	
 	init(expense: Expense) {
 		self.expense = expense
 	}
 	
 	func deleteExpense() {
-		expensesRepository.deleteExpense(expense) { error in
+		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+		expensesRepository.deleteExpense(expense: expense, budgetID: budgetID) { error in
 			// TODO: Implement error handling
 		}
 	}

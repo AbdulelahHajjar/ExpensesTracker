@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 struct UserData: Identifiable, Codable {
 	var id          : String
 	var email       : String
-	var displayName : String?
+	var displayName : Optional<String>
 	
 	private enum CodingKeys: CodingKey {
 		case id

@@ -16,8 +16,8 @@ struct Expense: Identifiable, Codable {
 	var amount    : Double
 	var timestamp : Timestamp
 //	var location  : CLLocation?
-	var category  : Category?
-	var store     : Store?
+	var category  : Optional<Category>
+	var store     : Optional<Store>
 	
 	enum CodingKeys: CodingKey {
 		case id

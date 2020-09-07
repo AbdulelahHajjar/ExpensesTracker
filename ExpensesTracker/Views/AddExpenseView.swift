@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddExpenseView: View {
+	@Environment(\.presentationMode) var presentationMode
 	@ObservedObject var viewModel: AddExpenseViewModel
 	
     var body: some View {
@@ -24,7 +25,8 @@ struct AddExpenseView: View {
 				
 				Section {
 					Button(action: {
-						self.viewModel.createExpense()
+						self.viewModel.addExpense()
+						self.presentationMode.wrappedValue.dismiss()
 					}) {
 						Text("Add Expense")
 					}

@@ -42,6 +42,10 @@ final class UserDataRepository: ObservableObject {
 		authService.signOut()
 	}
 	
+	func updateUserData(_ userData: UserData, completion: @escaping (Error?) -> ()) {
+		firestoreService.saveDocument(collection: .users, model: userData, completion: completion)
+	}
+	
 	// MARK: - Helpers
 	private func registerSubscribers() {
 		authService.$authState

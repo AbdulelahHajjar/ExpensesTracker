@@ -74,3 +74,13 @@ extension Date {
 }
 
 let screen = UIScreen.main.bounds
+
+extension Date {
+	static var tomorrow: Date { Date().addingTimeInterval(86_400) }
+}
+
+extension Date {
+	func addDays(_ numberOfDays: Int) -> Date? {
+		Calendar.current.date(byAdding: .day, value: numberOfDays, to: self)
+	}
+}
