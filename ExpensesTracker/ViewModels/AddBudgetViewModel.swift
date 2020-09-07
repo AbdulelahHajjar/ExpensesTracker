@@ -14,7 +14,7 @@ final class AddBudgetViewModel: ObservableObject {
 	@Published var name              = ""
 	@Published var amount            = ""
 	@Published var savingsPercentage = ""
-	@Published var startDate         = Date()
+	@Published var startDate         = Date() { willSet { if newValue >= endDate { endDate = newValue.addDays(1) ?? newValue } } }
 	@Published var endDate           = Date.tomorrow
 	@Published var repeatCycle       = Budget.RepeatCycle.never
 	
@@ -22,7 +22,7 @@ final class AddBudgetViewModel: ObservableObject {
 	
 	var showEndDatePicker    : Bool { repeatCycle == .never }
 	var startDatePickerRange : ClosedRange<Date> { Date()...Date.distantFuture }
-	var endDatePickerRange   : ClosedRange<Date> { Date.tomorrow...Date.distantFuture }
+	var endDatePickerRange   : ClosedRange<Date> { (startDate.addDays(1) ?? startDate)...Date.distantFuture }
 	var repeatCycles         : [Budget.RepeatCycle] { Budget.RepeatCycle.allCases }
 	
 	private var cancellables = Set<AnyCancellable>()
@@ -37,8 +37,8 @@ final class AddBudgetViewModel: ObservableObject {
 							name: name,
 							amount: Double(amount) ?? -1,
 							savingsPercentage: Double(savingsPercentage) ?? -1,
-							startDate: Timestamp(date: startDate),
-							endDate: Timestamp(date: (repeatCycle == .never ? endDate : getDate(repeatCycle: repeatCycle, startDate: startDate)) ?? Date()),
+							startTimestamp: Timestamp(date: startDate),
+							endTimestamp: Timestamp(date: (repeatCycle == .never ? endDate : getDate(repeatCycle: repeatCycle, startDate: startDate)) ?? Date()),
 							repeatCycle: repeatCycle,
 							previousBudgetID: nil,
 							isActive: true)

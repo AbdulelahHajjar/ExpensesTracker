@@ -84,3 +84,35 @@ extension Date {
 		Calendar.current.date(byAdding: .day, value: numberOfDays, to: self)
 	}
 }
+
+extension Date {
+	func years(to: Date) -> Int? {
+		guard let years = Calendar.current.dateComponents([.year], from: self, to: to).year else { return nil }
+		return abs(years)
+	}
+	
+	func months(to: Date) -> Int? {
+		guard let months = Calendar.current.dateComponents([.month], from: self, to: to).month else { return nil }
+		return abs(months)
+	}
+	
+	func days(to: Date) -> Int? {
+		guard let days = Calendar.current.dateComponents([.day], from: self, to: to).day else { return nil }
+		return abs(days)
+	}
+	
+	func hours(to: Date) -> Int? {
+		guard let hours = Calendar.current.dateComponents([.hour], from: self, to: to).hour else { return nil }
+		return abs(hours)
+	}
+	
+	func minutes(to: Date) -> Int? {
+		guard let minutes = Calendar.current.dateComponents([.minute], from: self, to: to).minute else { return nil }
+		return abs(minutes)
+	}
+	
+	func seconds(to: Date) -> Int? {
+		guard let seconds = Calendar.current.dateComponents([.second], from: self, to: to).second else { return nil }
+		return abs(seconds)
+	}
+}

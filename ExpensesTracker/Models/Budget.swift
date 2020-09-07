@@ -15,11 +15,20 @@ struct Budget: Identifiable, Codable, Equatable {
 	var name: String
 	var amount: Double
 	var savingsPercentage: Double
-	var startDate: Timestamp
-	var endDate: Timestamp
+	var startTimestamp: Timestamp
+	var endTimestamp: Timestamp
 	let repeatCycle: Budget.RepeatCycle
 	var previousBudgetID: Optional<String>
 	var isActive: Bool
+	
+	var startDate       : Date		{ startTimestamp.dateValue() }
+	var endDate         : Date		{ endTimestamp.dateValue() }
+	var savingsAmount   : Double	{ savingsPercentage / 100.0 * amount }
+	var budgetDays      : Int?		{ startDate.days(to: endDate) }
+	var dailySpendLimit : Double?	{
+		guard let denominator = budgetDays, denominator != 0 else { return nil }
+		return (amount - savingsAmount) / Double(denominator)
+	}
 	
 	enum CodingKeys: CodingKey {
 		case id
@@ -27,8 +36,8 @@ struct Budget: Identifiable, Codable, Equatable {
 		case name
 		case amount
 		case savingsPercentage
-		case startDate
-		case endDate
+		case startTimestamp
+		case endTimestamp
 		case repeatCycle
 		case previousBudgetID
 		case isActive
@@ -60,9 +69,9 @@ extension Budget {
 	static let placeholder = Budget(id: UUID().uuidString,
 									name: "Placeholder Budget",
 									amount: 1000,
-									savingsPercentage: 20,
-									startDate: Timestamp(date: Date()),
-									endDate: Timestamp(date: Date.tomorrow),
+									savingsPercentage: 10,
+									startTimestamp: Timestamp(date: Date()),
+									endTimestamp: Timestamp(date: Date().addDays(30) ?? Date.tomorrow),
 									repeatCycle: .never,
 									previousBudgetID: nil,
 									isActive: true)
