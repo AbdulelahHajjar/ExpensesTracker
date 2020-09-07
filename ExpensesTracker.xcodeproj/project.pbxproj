@@ -27,6 +27,7 @@
 		EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */; };
 		EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */; };
 		EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA224F99F3000324B41 /* AddExpenseView.swift */; };
+		EB82B8A725066E9100798360 /* TimeTraveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB82B8A625066E9100798360 /* TimeTraveler.swift */; };
 		EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */; };
 		EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */; };
 		EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB792EA224F99F3000324B41 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		EB82B8A625066E9100798360 /* TimeTraveler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTraveler.swift; sourceTree = "<group>"; };
 		EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		EBDAAA3424F477DD0040E1D6 /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				EBF0485024F47A9000A0F04A /* Enums.swift */,
 				EBF0485124F47A9000A0F04A /* Extensions.swift */,
 				EBF0485224F47A9000A0F04A /* FirestoreListener.swift */,
+				EB82B8A625066E9100798360 /* TimeTraveler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */,
 				EBF0484B24F47A8300A0F04A /* ExpensesRepository.swift in Sources */,
 				EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */,
+				EB82B8A725066E9100798360 /* TimeTraveler.swift in Sources */,
 				EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */,
 				EB2F4A2D2505297400BC94EC /* ExpensesListViewModel.swift in Sources */,
 				EBF0485324F47A9000A0F04A /* Enums.swift in Sources */,
