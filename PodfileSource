@@ -1,4 +1,3 @@
-plugin "cocoapods-binary-cache"
 platform :ios, '13.0'
 
 target 'ExpensesTracker' do
@@ -6,8 +5,8 @@ target 'ExpensesTracker' do
   use_frameworks!
 
   # Pods for ExpensesTracker
-  pod "Firebase/Auth", :binary => false
-  pod "Firebase/Firestore", :binary => false
-  pod "FirebaseFirestoreSwift", :binary => false
+  pod "Firebase/Auth"
+  pod "Firebase/Firestore"
+  pod "FirebaseFirestoreSwift"
 
 end

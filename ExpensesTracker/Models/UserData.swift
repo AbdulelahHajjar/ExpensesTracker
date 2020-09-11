@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct UserData: Identifiable, Codable {
-	var id          : String
+	let id          : String
 	var email       : String
 	var displayName : Optional<String>
 	

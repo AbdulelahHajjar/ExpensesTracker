@@ -80,8 +80,8 @@ extension Date {
 }
 
 extension Date {
-	func addDays(_ numberOfDays: Int) -> Date? {
-		Calendar.current.date(byAdding: .day, value: numberOfDays, to: self)
+	func byAddingDays(_ numberOfDays: Double) -> Date {
+		self.addingTimeInterval(numberOfDays * 86_400)
 	}
 }
 

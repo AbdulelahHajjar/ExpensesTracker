@@ -32,5 +32,3 @@ enum AuthState: Equatable {
 	case signedOut
 	case signedIn(uid: String)
 }
-
-
