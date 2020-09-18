@@ -22,26 +22,29 @@ final class AddBudgetViewModel: ObservableObject {
 	
 	var showEndDatePicker    : Bool { repeatCycle == .never }
 	var startDatePickerRange : ClosedRange<Date> { Date()...Date.distantFuture }
-	var endDatePickerRange   : ClosedRange<Date> { (startDate.byAddingDays(1) ?? startDate)...Date.distantFuture }
+	var endDatePickerRange   : ClosedRange<Date> { startDate.byAddingDays(1)...Date.distantFuture }
 	var repeatCycles         : [Budget.RepeatCycle] { Budget.RepeatCycle.allCases }
 	
 	private var cancellables = Set<AnyCancellable>()
 	
-	private func getDate(repeatCycle: Budget.RepeatCycle, startDate: Date) -> Date? {
-		guard let daysToIncrement = repeatCycle.numberOfDays else { return nil }
-		return startDate.byAddingDays(Double(daysToIncrement))
-	}
-	
 	func addBudget() {
-		let budget = Budget(id: UUID().uuidString,
-							name: name,
-							amount: Double(amount) ?? -1,
-							savingsPercentage: Double(savingsPercentage) ?? -1,
-							startTimestamp: Timestamp(date: startDate),
-							endTimestamp: Timestamp(date: (repeatCycle == .never ? endDate : getDate(repeatCycle: repeatCycle, startDate: startDate)) ?? Date()),
-							repeatCycle: repeatCycle,
-							previousBudgetID: nil,
-							isActive: true)
+		var budget: Budget
+		
+		if repeatCycle == .never {
+			budget = Budget(id: UUID().uuidString,
+							 name: name,
+							 amount: Double(amount) ?? -1,
+							 savingsPercentage: Double(savingsPercentage) ?? 0,
+							 startDate: startDate,
+							 endDate: endDate)!
+		} else {
+			budget = Budget(id: UUID().uuidString,
+							 name: name,
+							 amount: Double(amount) ?? -1,
+							 savingsPercentage: Double(savingsPercentage) ?? 0,
+							 repeatCycle: repeatCycle,
+							 startDate: startDate)!
+		}
 		
 		budgetsRepository.addBudget(budget) { error in
 			// TODO: Error handling...

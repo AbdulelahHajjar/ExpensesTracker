@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct DashboardView: View {
-	@ObservedObject var timeTraveler = TimeTraveler.shared
-	
 	@ObservedObject var viewModel: DashboardViewModel
 	
 	@State private var isShowingAddBudgetView = false
@@ -18,21 +16,7 @@ struct DashboardView: View {
 	
     var body: some View {
 		VStack(alignment: .center) {
-			HStack {
-				Button(action: {
-					self.timeTraveler.dayTravel(by: -1)
-				}) {
-					Image(systemName: "chevron.left")
-				}
-				
-				Text("Today is: \(timeTraveler.date.shortDateTime)")
-				
-				Button(action: {
-					self.timeTraveler.dayTravel(by: 1)
-				}) {
-					Image(systemName: "chevron.right")
-				}
-			}
+			Text("Todays is: \(viewModel.today.shortDateTime)")
 			
 			HStack {
 				Button(action: {
@@ -47,7 +31,7 @@ struct DashboardView: View {
 								self.viewModel.setDashboardBudget(id: budget.id)
 								self.isShowingBudgetSelector = false
 							}) {
-								Text(budget.name)
+								Text("\(budget.startDate.shortDateTime) -> \(budget.endDate.shortDateTime)")
 									.foregroundColor(.black)
 							}
 						}
@@ -91,8 +75,7 @@ struct DashboardView: View {
 					Text("Start Date:\t\t\t\t\(viewModel.dashboardBudget?.startDate.shortDateTime ?? Date.distantPast.shortDateTime)")
 					Text("End Date:\t\t\t\t\(viewModel.dashboardBudget?.endDate.shortDateTime ?? Date.distantPast.shortDateTime)")
 					Text("Repeat Cycle:\t\t\t\(viewModel.dashboardBudget?.repeatCycle.rawValue ?? "[NA]")")
-					Text("Previous Budget ID:\t\(viewModel.dashboardBudget?.previousBudgetID ?? "[NA]")")
-					Text("Is Active:\t\t\t\t\(String(viewModel.dashboardBudget?.isActive ?? false))")
+					Text("Status:\t\t\t\t\(String(viewModel.dashboardBudget?.status.rawValue ?? "[NA]"))")
 						.padding(.bottom, 8)
 				}
 				

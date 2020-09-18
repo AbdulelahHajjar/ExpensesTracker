@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5484459046976902740F2675 /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC60FEFDC937CD771520493 /* Pods_ExpensesTracker.framework */; };
 		EB13DB7F24FB914000B38B8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13DB7E24FB914000B38B8B /* SettingsView.swift */; };
+		EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB175E8A2514EAE900F84579 /* AppStateRepository.swift */; };
 		EB209954250166C800CD70F0 /* BudgetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB209953250166C800CD70F0 /* BudgetsRepository.swift */; };
 		EB2099562501671900CD70F0 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2099552501671900CD70F0 /* Budget.swift */; };
 		EB20995C2501734E00CD70F0 /* AddBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */; };
@@ -24,11 +25,9 @@
 		EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */; };
 		EB4468EC2503E577000275AC /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468EB2503E577000275AC /* DashboardView.swift */; };
 		EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */; };
-		EB5DA6D2250BC79F00CF1997 /* BudgetCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5DA6D1250BC79F00CF1997 /* BudgetCycle.swift */; };
 		EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */; };
 		EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */; };
 		EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA224F99F3000324B41 /* AddExpenseView.swift */; };
-		EB82B8A725066E9100798360 /* TimeTraveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB82B8A625066E9100798360 /* TimeTraveler.swift */; };
 		EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */; };
 		EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */; };
 		EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */; };
@@ -58,6 +57,7 @@
 		B8F51D001CBD4F32DCCA9B79 /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		EAC60FEFDC937CD771520493 /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB13DB7E24FB914000B38B8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EB175E8A2514EAE900F84579 /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
 		EB209953250166C800CD70F0 /* BudgetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsRepository.swift; sourceTree = "<group>"; };
 		EB2099552501671900CD70F0 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetViewModel.swift; sourceTree = "<group>"; };
@@ -73,11 +73,9 @@
 		EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		EB4468EB2503E577000275AC /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		EB5DA6D1250BC79F00CF1997 /* BudgetCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCycle.swift; sourceTree = "<group>"; };
 		EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB792EA224F99F3000324B41 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
-		EB82B8A625066E9100798360 /* TimeTraveler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTraveler.swift; sourceTree = "<group>"; };
 		EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		EBDAAA3424F477DD0040E1D6 /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				EBF0483424F47A6400A0F04A /* UserData.swift */,
-				EB5DA6D1250BC79F00CF1997 /* BudgetCycle.swift */,
 				EB2099552501671900CD70F0 /* Budget.swift */,
 				EBF0483524F47A6400A0F04A /* Expense.swift */,
 			);
@@ -265,6 +262,7 @@
 				EBF0484824F47A8200A0F04A /* UserDataRepository.swift */,
 				EB209953250166C800CD70F0 /* BudgetsRepository.swift */,
 				EBF0484924F47A8300A0F04A /* ExpensesRepository.swift */,
+				EB175E8A2514EAE900F84579 /* AppStateRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -285,7 +283,6 @@
 				EBF0485024F47A9000A0F04A /* Enums.swift */,
 				EBF0485124F47A9000A0F04A /* Extensions.swift */,
 				EBF0485224F47A9000A0F04A /* FirestoreListener.swift */,
-				EB82B8A625066E9100798360 /* TimeTraveler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -419,11 +416,9 @@
 				EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */,
 				EBF0484B24F47A8300A0F04A /* ExpensesRepository.swift in Sources */,
 				EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */,
-				EB82B8A725066E9100798360 /* TimeTraveler.swift in Sources */,
 				EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */,
 				EB2F4A2D2505297400BC94EC /* ExpensesListViewModel.swift in Sources */,
 				EBF0485324F47A9000A0F04A /* Enums.swift in Sources */,
-				EB5DA6D2250BC79F00CF1997 /* BudgetCycle.swift in Sources */,
 				EB25E67124FB8F3C00F194F0 /* SettingsViewModel.swift in Sources */,
 				EBF0483F24F47A6D00A0F04A /* InitialView.swift in Sources */,
 				EBF0483724F47A6400A0F04A /* Expense.swift in Sources */,
@@ -439,6 +434,7 @@
 				EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
 				EB209960250174BC00CD70F0 /* AddBudgetView.swift in Sources */,
+				EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */,
 				EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */,
 				EB4468EC2503E577000275AC /* DashboardView.swift in Sources */,
 				EB22DC4624FABD6B00EE3EAF /* BottomSheetView.swift in Sources */,

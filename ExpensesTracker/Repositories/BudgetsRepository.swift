@@ -18,9 +18,44 @@ final class BudgetsRepository: ObservableObject {
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
 	@Published private var userDefaultsService = UserDefaultsService.shared
+	
+	@Published private var budgetTimers = [Timer]()
+	
 	private var cancellables                  = Set<AnyCancellable>()
 	
 	private init() { registerSubscribers() }
+	
+	// MARK: - Combine
+	private func registerSubscribers() {
+		userDataRepository.$userData
+			.receive(on: DispatchQueue.main)
+			.sink {
+				if $0 != nil { self.loadBudgets() }
+		}
+		.store(in: &cancellables)
+		
+		$budgets
+			.receive(on: DispatchQueue.main)
+			.debounce(for: 1.0, scheduler: RunLoop.main)
+			.map { $0.filter { $0.status != .archived } }
+			.sink { self.refreshBudgetTimers(budgets: $0) }
+			.store(in: &cancellables)
+		
+		$budgetTimers
+			.sink {
+				if !$0.isEmpty {
+					print("***B\nTimers Updated! to:")
+					let fireDates = $0.map { $0.fireDate.shortDateTime }
+					for fireDate in fireDates { print(fireDate) }
+					print("***E")
+				}
+			}
+			.store(in: &cancellables)
+		
+		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+			.sink { _ in self.refreshBudgetTimers(budgets: self.budgets) }
+			.store(in: &cancellables)
+	}
 	
 	// MARK: - Budgets CRUD
 	func addBudget(_ budget: Budget, completion: @escaping (Error?) -> (Void)) {
@@ -29,6 +64,7 @@ final class BudgetsRepository: ObservableObject {
 			if error == nil {
 				self.setDashboardBudgetID(id: budget.id)
 			}
+			completion(error)
 		}
 	}
 	
@@ -58,15 +94,7 @@ final class BudgetsRepository: ObservableObject {
 		}
 	}
 	
-	private func registerSubscribers() {
-		userDataRepository.$userData
-			.receive(on: DispatchQueue.main)
-			.sink {
-				if $0 != nil { self.loadBudgets() }
-			}
-			.store(in: &cancellables)
-	}
-	
+	// MARK: - Helpers
 	func setDashboardBudgetID(id: String) {
 		self.dashboardBudgetID = id
 		userDefaultsService.save(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue, value: id)
@@ -74,5 +102,75 @@ final class BudgetsRepository: ObservableObject {
 	
 	private func retrieveDashboardBudgetID() -> String? {
 		userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String
+	}
+	
+	// MARK: - Timers
+	private func refreshBudgetTimers(budgets: [Budget]) {
+		if !budgetTimers.isEmpty {
+			for timer in budgetTimers { timer.invalidate() }
+			budgetTimers = []
+		}
+		
+		var budgetTimersCopy = budgetTimers
+		
+		for budget in budgets {
+			let status = budget.status
+			guard status != .archived else { return }
+			
+			var selector: Selector
+			
+			if status == .active {
+				selector = budget.repeatCycle == .never ? #selector(archiveBudget(sender:)) : #selector(continueCycle(sender:))
+			} else {
+				selector = #selector(activateBudget(sender:))
+			}
+			
+			let fireDate = status == .active ? budget.endDate : budget.startDate
+			
+			let timer = Timer(fireAt: fireDate, interval: 0, target: self, selector: selector, userInfo: budget, repeats: false)
+			budgetTimersCopy.append(timer)
+			RunLoop.main.add(timer, forMode: .common)
+		}
+		
+		budgetTimers = budgetTimersCopy
+	}
+	
+	@objc private func archiveBudget(sender: Timer) {
+		guard var budget = sender.userInfo as? Budget else { return }
+		print("Archiving Budget \(budget) with Repeat Cycle \(budget.repeatCycle) at \(budget.endDate)")
+		budget.archive()
+		updateBudget(budget) { error in
+			// TODO: Handle
+		}
+	}
+	
+	//This is used to activate a scheduled budget created by the user.
+	@objc private func activateBudget(sender: Timer) {
+		guard var budget = sender.userInfo as? Budget else { return }
+		print("Activating Budget \(budget) with Repeat Cycle \(budget.repeatCycle) at \(budget.startDate)")
+		budget.activate()
+		updateBudget(budget) { error in
+			// TODO: Handle
+		}
+	}
+	
+	//This is used to archive the current budget, then create a new budget with the same information.
+	@objc private func continueCycle(sender: Timer) {
+		guard var currentBudget = sender.userInfo as? Budget else { return }
+		print("Continuing the cycle for Budget \(currentBudget) with Repeat Cycle \(currentBudget.repeatCycle) at \(currentBudget.endDate)")
+		
+		//Fix multiple creation of budget if endDate of new budget in before the current date.
+		let newBudget = Budget(id: UUID().uuidString,
+							   name: currentBudget.name,
+							   amount: currentBudget.amount,
+							   savingsPercentage: currentBudget.savingsPercentage,
+							   repeatCycle: currentBudget.repeatCycle,
+							   startDate: currentBudget.endDate)!
+		currentBudget.archive()
+		updateBudget(currentBudget) { error in
+			self.addBudget(newBudget) { error in
+				
+			}
+		}
 	}
 }

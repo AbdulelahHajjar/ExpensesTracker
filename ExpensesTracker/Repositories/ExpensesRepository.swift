@@ -18,11 +18,8 @@ final class ExpensesRepository: ObservableObject {
 	@Published private var budgetsRepository = BudgetsRepository.shared
 	private var cancellables                  = Set<AnyCancellable>()
 	
-	private init() {
-		//Disabling to convert to budgets sub-collection.
-		registerSubscribers()
-	}
-	
+	private init() { registerSubscribers() }
+	deinit { print("Deinit: ExpensesRepository") }
 	// MARK: - Expenses CRUD
 	func addExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }

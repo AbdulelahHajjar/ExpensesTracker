@@ -8,12 +8,14 @@
 
 import Foundation
 import Combine
+import UIKit
 
 final class DashboardViewModel: ObservableObject {
 	@Published private var budgetsRepository = BudgetsRepository.shared
 	@Published private var expensesRepository = ExpensesRepository.shared
-	@Published private var timeTraveler = TimeTraveler.shared
+	@Published private var appStateRepository = AppStateRepository.shared
 	
+	@Published private(set) var today = Date()
 	@Published private(set) var dashboardBudget: Budget? = nil
 	@Published private(set) var activeBudgets: [Budget] = []
 	@Published private(set) var expenses: [Expense] = []
@@ -40,10 +42,17 @@ final class DashboardViewModel: ObservableObject {
 	func registerSubscribers() {
 		budgetsRepository.$budgets
 			.receive(on: DispatchQueue.main)
-			.map { budgets in
-				budgets.filter { $0.isActive }
-			}
+			.map { $0.filter { $0.status == .active } }
 			.assign(to: \.activeBudgets, on: self)
+			.store(in: &cancellables)
+		
+		expensesRepository.$expenses
+			.receive(on: DispatchQueue.main)
+			.assign(to: \.expenses, on: self)
+			.store(in: &cancellables)
+		
+		appStateRepository.$today
+			.assign(to: \.today, on: self)
 			.store(in: &cancellables)
 		
 		budgetsRepository.$dashboardBudgetID
@@ -54,31 +63,29 @@ final class DashboardViewModel: ObservableObject {
 			.assign(to: \.dashboardBudget, on: self)
 			.store(in: &cancellables)
 		
-		expensesRepository.$expenses
+		$expenses
 			.receive(on: DispatchQueue.main)
 			.map { $0.map { $0.amount }.reduce(0) { $0 + $1 } }
 			.assign(to: \.totalSpendings, on: self)
 			.store(in: &cancellables)
 		
-		expensesRepository.$expenses
-			.receive(on: DispatchQueue.main)
-			.assign(to: \.expenses, on: self)
-			.store(in: &cancellables)
-		
-		expensesRepository.$expenses
+		$expenses
 			.receive(on: DispatchQueue.main)
 			.map {
-				$0.filter { Calendar.current.isDate($0.timestamp.dateValue(), inSameDayAs: self.timeTraveler.date) }.map { $0.amount }.reduce(0) { $0 + $1 }
+				self.calculateTodaySpendings(date: Date(), expenses: $0)
 			}
 			.assign(to: \.todaySpendings, on: self)
 			.store(in: &cancellables)
 		
-		timeTraveler.$date
+		$today
 			.receive(on: DispatchQueue.main)
-			.map { date in
-				self.expenses.filter { Calendar.current.isDate($0.timestamp.dateValue(), inSameDayAs: date) }.map { $0.amount }.reduce(0) { $0 + $1 }
+			.sink { _ in
+				self.todaySpendings = self.calculateTodaySpendings(date: Date(), expenses: self.expenses)
 			}
-			.assign(to: \.todaySpendings, on: self)
 			.store(in: &cancellables)
+	}
+	
+	func calculateTodaySpendings(date: Date, expenses: [Expense]) -> Double {
+		expenses.filter { Calendar.current.isDate($0.timestamp.dateValue(), inSameDayAs: Date()) }.map { $0.amount }.reduce(0) { $0 + $1 }
 	}
 }
