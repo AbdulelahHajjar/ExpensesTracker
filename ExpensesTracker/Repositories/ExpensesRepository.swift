@@ -23,7 +23,14 @@ final class ExpensesRepository: ObservableObject {
 	// MARK: - Expenses CRUD
 	func addExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
 		guard let user = userDataRepository.userData else { return }
-		firestoreService.saveDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
+        
+        var x = budgetsRepository.budgets.first { $0.id == budgetID }!
+        x.insights.addToDailySpendings(date: expense.date, amount: expense.amount)
+        
+        budgetsRepository.updateBudget(x) { error in
+            if error != nil { return }
+            self.firestoreService.saveDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
+        }
 	}
 	
 	func updateExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
@@ -43,10 +50,10 @@ final class ExpensesRepository: ObservableObject {
 			DispatchQueue.main.async {
 				switch result {
 					case .success(let expenses):
-						self.expenses = expenses
+                        self.expenses = expenses
 						print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s")")
 					case .failure(_):
-						self.expenses = []
+                        self.expenses = []
 				}
 			}
 		}
@@ -56,7 +63,7 @@ final class ExpensesRepository: ObservableObject {
 		budgetsRepository.$dashboardBudgetID
 			.receive(on: DispatchQueue.main)
 			.sink {
-				if $0 != nil { self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)}
+                if $0 != nil { self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)}
 			}
 			.store(in: &cancellables)
 	}

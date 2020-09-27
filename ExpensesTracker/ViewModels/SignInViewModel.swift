@@ -20,7 +20,7 @@ final class SignInViewModel: ObservableObject {
 		// TODO: Check if valid email and password
 		userDataRepository.signIn(email: email, password: password) { error in
 			// TODO: Manage Completion Handler
-			self.dismissModal = true
+            self.dismissModal = true
 		}
 	}
 }

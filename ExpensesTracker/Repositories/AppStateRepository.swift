@@ -20,7 +20,8 @@ final class AppStateRepository: ObservableObject {
 	
 	private func registerSubscribers() {
 		NotificationCenter.default.publisher(for: .NSCalendarDayChanged)
-			.sink { _ in self.today = Date() }
+			.receive(on: DispatchQueue.main)
+            .sink { _ in self.today = Date() }
 			.store(in: &cancellables)
 	}
 }

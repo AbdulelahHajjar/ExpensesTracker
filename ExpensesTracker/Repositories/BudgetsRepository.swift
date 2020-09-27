@@ -13,7 +13,8 @@ import Firebase
 final class BudgetsRepository: ObservableObject {
 	static let shared                         = BudgetsRepository()
 	
-	@Published private(set) var budgets       = [Budget]()
+    @Published private(set) var budgets       = [Budget]()
+    
 	@Published private(set) var dashboardBudgetID: String? = nil
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
@@ -30,7 +31,7 @@ final class BudgetsRepository: ObservableObject {
 		userDataRepository.$userData
 			.receive(on: DispatchQueue.main)
 			.sink {
-				if $0 != nil { self.loadBudgets() }
+                if $0 != nil { self.loadBudgets() }
 		}
 		.store(in: &cancellables)
 		
@@ -38,7 +39,7 @@ final class BudgetsRepository: ObservableObject {
 			.receive(on: DispatchQueue.main)
 			.debounce(for: 1.0, scheduler: RunLoop.main)
 			.map { $0.filter { $0.status != .archived } }
-			.sink { self.refreshBudgetTimers(budgets: $0) }
+            .sink { self.refreshBudgetTimers(budgets: $0) }
 			.store(in: &cancellables)
 		
 		$budgetTimers
@@ -53,16 +54,17 @@ final class BudgetsRepository: ObservableObject {
 			.store(in: &cancellables)
 		
 		NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-			.sink { _ in self.refreshBudgetTimers(budgets: self.budgets) }
+            .sink { _ in self.refreshBudgetTimers(budgets: self.budgets) }
 			.store(in: &cancellables)
 	}
 	
 	// MARK: - Budgets CRUD
 	func addBudget(_ budget: Budget, completion: @escaping (Error?) -> (Void)) {
 		guard let user = userDataRepository.userData else { return }
+        
 		firestoreService.saveDocument(collection: .users_budgets(userID: user.id), model: budget) { error in
 			if error == nil {
-				self.setDashboardBudgetID(id: budget.id)
+                self.setDashboardBudgetID(id: budget.id)
 			}
 			completion(error)
 		}
@@ -76,7 +78,7 @@ final class BudgetsRepository: ObservableObject {
 		guard let user = userDataRepository.userData else { return }
 		firestoreService.deleteDocument(collection: .users_budgets(userID: user.id), model: budget, completion: completion)
 	}
-	
+    
 	// MARK: - Helpers
 	private func loadBudgets() {
 		guard let userID = userDataRepository.userData?.id else { return }
@@ -85,8 +87,8 @@ final class BudgetsRepository: ObservableObject {
 			DispatchQueue.main.async {
 				switch result {
 				case .success(let budgets):
-					self.budgets = budgets
-					self.dashboardBudgetID = self.retrieveDashboardBudgetID()
+                    self.budgets = budgets
+                    self.dashboardBudgetID = self.retrieveDashboardBudgetID()
 					print("BudgetsRepository: Downloaded \(budgets.count) Budget\(budgets.count == 1 ? "" : "s")")
 				case .failure(_): break
 				}
@@ -96,7 +98,7 @@ final class BudgetsRepository: ObservableObject {
 	
 	// MARK: - Helpers
 	func setDashboardBudgetID(id: String) {
-		self.dashboardBudgetID = id
+		dashboardBudgetID = id
 		userDefaultsService.save(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue, value: id)
 	}
 	
@@ -168,7 +170,7 @@ final class BudgetsRepository: ObservableObject {
 							   startDate: currentBudget.endDate)!
 		currentBudget.archive()
 		updateBudget(currentBudget) { error in
-			self.addBudget(newBudget) { error in
+            self.addBudget(newBudget) { error in
 				
 			}
 		}

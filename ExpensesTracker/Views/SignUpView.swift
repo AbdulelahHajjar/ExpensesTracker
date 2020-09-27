@@ -28,9 +28,9 @@ struct SignUpView: View {
     }
 	
 	func signUp() {
-		self.viewModel.signUp { error in
+		viewModel.signUp { error in
 			// TODO:- Error handling
-			self.presentationMode.wrappedValue.dismiss()
+			presentationMode.wrappedValue.dismiss()
 		}
 	}
 }

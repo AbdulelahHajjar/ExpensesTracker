@@ -24,7 +24,7 @@ struct SignInView: View {
 		}
 		.onReceive(viewModel.$dismissModal) { value in
 			if value == true {
-				self.presentationMode.wrappedValue.dismiss()
+				presentationMode.wrappedValue.dismiss()
 			}
 		}
     }

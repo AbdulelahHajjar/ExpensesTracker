@@ -34,7 +34,7 @@ class FirestoreService: ObservableObject {
 			var modelArray = [T]()
 			
 			for document in documents {
-				let decodeResult = self.decode(documentSnapshot: document, as: T.self)
+                let decodeResult = self.decode(documentSnapshot: document, as: T.self)
 				switch decodeResult {
 				case .success(let model): modelArray.append(model)
 				default: break
@@ -63,7 +63,7 @@ class FirestoreService: ObservableObject {
 				return
 			}
 			
-			let decodeResult = self.decode(documentSnapshot: documentSnapshot, as: T.self)
+            let decodeResult = self.decode(documentSnapshot: documentSnapshot, as: T.self)
 			completion(decodeResult)
 		}
 		
@@ -112,7 +112,7 @@ class FirestoreService: ObservableObject {
 			.receive(on: DispatchQueue.main)
 			.sink {
 				if $0 == .signedOut || $0 == .undetermined {
-					self.removeAllListeners()
+                    self.removeAllListeners()
 				}
 			}
 			.store(in: &cancellables)

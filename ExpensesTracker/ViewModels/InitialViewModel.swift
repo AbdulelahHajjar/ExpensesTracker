@@ -22,7 +22,7 @@ class InitialViewModel: ObservableObject {
 	private func registerSubscribers() {
 		userDataRepository.$userData
 			.receive(on: DispatchQueue.main)
-			.sink { self.showHomeView.send($0 != nil) }
+            .sink { self.showHomeView.send($0 != nil) }
 			.store(in: &cancellables)
 		
 		userDataRepository.$isDeterminingAuthState

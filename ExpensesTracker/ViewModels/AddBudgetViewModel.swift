@@ -21,8 +21,8 @@ final class AddBudgetViewModel: ObservableObject {
 	@Published private var budgetsRepository = BudgetsRepository.shared
 	
 	var showEndDatePicker    : Bool { repeatCycle == .never }
-	var startDatePickerRange : ClosedRange<Date> { Date()...Date.distantFuture }
-	var endDatePickerRange   : ClosedRange<Date> { startDate.byAddingDays(1)...Date.distantFuture }
+	var startDatePickerRange : ClosedRange<Date> { Date()...startDate.byAddingDays(365) }
+    var endDatePickerRange   : ClosedRange<Date> { startDate.byAddingDays(1)...startDate.byAddingDays(365) }
 	var repeatCycles         : [Budget.RepeatCycle] { Budget.RepeatCycle.allCases }
 	
 	private var cancellables = Set<AnyCancellable>()

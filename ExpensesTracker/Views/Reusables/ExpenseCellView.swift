@@ -17,13 +17,13 @@ struct ExpenseCellView: View {
 		HStack {
 			VStack(alignment: .leading) {
 				Text(String(viewModel.expense.amount))
-				Text(String(viewModel.expense.timestamp.dateValue().shortDateTime))
+				Text(String(viewModel.expense.date.shortDateTime))
 			}
 			
 			Spacer()
 			
 			Button(action: {
-				self.isShowingEditExpenseView = true
+				isShowingEditExpenseView = true
 			}) {
 				Image(systemName: "pencil.circle")
 					.resizable()
@@ -32,13 +32,13 @@ struct ExpenseCellView: View {
 					.foregroundColor(.blue)
 			}
 			.buttonStyle(BorderlessButtonStyle())
-			.sheet(isPresented: self.$isShowingEditExpenseView) {
-				EditExpenseView(viewModel: .init(expense: self.viewModel.expense))
+			.sheet(isPresented: $isShowingEditExpenseView) {
+				EditExpenseView(viewModel: .init(expense: viewModel.expense))
 			}
 			
 			
 			Button(action: {
-				self.viewModel.deleteExpense()
+				viewModel.deleteExpense()
 			}) {
 				Image(systemName: "trash.circle")
 					.resizable()

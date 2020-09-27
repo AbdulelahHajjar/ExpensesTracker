@@ -19,7 +19,7 @@ struct InitialView: View {
 		NavigationView {
 			VStack {
 				Button(action: {
-					self.showSignUp = true
+					showSignUp = true
 				}) {
 					Text("Sign Up")
 				}
@@ -28,7 +28,7 @@ struct InitialView: View {
 				}
 								
 				Button(action: {
-					self.showSignIn = true
+					showSignIn = true
 				}) {
 					Text("Sign In")
 				}
@@ -38,7 +38,7 @@ struct InitialView: View {
 				
 				NavigationLink(destination: RootTabView().navigationBarBackButtonHidden(true), isActive: $showHome) { EmptyView() }
 			}
-			.onReceive(viewModel.showHomeView) { self.showHome = $0 }
+			.onReceive(viewModel.showHomeView) { showHome = $0 }
 		}
 		.overlay(
 			Color.red

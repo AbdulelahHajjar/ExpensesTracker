@@ -23,14 +23,14 @@ struct ExpensesListView: View {
 		.navigationBarItems(trailing:
 			HStack {
 				Button(action: {
-					self.isShowingAddExpenseView = true
+					isShowingAddExpenseView = true
 				}) {
 					Image(systemName: "plus.circle")
 						.resizable()
 						.scaledToFit()
 						.frame(width: 24, height: 24)
 				}
-				.sheet(isPresented: self.$isShowingAddExpenseView) {
+				.sheet(isPresented: $isShowingAddExpenseView) {
 					AddExpenseView(viewModel: .init())
 				}
 			}

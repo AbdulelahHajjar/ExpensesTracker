@@ -23,7 +23,7 @@ struct EditExpenseView: View {
 			
 			Section {
 				Button(action: {
-					self.viewModel.updateExpense()
+					viewModel.updateExpense()
 				}) {
 					Text("Save Changes")
 				}

@@ -21,13 +21,13 @@ final class EditExpenseViewModel: ObservableObject {
 	init(expense: Expense) {
 		self.expense = expense
 		self.amount = String(expense.amount)
-		self.date = expense.timestamp.dateValue()
+		self.date = expense.date
 	}
 	
 	func updateExpense() {
 		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
 		expense.amount = Double(amount) ?? -1
-		expense.timestamp = Timestamp(date: date)
+        expense.updateDate(date)
 		expensesRepository.updateExpense(expense: expense, budgetID: budgetID) { error in
 			// TODO: Implement error handling
 		}

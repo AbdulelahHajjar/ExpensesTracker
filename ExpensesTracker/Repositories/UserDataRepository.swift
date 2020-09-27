@@ -19,13 +19,13 @@ final class UserDataRepository: ObservableObject {
 	private var cancellables                = Set<AnyCancellable>()
 
 	private init() { registerSubscribers() }
-	
+	deinit { print("Deinit: UserDataRepository") }
 	// MARK: - UserData CRUD
 	private func loadUserData(uid: String) {
 		firestoreService.getDocument(collection: .users, documentID: uid, attachListener: true) { (result: Result<UserData, Error>) in
 			switch result {
-				case .success(let user): self.initializeUser(user)
-				case .failure(_): self.signOut()
+            case .success(let user): self.initializeUser(user)
+            case .failure(_): self.signOut()
 			}
 		}
 	}
@@ -52,22 +52,22 @@ final class UserDataRepository: ObservableObject {
 			.receive(on: DispatchQueue.main)
 			.sink {
 				switch $0 {
-					case .signedIn(let uid): self.loadUserData(uid: uid)
-					default: self.deInitializeUser()
+                    case .signedIn(let uid): self.loadUserData(uid: uid)
+                    default: self.deInitializeUser()
 				}
-				self.isDeterminingAuthState = $0 == .undetermined ? true : false
+                self.isDeterminingAuthState = $0 == .undetermined ? true : false
 			}
 			.store(in: &cancellables)
 	}
 	
 	private func initializeUser(_ user: UserData) {
-		DispatchQueue.main.async { self.userData = user }
+        DispatchQueue.main.async { self.userData = user }
 		print("UserDataRepository: Initialized UID \(user.id)")
 	}
 	
 	private func deInitializeUser() {
-		if self.userData == nil { return }
-		print("UserDataRepository: Deinitialized UID \(self.userData?.id ?? "[NO ID]")")
-		DispatchQueue.main.async { self.userData = nil }
+		if userData == nil { return }
+		print("UserDataRepository: Deinitialized UID \(userData?.id ?? "[NO ID]")")
+        DispatchQueue.main.async { self.userData = nil }
 	}
 }

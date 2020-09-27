@@ -40,24 +40,24 @@ struct BottomSheetView<Content: View>: View {
 				DragGesture()
 					.onChanged { value in
 						withAnimation(.easeInOut(duration: 0.24)) {
-							if abs(value.translation.height) > self.maxExtendingDrag {
+							if abs(value.translation.height) > maxExtendingDrag {
 								return
 							}
-							self.dragHeight = value.translation.height
+							dragHeight = value.translation.height
 						}
 					}
 					.onEnded { value in
 						print(value.translation.height)
-						print(self.isExtended)
+						print(isExtended)
 						withAnimation(.easeInOut(duration: 0.24)) {
-							if value.translation.height < -80 && !self.isExtended {
+							if value.translation.height < -80 && !isExtended {
 								print("here")
-								self.isExtended = true
+								isExtended = true
 							}
-							else if value.translation.height > 80 && self.isExtended {
-								self.isExtended = false
+							else if value.translation.height > 80 && isExtended {
+								isExtended = false
 							}
-							self.dragHeight = .zero
+							dragHeight = .zero
 						}
 					}
 			)

@@ -54,17 +54,17 @@ class AuthService: ObservableObject {
 			Auth.auth().removeStateDidChangeListener(handler)
 		}
 		
-		self.authStateChangeHandler = Auth.auth().addStateDidChangeListener { (auth, user) in
+		authStateChangeHandler = Auth.auth().addStateDidChangeListener { (auth, user) in
 			guard let userID = user?.uid else {
-				self.setAuthState(.signedOut)
+                self.setAuthState(.signedOut)
 				return
 			}
 			
-			self.setAuthState(.signedIn(uid: userID))
+            self.setAuthState(.signedIn(uid: userID))
 		}
 	}
 	
 	private func setAuthState(_ authState: AuthState) {
-		DispatchQueue.main.async { self.authState = authState }
+        DispatchQueue.main.async { self.authState = authState }
 	}
 }

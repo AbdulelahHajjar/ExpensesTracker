@@ -14,6 +14,9 @@
 		EB2099562501671900CD70F0 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2099552501671900CD70F0 /* Budget.swift */; };
 		EB20995C2501734E00CD70F0 /* AddBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */; };
 		EB209960250174BC00CD70F0 /* AddBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB20995F250174BC00CD70F0 /* AddBudgetView.swift */; };
+		EB22532D251F5D4200CA0595 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22532C251F5D4200CA0595 /* ChartView.swift */; };
+		EB22532F251F5D4E00CA0595 /* Path+QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22532E251F5D4E00CA0595 /* Path+QuadCurve.swift */; };
+		EB225331251F5D6E00CA0595 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB225330251F5D6E00CA0595 /* Date+Extensions.swift */; };
 		EB22DC4624FABD6B00EE3EAF /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4524FABD6B00EE3EAF /* BottomSheetView.swift */; };
 		EB22DC4824FB0E6D00EE3EAF /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */; };
 		EB22DC4A24FB0E7E00EE3EAF /* EditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */; };
@@ -25,6 +28,7 @@
 		EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */; };
 		EB4468EC2503E577000275AC /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468EB2503E577000275AC /* DashboardView.swift */; };
 		EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */; };
+		EB44A22925188D4200A20B82 /* NewDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB44A22825188D4200A20B82 /* NewDashboardView.swift */; };
 		EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */; };
 		EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */; };
 		EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA224F99F3000324B41 /* AddExpenseView.swift */; };
@@ -62,6 +66,9 @@
 		EB2099552501671900CD70F0 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetViewModel.swift; sourceTree = "<group>"; };
 		EB20995F250174BC00CD70F0 /* AddBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetView.swift; sourceTree = "<group>"; };
+		EB22532C251F5D4200CA0595 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		EB22532E251F5D4E00CA0595 /* Path+QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+QuadCurve.swift"; sourceTree = "<group>"; };
+		EB225330251F5D6E00CA0595 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EB22DC4524FABD6B00EE3EAF /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
 		EB22DC4924FB0E7E00EE3EAF /* EditExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewModel.swift; sourceTree = "<group>"; };
@@ -73,6 +80,7 @@
 		EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		EB4468EB2503E577000275AC /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		EB44A22825188D4200A20B82 /* NewDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDashboardView.swift; sourceTree = "<group>"; };
 		EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB792EA224F99F3000324B41 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 			children = (
 				EB27213E250578FC000F5B88 /* ExpenseCellView.swift */,
 				EB22DC4524FABD6B00EE3EAF /* BottomSheetView.swift */,
+				EB22532C251F5D4200CA0595 /* ChartView.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -235,6 +244,7 @@
 				EB13DB7E24FB914000B38B8B /* SettingsView.swift */,
 				EB4468EB2503E577000275AC /* DashboardView.swift */,
 				EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */,
+				EB44A22825188D4200A20B82 /* NewDashboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,8 +290,10 @@
 		EBF0483124F479ED00A0F04A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EB22532E251F5D4E00CA0595 /* Path+QuadCurve.swift */,
 				EBF0485024F47A9000A0F04A /* Enums.swift */,
 				EBF0485124F47A9000A0F04A /* Extensions.swift */,
+				EB225330251F5D6E00CA0595 /* Date+Extensions.swift */,
 				EBF0485224F47A9000A0F04A /* FirestoreListener.swift */,
 			);
 			path = Utilities;
@@ -316,7 +328,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Abdulelah Hajjar";
 				TargetAttributes = {
 					EBDAAA3324F477DD0040E1D6 = {
@@ -429,12 +441,16 @@
 				EB27213F250578FC000F5B88 /* ExpenseCellView.swift in Sources */,
 				EBF0484724F47A7800A0F04A /* SignInViewModel.swift in Sources */,
 				EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */,
+				EB22532D251F5D4200CA0595 /* ChartView.swift in Sources */,
 				EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */,
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */,
+				EB22532F251F5D4E00CA0595 /* Path+QuadCurve.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
 				EB209960250174BC00CD70F0 /* AddBudgetView.swift in Sources */,
+				EB44A22925188D4200A20B82 /* NewDashboardView.swift in Sources */,
 				EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */,
+				EB225331251F5D6E00CA0595 /* Date+Extensions.swift in Sources */,
 				EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */,
 				EB4468EC2503E577000275AC /* DashboardView.swift in Sources */,
 				EB22DC4624FABD6B00EE3EAF /* BottomSheetView.swift in Sources */,
@@ -484,6 +500,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -508,13 +525,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -544,6 +562,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -562,12 +581,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -583,7 +603,7 @@
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +627,7 @@
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

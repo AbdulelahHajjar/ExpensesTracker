@@ -12,6 +12,6 @@ final class SettingsViewModel: ObservableObject {
 	@Published var userDataRepository = UserDataRepository.shared
 	
 	func signOut() {
-		self.userDataRepository.signOut()
+		userDataRepository.signOut()
 	}
 }

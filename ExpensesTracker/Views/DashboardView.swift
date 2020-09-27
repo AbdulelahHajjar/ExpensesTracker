@@ -16,22 +16,23 @@ struct DashboardView: View {
 	
     var body: some View {
 		VStack(alignment: .center) {
+			
 			Text("Todays is: \(viewModel.today.shortDateTime)")
 			
 			HStack {
 				Button(action: {
-					self.isShowingBudgetSelector = true
+					isShowingBudgetSelector = true
 				}) {
 					Text("Select Budget")
 				}
 				.sheet(isPresented: $isShowingBudgetSelector) {
 					Form {
-						ForEach(self.viewModel.activeBudgets) { budget in
+						ForEach(viewModel.activeBudgets) { budget in
 							Button(action: {
-								self.viewModel.setDashboardBudget(id: budget.id)
-								self.isShowingBudgetSelector = false
+								viewModel.setDashboardBudget(id: budget.id)
+								isShowingBudgetSelector = false
 							}) {
-								Text("\(budget.startDate.shortDateTime) -> \(budget.endDate.shortDateTime)")
+								Text("\(budget.startDate.shortDate) -> \(budget.endDate.shortDate) [\(budget.status.rawValue)]")
 									.foregroundColor(.black)
 							}
 						}
@@ -42,7 +43,7 @@ struct DashboardView: View {
 				Color.gray.frame(width: 1, height: 10)
 				
 				Button(action: {
-					self.isShowingAddBudgetView = true
+					isShowingAddBudgetView = true
 				}) {
 					Text("Add Budget")
 				}
@@ -53,7 +54,7 @@ struct DashboardView: View {
 				Color.gray.frame(width: 1, height: 10)
 				
 				Button(action: {
-					self.viewModel.deleteDashboardBudget()
+					viewModel.deleteDashboardBudget()
 				}) {
 					Text("Delete Budget")
 						.foregroundColor(.red)

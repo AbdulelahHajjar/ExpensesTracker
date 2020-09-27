@@ -28,9 +28,9 @@ struct AddBudgetView: View {
 							Text(repeatCycle.rawValue).tag(repeatCycle)
 						}
 					}
-					
+					                    
 					DatePicker(selection: $viewModel.startDate, in: viewModel.startDatePickerRange, displayedComponents: .date) { Text("Start Date") }
-					
+					                    
 					if viewModel.showEndDatePicker {
 						DatePicker(selection: $viewModel.endDate, in: viewModel.endDatePickerRange, displayedComponents: .date) { Text("End Date") }
 					}
@@ -38,7 +38,7 @@ struct AddBudgetView: View {
 				
 				Section {
 					Button(action: {
-						self.viewModel.addBudget()
+						viewModel.addBudget()
 					}) {
 						Text("Add Budget")
 					}

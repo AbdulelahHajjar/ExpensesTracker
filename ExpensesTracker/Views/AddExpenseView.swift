@@ -21,12 +21,13 @@ struct AddExpenseView: View {
 					DatePicker(selection: $viewModel.date, displayedComponents: .date) {
 						Text("Date")
 					}
+                    
 				}
 				
 				Section {
 					Button(action: {
-						self.viewModel.addExpense()
-						self.presentationMode.wrappedValue.dismiss()
+						viewModel.addExpense()
+						presentationMode.wrappedValue.dismiss()
 					}) {
 						Text("Add Expense")
 					}

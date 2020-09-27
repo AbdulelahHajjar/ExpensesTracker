@@ -13,7 +13,7 @@ struct SettingsView: View {
 	
     var body: some View {
 		Button(action: {
-			self.viewModel.signOut()
+			viewModel.signOut()
 		}) {
 			Text("Sign Out")
 		}
