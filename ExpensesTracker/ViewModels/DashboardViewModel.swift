@@ -20,7 +20,7 @@ final class DashboardViewModel: ObservableObject {
 	@Published private(set) var activeBudgets: [Budget] = []
 	@Published private(set) var expenses: [Expense] = []
     
-    var graphValues: [String : Double] {
+    var chartValues: [String : Double] {
         guard let budget = dashboardBudget else { return [:] }
         return Dictionary(uniqueKeysWithValues: budget.insights.dailySpendings.map { key, value in (key.shortDate, value) })
     }

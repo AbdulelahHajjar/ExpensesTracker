@@ -52,7 +52,7 @@ struct NewDashboardView: View {
 				.foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
 				.fontWeight(.light)
 			
-            ChartView(data: viewModel.graphValues, isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
+            ChartView(data: viewModel.chartValues, isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
 				.frame(height: 200)
 			
 			HStack {
