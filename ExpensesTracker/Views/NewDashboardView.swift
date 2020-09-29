@@ -107,6 +107,17 @@ struct NewDashboardView: View {
                 Spacer()
             } else {
                 Text("No Budget")
+                Button(action: { isShowingAddBudgetView = true }, label: {
+                    Image(systemName: "plus")
+                        .padding(10)
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
+                        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
+                })
+                .sheet(isPresented: $isShowingAddBudgetView, content: {
+                    AddBudgetView(viewModel: .init())
+                })
             }
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)

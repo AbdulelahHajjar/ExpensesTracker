@@ -22,7 +22,7 @@ final class BudgetsRepository: ObservableObject {
 	
 	@Published private var budgetTimers = [Timer]()
 	
-	private var cancellables                  = Set<AnyCancellable>()
+	private var cancellables = Set<AnyCancellable>()
 	
 	private init() { registerSubscribers() }
 	
@@ -64,7 +64,7 @@ final class BudgetsRepository: ObservableObject {
         
 		firestoreService.saveDocument(collection: .users_budgets(userID: user.id), model: budget) { error in
 			if error == nil {
-                self.setDashboardBudgetID(id: budget.id)
+                self.updateDashboardBudgetID(id: budget.id)
 			}
 			completion(error)
 		}
@@ -88,7 +88,7 @@ final class BudgetsRepository: ObservableObject {
 				switch result {
 				case .success(let budgets):
                     self.budgets = budgets
-                    self.dashboardBudgetID = self.retrieveDashboardBudgetID()
+                    self.setDashboardBudgetID()
 					print("BudgetsRepository: Downloaded \(budgets.count) Budget\(budgets.count == 1 ? "" : "s")")
 				case .failure(_): break
 				}
@@ -97,14 +97,26 @@ final class BudgetsRepository: ObservableObject {
 	}
 	
 	// MARK: - Helpers
-	func setDashboardBudgetID(id: String) {
+	func updateDashboardBudgetID(id: String) {
+        if dashboardBudgetID == id { return }
 		dashboardBudgetID = id
 		userDefaultsService.save(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue, value: id)
 	}
 	
-	private func retrieveDashboardBudgetID() -> String? {
-		userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String
+	private func setDashboardBudgetID() {
+        guard let id = userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String, budgetExists(with: id) else {
+            dashboardBudgetID = nil
+            return
+        }
+        dashboardBudgetID = id
 	}
+    
+    private func budgetExists(with id: String) -> Bool {
+        for budget in budgets.filter({ $0.status == .active }) {
+            if budget.id == id { return true }
+        }
+        return false
+    }
 	
 	// MARK: - Timers
 	private func refreshBudgetTimers(budgets: [Budget]) {

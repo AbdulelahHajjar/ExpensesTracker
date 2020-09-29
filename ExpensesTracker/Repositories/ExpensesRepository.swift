@@ -16,6 +16,8 @@ final class ExpensesRepository: ObservableObject {
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
 	@Published private var budgetsRepository = BudgetsRepository.shared
+    @Published private var currentBudgetID: String? = nil
+    
 	private var cancellables                  = Set<AnyCancellable>()
 	
 	private init() { registerSubscribers() }
@@ -34,12 +36,35 @@ final class ExpensesRepository: ObservableObject {
 	}
 	
 	func updateExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
-		addExpense(expense: expense, budgetID: budgetID, completion: completion)
+        guard let user = userDataRepository.userData,
+              let previousExpense = expenses.first(where: { $0.id == expense.id }),
+              var budget = budgetsRepository.budgets.first(where: { $0.id == budgetID }) else {
+            completion(FirestoreError.unknown) //Should be something better than this
+            return
+        }
+        
+        budget.insights.addToDailySpendings(date: previousExpense.date, amount: -previousExpense.amount)
+        budget.insights.addToDailySpendings(date: expense.date, amount: expense.amount)
+        
+        #warning("Use transaction")
+        budgetsRepository.updateBudget(budget) { (error) -> (Void) in
+            if error == nil {
+                self.firestoreService.saveDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
+            }
+        }
 	}
 	
 	func deleteExpense(expense: Expense, budgetID: String, completion: @escaping (Error?) -> ()) {
-		guard let user = userDataRepository.userData else { return }
-		firestoreService.deleteDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
+		guard let user = userDataRepository.userData,
+              var budget = budgetsRepository.budgets.first(where: { $0.id == budgetID }) else { return }
+        
+        budget.insights.addToDailySpendings(date: expense.date, amount: -expense.amount)
+        
+        budgetsRepository.updateBudget(budget) { (error) -> (Void) in
+            if error == nil {
+                self.firestoreService.deleteDocument(collection: .users_budgets_expenses(userID: user.id, budgetID: budgetID), model: expense, completion: completion)
+            }
+        }
 	}
 	
 	// MARK: - Helpers
@@ -63,7 +88,10 @@ final class ExpensesRepository: ObservableObject {
 		budgetsRepository.$dashboardBudgetID
 			.receive(on: DispatchQueue.main)
 			.sink {
-                if $0 != nil { self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)}
+                if $0 != self.currentBudgetID && $0 != nil {
+                    self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)
+                }
+                self.currentBudgetID = $0
 			}
 			.store(in: &cancellables)
 	}

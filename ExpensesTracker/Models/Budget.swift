@@ -162,6 +162,7 @@ extension Budget {
             dailySpendings[dateKey] = (dailySpendings[dateKey] ?? 0) + amount
         }
         
+        
         static func generateDailySpendings(startDate: Date, endDate: Date) -> [Date : Double]? {
             var date = startDate
             var _dailySpendings = [Date : Double]()

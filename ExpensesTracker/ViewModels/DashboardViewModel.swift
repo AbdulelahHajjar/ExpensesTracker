@@ -29,7 +29,7 @@ final class DashboardViewModel: ObservableObject {
 	init() { registerSubscribers() }
 	
 	func setDashboardBudget(id: String) {
-		budgetsRepository.setDashboardBudgetID(id: id)
+		budgetsRepository.updateDashboardBudgetID(id: id)
 	}
 	
 	func deleteDashboardBudget() {

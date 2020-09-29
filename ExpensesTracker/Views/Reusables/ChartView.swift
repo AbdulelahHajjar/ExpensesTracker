@@ -112,8 +112,8 @@ public struct ChartView: View {
 						showIndicator = true
 				}
 				.onEnded { value in
-					showIndicator = false
                     self.currentPointIndex = nil
+					showIndicator = false
 				}
 			)
 		}
