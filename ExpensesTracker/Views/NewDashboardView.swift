@@ -14,6 +14,7 @@ struct NewDashboardView: View {
 	@State private var firstColor = Color(#colorLiteral(red: 0, green: 0.5764705882, blue: 0.9137254902, alpha: 1))
 	@State private var secondColor = Color(#colorLiteral(red: 0.5019607843, green: 0.8156862745, blue: 0.7803921569, alpha: 1))
 	@State private var isShowingAddBudgetView = false
+    @State private var isShowingSelectBudgetView = false
     
     var body: some View {
 		VStack(alignment: .leading) {
@@ -35,6 +36,29 @@ struct NewDashboardView: View {
                     })
                     .sheet(isPresented: $isShowingAddBudgetView, content: {
                         AddBudgetView(viewModel: .init())
+                    })
+                    
+                    Button(action: { isShowingSelectBudgetView = true }, label: {
+                        Image(systemName: "doc.on.doc")
+                            .padding(10)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
+                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
+                    })
+                    .sheet(isPresented: $isShowingSelectBudgetView, content: {
+                        Form {
+                            ForEach(viewModel.activeBudgets) { budget in
+                                Button(action: {
+                                    viewModel.setDashboardBudget(id: budget.id)
+                                    isShowingSelectBudgetView = false
+                                }) {
+                                    Text("\(budget.startDate.shortDate) -> \(budget.endDate.shortDate) [\(budget.status.rawValue)]")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }
+                        .navigationBarTitle("", displayMode: .inline)
                     })
                 }
                 .padding(.bottom)

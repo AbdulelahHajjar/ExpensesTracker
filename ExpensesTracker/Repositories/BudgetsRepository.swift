@@ -105,7 +105,7 @@ final class BudgetsRepository: ObservableObject {
 	
 	private func setDashboardBudgetID() {
         guard let id = userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String, budgetExists(with: id) else {
-            dashboardBudgetID = nil
+            dashboardBudgetID = budgets.first { $0.status == .active }?.id
             return
         }
         dashboardBudgetID = id
