@@ -158,7 +158,7 @@ extension Budget {
         }
         
         mutating func addToDailySpendings(date: Date, amount: Double) {
-            guard let dateKey = dailySpendings.first(where: { $0.key == date })?.key else { return }
+            guard let dateKey = dailySpendings.first(where: { Calendar.current.isDate($0.key, inSameDayAs: date) })?.key else { return }
             dailySpendings[dateKey] = (dailySpendings[dateKey] ?? 0) + amount
         }
         

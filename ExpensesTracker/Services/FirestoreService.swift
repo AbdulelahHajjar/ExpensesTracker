@@ -24,7 +24,7 @@ class FirestoreService: ObservableObject {
 	func getDocuments<T: Codable & Identifiable>(collection: FirestoreCollection,
 												 attachListener: Bool,
 												 completion: @escaping (Result<[T], Error>) -> (Void)) {
-		
+        
 		let handler: FIRQuerySnapshotBlock = { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else {
 				completion(.failure(FirestoreError.unknown))

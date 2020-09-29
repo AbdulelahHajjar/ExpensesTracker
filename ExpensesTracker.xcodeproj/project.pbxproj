@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5484459046976902740F2675 /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC60FEFDC937CD771520493 /* Pods_ExpensesTracker.framework */; };
+		E5CE6B1A43961A8632860B31 /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */; };
 		EB13DB7F24FB914000B38B8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13DB7E24FB914000B38B8B /* SettingsView.swift */; };
 		EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB175E8A2514EAE900F84579 /* AppStateRepository.swift */; };
+		EB1F499E25225D2600A6FE9C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1F499D25225D2600A6FE9C /* ChartViewModel.swift */; };
 		EB209954250166C800CD70F0 /* BudgetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB209953250166C800CD70F0 /* BudgetsRepository.swift */; };
 		EB2099562501671900CD70F0 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2099552501671900CD70F0 /* Budget.swift */; };
 		EB20995C2501734E00CD70F0 /* AddBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */; };
@@ -57,11 +58,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8F5ADD6151A4B932868AA480 /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
-		B8F51D001CBD4F32DCCA9B79 /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
-		EAC60FEFDC937CD771520493 /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
 		EB13DB7E24FB914000B38B8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EB175E8A2514EAE900F84579 /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
+		EB1F499D25225D2600A6FE9C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		EB209953250166C800CD70F0 /* BudgetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsRepository.swift; sourceTree = "<group>"; };
 		EB2099552501671900CD70F0 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		EB20995B2501734E00CD70F0 /* AddBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		EBF0485024F47A9000A0F04A /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		EBF0485124F47A9000A0F04A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EBF0485224F47A9000A0F04A /* FirestoreListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreListener.swift; sourceTree = "<group>"; };
+		F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5484459046976902740F2675 /* Pods_ExpensesTracker.framework in Frameworks */,
+				E5CE6B1A43961A8632860B31 /* Pods_ExpensesTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,16 +127,16 @@
 		2077BCC545F89FBB3A3397F7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B8F51D001CBD4F32DCCA9B79 /* Pods-ExpensesTracker.debug.xcconfig */,
-				8F5ADD6151A4B932868AA480 /* Pods-ExpensesTracker.release.xcconfig */,
+				2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */,
+				B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		94B8E925443AC88F1F2DFC97 /* Frameworks */ = {
+		6F9E546E669605C4CB32BAC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAC60FEFDC937CD771520493 /* Pods_ExpensesTracker.framework */,
+				F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -174,6 +176,7 @@
 			children = (
 				EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */,
 				EB27213A250578CB000F5B88 /* ExpenseCellViewModel.swift */,
+				EB1F499D25225D2600A6FE9C /* ChartViewModel.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -184,7 +187,7 @@
 				EBDAAA3624F477DD0040E1D6 /* ExpensesTracker */,
 				EBDAAA3524F477DD0040E1D6 /* Products */,
 				2077BCC545F89FBB3A3397F7 /* Pods */,
-				94B8E925443AC88F1F2DFC97 /* Frameworks */,
+				6F9E546E669605C4CB32BAC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,11 +309,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBDAAA4824F477DE0040E1D6 /* Build configuration list for PBXNativeTarget "ExpensesTracker" */;
 			buildPhases = (
-				2CCC5B7B496A032CFEAC1DE8 /* [CP] Check Pods Manifest.lock */,
+				E10DB3A36440F49C1E5F3DD1 /* [CP] Check Pods Manifest.lock */,
 				EBDAAA3024F477DD0040E1D6 /* Sources */,
 				EBDAAA3124F477DD0040E1D6 /* Frameworks */,
 				EBDAAA3224F477DD0040E1D6 /* Resources */,
-				ABC9B3508F1A468618069C54 /* [CP] Embed Pods Frameworks */,
+				E839644334530456362EE930 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,7 +372,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CCC5B7B496A032CFEAC1DE8 /* [CP] Check Pods Manifest.lock */ = {
+		E10DB3A36440F49C1E5F3DD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -391,7 +394,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ABC9B3508F1A468618069C54 /* [CP] Embed Pods Frameworks */ = {
+		E839644334530456362EE930 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -442,6 +445,7 @@
 				EBF0484724F47A7800A0F04A /* SignInViewModel.swift in Sources */,
 				EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */,
 				EB22532D251F5D4200CA0595 /* ChartView.swift in Sources */,
+				EB1F499E25225D2600A6FE9C /* ChartViewModel.swift in Sources */,
 				EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */,
 				EBF0484624F47A7800A0F04A /* SignUpViewModel.swift in Sources */,
 				EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */,
@@ -594,7 +598,7 @@
 		};
 		EBDAAA4924F477DE0040E1D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8F51D001CBD4F32DCCA9B79 /* Pods-ExpensesTracker.debug.xcconfig */;
+			baseConfigurationReference = 2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -602,6 +606,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ExpensesTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -609,6 +614,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.2;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hajjar.ExpensesTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -618,7 +624,7 @@
 		};
 		EBDAAA4A24F477DE0040E1D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F5ADD6151A4B932868AA480 /* Pods-ExpensesTracker.release.xcconfig */;
+			baseConfigurationReference = B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -626,6 +632,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ExpensesTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

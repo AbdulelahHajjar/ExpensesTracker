@@ -108,16 +108,13 @@ final class BudgetsRepository: ObservableObject {
 	
 	// MARK: - Timers
 	private func refreshBudgetTimers(budgets: [Budget]) {
-		if !budgetTimers.isEmpty {
-			for timer in budgetTimers { timer.invalidate() }
-			budgetTimers = []
-		}
-		
+		clearBudgetTimers()
+        
 		var budgetTimersCopy = budgetTimers
 		
 		for budget in budgets {
 			let status = budget.status
-			guard status != .archived else { return }
+			guard status != .archived else { continue }
 			
 			var selector: Selector
 			
@@ -136,6 +133,13 @@ final class BudgetsRepository: ObservableObject {
 		
 		budgetTimers = budgetTimersCopy
 	}
+    
+    private func clearBudgetTimers() {
+        if !budgetTimers.isEmpty {
+            for timer in budgetTimers { timer.invalidate() }
+            budgetTimers = []
+        }
+    }
 	
 	@objc private func archiveBudget(sender: Timer) {
 		guard var budget = sender.userInfo as? Budget else { return }

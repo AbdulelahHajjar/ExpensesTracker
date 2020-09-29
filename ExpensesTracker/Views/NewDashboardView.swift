@@ -17,90 +17,97 @@ struct NewDashboardView: View {
     
     var body: some View {
 		VStack(alignment: .leading) {
-			HStack {
-				Text("Hello, Abdulelah!")
-					.font(.title)
-					.fontWeight(.semibold)
-				
-				Spacer()
-				
-                Button(action: { isShowingAddBudgetView = true }, label: {
-                    Image(systemName: "plus")
-                        .padding(14)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
-                        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-                })
-                .sheet(isPresented: $isShowingAddBudgetView, content: {
-                    AddBudgetView(viewModel: .init())
-                })
-			}
-			.padding(.bottom)
-			
-			HStack(alignment: .bottom, spacing: 4) {
-				Text("SR 30.00")
-					.font(.title)
-				
-				Text("+SR 1.50")
-					.font(.footnote)
-					.foregroundColor(.green)
-					.padding(.bottom, 4)
-			}
-			
-			Text("Today's allowance")
-				.foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
-				.fontWeight(.light)
-			
-            ChartView(data: viewModel.chartValues, isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
-				.frame(height: 200)
-			
-			HStack {
-				Group {
-					Text("4W")
-						.bold()
-						.padding(.horizontal, 10)
-						.padding(.vertical, 4)
+            if let budget = viewModel.dashboardBudget {
+                HStack {
+                    Text("Hello, Abdulelah!")
+                        .font(.title)
+                        .fontWeight(.semibold)
                     
-					Spacer()
-					
-					Text("3W")
-						.bold()
-						.padding(.horizontal, 10)
-						.padding(.vertical, 4)
-					
-					Spacer()
-					
-					Text("2W")
-						.bold()
-						.padding(.horizontal, 10)
-						.padding(.vertical, 4)
-					
-					Spacer()
-					
-					Text("1W")
-						.bold()
-						.padding(.horizontal, 10)
-						.padding(.vertical, 4)
-					
-					Spacer()
-					
-					Text("3D")
-						.bold()
-						.padding(.horizontal, 10)
-						.padding(.vertical, 4)
-				}
-				.font(.footnote)
-				.foregroundColor(.white)
-				.background(LinearGradient(gradient: .init(colors: [firstColor, secondColor]), startPoint: .bottomLeading, endPoint: .topTrailing))
-				.clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-				.shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 8)
-				.shadow(color: Color.black.opacity(0.15), radius: 1, x: 0, y: 1)
-			
-			}
-			
-			
-			Spacer()
+                    Spacer()
+                    
+                    Button(action: { isShowingAddBudgetView = true }, label: {
+                        Image(systemName: "plus")
+                            .padding(10)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
+                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
+                    })
+                    .sheet(isPresented: $isShowingAddBudgetView, content: {
+                        AddBudgetView(viewModel: .init())
+                    })
+                }
+                .padding(.bottom)
+                
+                Text("\(budget.id)")
+                    .font(.footnote)
+                
+                HStack(alignment: .bottom, spacing: 4) {
+                    Text("SR 30.00")
+                        .font(.title)
+                    
+                    Text("+SR 1.50")
+                        .font(.footnote)
+                        .foregroundColor(.green)
+                        .padding(.bottom, 4)
+                }
+                
+                Text("Today's allowance")
+                    .foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
+                    .fontWeight(.light)
+                
+                ChartView(viewModel: .init(rawData: budget.insights.dailySpendings), isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
+                    .frame(height: 200)
+
+                HStack {
+                    Group {
+                        Text("4W")
+                            .bold()
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                        
+                        Spacer()
+                        
+                        Text("3W")
+                            .bold()
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                        
+                        Spacer()
+                        
+                        Text("2W")
+                            .bold()
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                        
+                        Spacer()
+                        
+                        Text("1W")
+                            .bold()
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                        
+                        Spacer()
+                        
+                        Text("3D")
+                            .bold()
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                    }
+                    .font(.footnote)
+                    .foregroundColor(.white)
+                    .background(LinearGradient(gradient: .init(colors: [firstColor, secondColor]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 8)
+                    .shadow(color: Color.black.opacity(0.15), radius: 1, x: 0, y: 1)
+                
+                }
+                
+                
+                Spacer()
+            } else {
+                Text("No Budget")
+            }
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
 		.padding()
@@ -109,7 +116,16 @@ struct NewDashboardView: View {
 		.navigationBarHidden(true)
 		.overlay(
 			BottomSheetView {
-				Text("")
+                NavigationLink(
+                    destination: ExpensesListView(viewModel: .init()),
+                    label: {
+                        Image(systemName: "plus")
+                            .padding(10)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
+                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
+                    })
 			}
             .opacity(0.85)
             .offset(y: 100)

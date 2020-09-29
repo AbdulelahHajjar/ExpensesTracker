@@ -14,9 +14,9 @@ struct ExpensesListView: View {
 	@State private var isShowingAddExpenseView = false
 	
     var body: some View {
-		List {
+		ScrollView {
 			ForEach(viewModel.expenseCellViewModels) { expenseCellViewModel in
-				ExpenseCellView(viewModel: expenseCellViewModel)
+                ExpenseCellView(viewModel: expenseCellViewModel)
 			}
 		}
 		.navigationBarTitle("Expenses")

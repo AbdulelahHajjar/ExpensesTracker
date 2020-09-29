@@ -20,11 +20,6 @@ final class DashboardViewModel: ObservableObject {
 	@Published private(set) var activeBudgets: [Budget] = []
 	@Published private(set) var expenses: [Expense] = []
     
-    var chartValues: [String : Double] {
-        guard let budget = dashboardBudget else { return [:] }
-        return Dictionary(uniqueKeysWithValues: budget.insights.dailySpendings.map { key, value in (key.shortDate, value) })
-    }
-    
 	var dailySpendLimit: Double? { dashboardBudget?.dailySpendLimit }
 	@Published var totalSpendings: Double? = nil
 	@Published var todaySpendings: Double? = nil
@@ -67,7 +62,7 @@ final class DashboardViewModel: ObservableObject {
 			}
 			.assign(to: \.dashboardBudget, on: self)
 			.store(in: &cancellables)
-		
+        
 		$expenses
 			.receive(on: DispatchQueue.main)
 			.map { $0.map { $0.amount }.reduce(0) { $0 + $1 } }

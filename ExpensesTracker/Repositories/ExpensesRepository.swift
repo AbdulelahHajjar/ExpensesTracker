@@ -51,7 +51,7 @@ final class ExpensesRepository: ObservableObject {
 				switch result {
 					case .success(let expenses):
                         self.expenses = expenses
-						print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s")")
+                        print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s"), for Budget: \(String(describing: self.budgetsRepository.dashboardBudgetID))")
 					case .failure(_):
                         self.expenses = []
 				}
