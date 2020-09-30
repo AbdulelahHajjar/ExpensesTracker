@@ -25,46 +25,8 @@ struct NewDashboardView: View {
                         .fontWeight(.semibold)
                     
                     Spacer()
-                    
-                    Button(action: { isShowingAddBudgetView = true }, label: {
-                        Image(systemName: "plus")
-                            .padding(10)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
-                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-                    })
-                    .sheet(isPresented: $isShowingAddBudgetView, content: {
-                        AddBudgetView(viewModel: .init())
-                    })
-                    
-                    Button(action: { isShowingSelectBudgetView = true }, label: {
-                        Image(systemName: "doc.on.doc")
-                            .padding(10)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
-                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-                    })
-                    .sheet(isPresented: $isShowingSelectBudgetView, content: {
-                        Form {
-                            ForEach(viewModel.activeBudgets) { budget in
-                                Button(action: {
-                                    viewModel.setDashboardBudget(id: budget.id)
-                                    isShowingSelectBudgetView = false
-                                }) {
-                                    Text("\(budget.startDate.shortDate) -> \(budget.endDate.shortDate) [\(budget.status.rawValue)]")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        }
-                        .navigationBarTitle("", displayMode: .inline)
-                    })
                 }
                 .padding(.bottom)
-                
-                Text("\(budget.id)")
-                    .font(.footnote)
                 
                 HStack(alignment: .bottom, spacing: 4) {
                     Text("SR 30.00")
@@ -82,91 +44,38 @@ struct NewDashboardView: View {
                 
                 ChartView(viewModel: .init(rawData: budget.insights.dailySpendings), isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
                     .frame(height: 200)
-
-                HStack {
-                    Group {
-                        Text("4W")
-                            .bold()
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                        
-                        Spacer()
-                        
-                        Text("3W")
-                            .bold()
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                        
-                        Spacer()
-                        
-                        Text("2W")
-                            .bold()
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                        
-                        Spacer()
-                        
-                        Text("1W")
-                            .bold()
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                        
-                        Spacer()
-                        
-                        Text("3D")
-                            .bold()
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                    }
-                    .font(.footnote)
-                    .foregroundColor(.white)
-                    .background(LinearGradient(gradient: .init(colors: [firstColor, secondColor]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 8)
-                    .shadow(color: Color.black.opacity(0.15), radius: 1, x: 0, y: 1)
                 
+                HStack {
+                    Text("4W")
+                        .bold()
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 6)
+                        .font(.footnote)
+                        .foregroundColor(.white)
+                        .background(LinearGradient(gradient: .init(colors: [firstColor, secondColor]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 8)
+                        .shadow(color: Color.black.opacity(0.15), radius: 1, x: 0, y: 1)
                 }
                 
-                
                 Spacer()
-            } else {
-                Text("No Budget")
-                Button(action: { isShowingAddBudgetView = true }, label: {
-                    Image(systemName: "plus")
-                        .padding(10)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
-                        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-                })
-                .sheet(isPresented: $isShowingAddBudgetView, content: {
-                    AddBudgetView(viewModel: .init())
-                })
             }
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
 		.padding()
 		.background(
-            LinearGradient(gradient: .init(stops: [.init(color: Color(#colorLiteral(red: 0.8745098039, green: 0.9176470588, blue: 0.9882352941, alpha: 1)), location: 0),
-                                                   .init(color: Color(#colorLiteral(red: 0.9568627451, green: 0.968627451, blue: 0.9882352941, alpha: 1)), location: 0.4)]),
+            LinearGradient(gradient: .init(stops: [.init(color: Color(#colorLiteral(red: 0.9019607843, green: 0.9333333333, blue: 0.9882352941, alpha: 1)), location: 0),
+                                                   .init(color: Color(#colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9803921569, alpha: 1)), location: 0.5)]),
                            startPoint: .top,
                            endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
         )
+        
 		.navigationBarTitle("")
 		.navigationBarHidden(true)
 		.overlay(
 			BottomSheetView {
-                NavigationLink(
-                    destination: ExpensesListView(viewModel: .init()),
-                    label: {
-                        Image(systemName: "plus")
-                            .padding(10)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
-                            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
-                    })
+                Text("I will have content soon!")
 			}
             .opacity(1.00)
             .offset(y: 100)

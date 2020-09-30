@@ -17,6 +17,12 @@ struct RootTabView: View {
 					Text("Dashboard")
 				}
 			
+            TemporaryInfoView(viewModel: .init())
+                .tabItem {
+                    Image(systemName: "info")
+                    Text("Information")
+                }
+            
 			SettingsView(viewModel: .init())
 				.tabItem {
 					Image(systemName: "gear")
