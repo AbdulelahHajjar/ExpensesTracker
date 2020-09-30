@@ -1,5 +1,5 @@
 //
-//  NewDashboardView.swift
+//  DashboardView.swift
 //  ExpensesTracker
 //
 //  Created by Abdulelah Hajjar on 21/09/2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NewDashboardView: View {
+struct DashboardView: View {
     @ObservedObject var viewModel: DashboardViewModel
     
 	@State private var firstColor = Color(#colorLiteral(red: 0, green: 0.5764705882, blue: 0.9137254902, alpha: 1))
@@ -86,7 +86,7 @@ struct NewDashboardView: View {
 struct NewDashboardView_Previews: PreviewProvider {
     static var previews: some View {
 		NavigationView {
-            NewDashboardView(viewModel: .init())
+            DashboardView(viewModel: .init())
 		}
     }
 }
