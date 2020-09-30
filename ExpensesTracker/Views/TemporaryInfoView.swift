@@ -17,7 +17,7 @@ struct TemporaryInfoView: View {
         VStack {
             Text("Current Bugdet:\n\(viewModel.dashboardBudget?.id ?? "[NONE]")")
             
-            Button(action: {}, label: {
+            Button(action: { isShowingSelectBudgetView = true }, label: {
                 Text("Select from Active Budgets")
             })
             .sheet(isPresented: $isShowingSelectBudgetView, content: {
