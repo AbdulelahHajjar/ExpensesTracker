@@ -146,7 +146,13 @@ struct NewDashboardView: View {
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
 		.padding()
-		.background(Color(#colorLiteral(red: 0.9019607843, green: 0.9333333333, blue: 0.9882352941, alpha: 1)).edgesIgnoringSafeArea(.all))
+		.background(
+            LinearGradient(gradient: .init(stops: [.init(color: Color(#colorLiteral(red: 0.8745098039, green: 0.9176470588, blue: 0.9882352941, alpha: 1)), location: 0),
+                                                   .init(color: Color(#colorLiteral(red: 0.9568627451, green: 0.968627451, blue: 0.9882352941, alpha: 1)), location: 0.4)]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+        )
 		.navigationBarTitle("")
 		.navigationBarHidden(true)
 		.overlay(
@@ -162,7 +168,7 @@ struct NewDashboardView: View {
                             .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 10)
                     })
 			}
-            .opacity(0.85)
+            .opacity(1.00)
             .offset(y: 100)
 		)
     }
