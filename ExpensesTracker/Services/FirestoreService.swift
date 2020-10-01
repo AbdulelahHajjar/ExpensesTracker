@@ -109,7 +109,6 @@ class FirestoreService: ObservableObject {
 	
 	private func registerSubscribers() {
 		authService.$authState
-			.receive(on: DispatchQueue.main)
 			.sink {
 				if $0 == .signedOut || $0 == .undetermined {
                     self.removeAllListeners()

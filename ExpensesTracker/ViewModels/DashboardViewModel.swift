@@ -41,13 +41,11 @@ final class DashboardViewModel: ObservableObject {
 	
 	func registerSubscribers() {
 		budgetsRepository.$budgets
-			.receive(on: DispatchQueue.main)
 			.map { $0.filter { $0.status == .active } }
 			.assign(to: \.activeBudgets, on: self)
 			.store(in: &cancellables)
 		
 		expensesRepository.$expenses
-			.receive(on: DispatchQueue.main)
 			.assign(to: \.expenses, on: self)
 			.store(in: &cancellables)
 		
@@ -56,7 +54,6 @@ final class DashboardViewModel: ObservableObject {
 			.store(in: &cancellables)
 		
 		budgetsRepository.$dashboardBudgetID
-			.receive(on: DispatchQueue.main)
 			.map { budgetID in
                 self.activeBudgets.first { $0.id == budgetID } ?? self.activeBudgets.first
 			}
@@ -64,13 +61,11 @@ final class DashboardViewModel: ObservableObject {
 			.store(in: &cancellables)
         
 		$expenses
-			.receive(on: DispatchQueue.main)
 			.map { $0.map { $0.amount }.reduce(0) { $0 + $1 } }
 			.assign(to: \.totalSpendings, on: self)
 			.store(in: &cancellables)
 		
 		$expenses
-			.receive(on: DispatchQueue.main)
 			.map {
                 self.calculateTodaySpendings(date: Date(), expenses: $0)
 			}
@@ -78,7 +73,6 @@ final class DashboardViewModel: ObservableObject {
 			.store(in: &cancellables)
 		
 		$today
-			.receive(on: DispatchQueue.main)
 			.sink { _ in
                 self.todaySpendings = self.calculateTodaySpendings(date: Date(), expenses: self.expenses)
 			}

@@ -24,7 +24,9 @@ final class UserDataRepository: ObservableObject {
 	private func loadUserData(uid: String) {
 		firestoreService.getDocument(collection: .users, documentID: uid, attachListener: true) { (result: Result<UserData, Error>) in
 			switch result {
-            case .success(let user): self.initializeUser(user)
+            case .success(let userData):
+                print("UserDataRepository: Initialized UID \(userData.id)")
+                self.userData = userData
             case .failure(_): self.signOut()
 			}
 		}
@@ -49,25 +51,15 @@ final class UserDataRepository: ObservableObject {
 	// MARK: - Helpers
 	private func registerSubscribers() {
 		authService.$authState
-			.receive(on: DispatchQueue.main)
 			.sink {
 				switch $0 {
                     case .signedIn(let uid): self.loadUserData(uid: uid)
-                    default: self.deInitializeUser()
+                    default:
+                        print("UserDataRepository: Deinitialized UID \(self.userData?.id ?? "[NO ID]")")
+                        self.userData = nil
 				}
                 self.isDeterminingAuthState = $0 == .undetermined ? true : false
 			}
 			.store(in: &cancellables)
-	}
-	
-	private func initializeUser(_ user: UserData) {
-        DispatchQueue.main.async { self.userData = user }
-		print("UserDataRepository: Initialized UID \(user.id)")
-	}
-	
-	private func deInitializeUser() {
-		if userData == nil { return }
-		print("UserDataRepository: Deinitialized UID \(userData?.id ?? "[NO ID]")")
-        DispatchQueue.main.async { self.userData = nil }
 	}
 }

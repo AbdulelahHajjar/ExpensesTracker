@@ -13,12 +13,13 @@ class AuthService: ObservableObject {
 	static let shared                     = AuthService()
 	
 	@Published private(set) var authState : AuthState = .undetermined
+    
 	private var authStateChangeHandler    : AuthStateDidChangeListenerHandle?
 	
 	private init() { registerStateListener() }
 	
 	// MARK: - Authentication Operations
-	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> (Void)) {
+	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> ()) {
 		if Auth.auth().currentUser != nil { return }
 		
 		Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -36,7 +37,7 @@ class AuthService: ObservableObject {
 		}
 	}
 	
-	func signIn(email: String, password: String, completion: @escaping (Error?) -> (Void)) {
+	func signIn(email: String, password: String, completion: @escaping (Error?) -> ()) {
 		if Auth.auth().currentUser != nil { return }
 		
 		Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
@@ -46,6 +47,7 @@ class AuthService: ObservableObject {
 	
 	func signOut() {
 		try? Auth.auth().signOut()
+        self.authState = .signedOut
 	}
 	
 	// MARK: - Helpers
@@ -56,15 +58,11 @@ class AuthService: ObservableObject {
 		
 		authStateChangeHandler = Auth.auth().addStateDidChangeListener { (auth, user) in
 			guard let userID = user?.uid else {
-                self.setAuthState(.signedOut)
+                self.authState = .signedOut
 				return
 			}
 			
-            self.setAuthState(.signedIn(uid: userID))
+            self.authState = .signedIn(uid: userID)
 		}
-	}
-	
-	private func setAuthState(_ authState: AuthState) {
-        DispatchQueue.main.async { self.authState = authState }
 	}
 }
