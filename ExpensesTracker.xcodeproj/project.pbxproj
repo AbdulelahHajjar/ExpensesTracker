@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E5CE6B1A43961A8632860B31 /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */; };
+		E7BC05A2230924BD1343F372 /* Pods_ExpensesTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBEF024F2DC18E569577DCC /* Pods_ExpensesTracker.framework */; };
 		EB13DB7F24FB914000B38B8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13DB7E24FB914000B38B8B /* SettingsView.swift */; };
 		EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB175E8A2514EAE900F84579 /* AppStateRepository.swift */; };
 		EB1F499E25225D2600A6FE9C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1F499D25225D2600A6FE9C /* ChartViewModel.swift */; };
@@ -27,12 +27,12 @@
 		EB2F4A2B2505293B00BC94EC /* ExpensesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */; };
 		EB2F4A2D2505297400BC94EC /* ExpensesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2F4A2C2505297400BC94EC /* ExpensesListViewModel.swift */; };
 		EB2FB10E24F995760088AE1B /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */; };
-		EB4468EC2503E577000275AC /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468EB2503E577000275AC /* DashboardView.swift */; };
 		EB4468EE2503E5E9000275AC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */; };
-		EB44A22925188D4200A20B82 /* NewDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB44A22825188D4200A20B82 /* NewDashboardView.swift */; };
+		EB44A22925188D4200A20B82 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB44A22825188D4200A20B82 /* DashboardView.swift */; };
 		EB77C6AA24F9A6EF00F9D3AA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */; };
 		EB792EA124F99E8F00324B41 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */; };
 		EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB792EA224F99F3000324B41 /* AddExpenseView.swift */; };
+		EB87E40F25246BE000CF931A /* TemporaryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB87E40E25246BE000CF931A /* TemporaryInfoView.swift */; };
 		EB8EEE722504C87000DE9287 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */; };
 		EBDAAA3824F477DD0040E1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */; };
 		EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDAAA3924F477DD0040E1D6 /* SceneDelegate.swift */; };
@@ -58,8 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
-		B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
+		2CBEF024F2DC18E569577DCC /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6985A96E1E7BCB4DB44C0F93 /* Pods-ExpensesTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		EB13DB7E24FB914000B38B8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EB175E8A2514EAE900F84579 /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
 		EB1F499D25225D2600A6FE9C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -79,12 +79,12 @@
 		EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListView.swift; sourceTree = "<group>"; };
 		EB2F4A2C2505297400BC94EC /* ExpensesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListViewModel.swift; sourceTree = "<group>"; };
 		EB2FB10D24F995760088AE1B /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
-		EB4468EB2503E577000275AC /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB4468ED2503E5E9000275AC /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		EB44A22825188D4200A20B82 /* NewDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDashboardView.swift; sourceTree = "<group>"; };
+		EB44A22825188D4200A20B82 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		EB77C6A924F9A6EF00F9D3AA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		EB792EA024F99E8F00324B41 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		EB792EA224F99F3000324B41 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		EB87E40E25246BE000CF931A /* TemporaryInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryInfoView.swift; sourceTree = "<group>"; };
 		EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		EBDAAA3424F477DD0040E1D6 /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDAAA3724F477DD0040E1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		EBF0485024F47A9000A0F04A /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		EBF0485124F47A9000A0F04A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EBF0485224F47A9000A0F04A /* FirestoreListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreListener.swift; sourceTree = "<group>"; };
-		F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpensesTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD5B2D49A5948A4741C6C839 /* Pods-ExpensesTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpensesTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpensesTracker/Pods-ExpensesTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,28 +117,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5CE6B1A43961A8632860B31 /* Pods_ExpensesTracker.framework in Frameworks */,
+				E7BC05A2230924BD1343F372 /* Pods_ExpensesTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00A45E7D0073D7BCF8CCFF51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CBEF024F2DC18E569577DCC /* Pods_ExpensesTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2077BCC545F89FBB3A3397F7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */,
-				B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */,
+				6985A96E1E7BCB4DB44C0F93 /* Pods-ExpensesTracker.debug.xcconfig */,
+				FD5B2D49A5948A4741C6C839 /* Pods-ExpensesTracker.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		6F9E546E669605C4CB32BAC6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F1415302D206EC8514DBCFC1 /* Pods_ExpensesTracker.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EB1A333D24F47934009D5FAC /* Supporting Files */ = {
@@ -187,7 +187,7 @@
 				EBDAAA3624F477DD0040E1D6 /* ExpensesTracker */,
 				EBDAAA3524F477DD0040E1D6 /* Products */,
 				2077BCC545F89FBB3A3397F7 /* Pods */,
-				6F9E546E669605C4CB32BAC6 /* Frameworks */,
+				00A45E7D0073D7BCF8CCFF51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,9 +245,9 @@
 				EB792EA224F99F3000324B41 /* AddExpenseView.swift */,
 				EB22DC4724FB0E6D00EE3EAF /* EditExpenseView.swift */,
 				EB13DB7E24FB914000B38B8B /* SettingsView.swift */,
-				EB4468EB2503E577000275AC /* DashboardView.swift */,
 				EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */,
-				EB44A22825188D4200A20B82 /* NewDashboardView.swift */,
+				EB44A22825188D4200A20B82 /* DashboardView.swift */,
+				EB87E40E25246BE000CF931A /* TemporaryInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -309,11 +309,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBDAAA4824F477DE0040E1D6 /* Build configuration list for PBXNativeTarget "ExpensesTracker" */;
 			buildPhases = (
-				E10DB3A36440F49C1E5F3DD1 /* [CP] Check Pods Manifest.lock */,
+				03B66C93827EA54CF3EA72D4 /* [CP] Check Pods Manifest.lock */,
 				EBDAAA3024F477DD0040E1D6 /* Sources */,
 				EBDAAA3124F477DD0040E1D6 /* Frameworks */,
 				EBDAAA3224F477DD0040E1D6 /* Resources */,
-				E839644334530456362EE930 /* [CP] Embed Pods Frameworks */,
+				1F690BDEF05FF4B10520416B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,7 +372,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E10DB3A36440F49C1E5F3DD1 /* [CP] Check Pods Manifest.lock */ = {
+		03B66C93827EA54CF3EA72D4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -394,7 +394,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E839644334530456362EE930 /* [CP] Embed Pods Frameworks */ = {
+		1F690BDEF05FF4B10520416B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -439,6 +439,7 @@
 				EBF0483724F47A6400A0F04A /* Expense.swift in Sources */,
 				EBF0483C24F47A6D00A0F04A /* SignUpView.swift in Sources */,
 				EBF0483624F47A6400A0F04A /* UserData.swift in Sources */,
+				EB87E40F25246BE000CF931A /* TemporaryInfoView.swift in Sources */,
 				EBF0484A24F47A8300A0F04A /* UserDataRepository.swift in Sources */,
 				EB27213B250578CB000F5B88 /* ExpenseCellViewModel.swift in Sources */,
 				EB27213F250578FC000F5B88 /* ExpenseCellView.swift in Sources */,
@@ -452,11 +453,10 @@
 				EB22532F251F5D4E00CA0595 /* Path+QuadCurve.swift in Sources */,
 				EBDAAA3A24F477DD0040E1D6 /* SceneDelegate.swift in Sources */,
 				EB209960250174BC00CD70F0 /* AddBudgetView.swift in Sources */,
-				EB44A22925188D4200A20B82 /* NewDashboardView.swift in Sources */,
+				EB44A22925188D4200A20B82 /* DashboardView.swift in Sources */,
 				EB175E8B2514EAE900F84579 /* AppStateRepository.swift in Sources */,
 				EB225331251F5D6E00CA0595 /* Date+Extensions.swift in Sources */,
 				EB792EA324F99F3000324B41 /* AddExpenseView.swift in Sources */,
-				EB4468EC2503E577000275AC /* DashboardView.swift in Sources */,
 				EB22DC4624FABD6B00EE3EAF /* BottomSheetView.swift in Sources */,
 				EBF0484F24F47A8A00A0F04A /* AuthService.swift in Sources */,
 				EB13DB7F24FB914000B38B8B /* SettingsView.swift in Sources */,
@@ -529,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -585,9 +585,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -598,7 +599,7 @@
 		};
 		EBDAAA4924F477DE0040E1D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2795BBD955C1BA194D963231 /* Pods-ExpensesTracker.debug.xcconfig */;
+			baseConfigurationReference = 6985A96E1E7BCB4DB44C0F93 /* Pods-ExpensesTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -606,14 +607,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ExpensesTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hajjar.ExpensesTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -624,7 +625,7 @@
 		};
 		EBDAAA4A24F477DE0040E1D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6BB188378BB883BE3277227 /* Pods-ExpensesTracker.release.xcconfig */;
+			baseConfigurationReference = FD5B2D49A5948A4741C6C839 /* Pods-ExpensesTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -632,14 +633,15 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ExpensesTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = TP338A8XKT;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = ExpensesTracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hajjar.ExpensesTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

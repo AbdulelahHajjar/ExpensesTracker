@@ -16,7 +16,7 @@ final class DashboardViewModel: ObservableObject {
 	@Published private var appStateRepository = AppStateRepository.shared
 	
 	@Published private(set) var today = Date()
-	@Published private(set) var dashboardBudget: Budget? = nil
+    @Published private(set) var dashboardBudget: Budget? = .placeholder
 	@Published private(set) var activeBudgets: [Budget] = []
 	@Published private(set) var expenses: [Expense] = []
     

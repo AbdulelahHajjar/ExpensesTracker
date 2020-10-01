@@ -2,106 +2,77 @@
 //  DashboardView.swift
 //  ExpensesTracker
 //
-//  Created by Abdulelah Hajjar on 05/09/2020.
+//  Created by Abdulelah Hajjar on 21/09/2020.
 //  Copyright © 2020 Abdulelah Hajjar. All rights reserved.
 //
 
 import SwiftUI
 
 struct DashboardView: View {
-	@ObservedObject var viewModel: DashboardViewModel
-	
+    @ObservedObject var viewModel: DashboardViewModel
+    
+	@State private var firstColor = Color(#colorLiteral(red: 0, green: 0.5764705882, blue: 0.9137254902, alpha: 1))
+	@State private var secondColor = Color(#colorLiteral(red: 0.5019607843, green: 0.8156862745, blue: 0.7803921569, alpha: 1))
 	@State private var isShowingAddBudgetView = false
-	@State private var isShowingBudgetSelector = false
-	
+    @State private var isShowingSelectBudgetView = false
+    
     var body: some View {
-		VStack(alignment: .center) {
-			
-			Text("Todays is: \(viewModel.today.shortDateTime)")
-			
-			HStack {
-				Button(action: {
-					isShowingBudgetSelector = true
-				}) {
-					Text("Select Budget")
-				}
-				.sheet(isPresented: $isShowingBudgetSelector) {
-					Form {
-						ForEach(viewModel.activeBudgets) { budget in
-							Button(action: {
-								viewModel.setDashboardBudget(id: budget.id)
-								isShowingBudgetSelector = false
-							}) {
-								Text("\(budget.startDate.shortDate) -> \(budget.endDate.shortDate) [\(budget.status.rawValue)]")
-									.foregroundColor(.black)
-							}
-						}
-					}
-					.navigationBarTitle("", displayMode: .inline)
-				}
-				
-				Color.gray.frame(width: 1, height: 10)
-				
-				Button(action: {
-					isShowingAddBudgetView = true
-				}) {
-					Text("Add Budget")
-				}
-				.sheet(isPresented: $isShowingAddBudgetView) {
-					AddBudgetView(viewModel: .init())
-				}
-				
-				Color.gray.frame(width: 1, height: 10)
-				
-				Button(action: {
-					viewModel.deleteDashboardBudget()
-				}) {
-					Text("Delete Budget")
-						.foregroundColor(.red)
-				}
-				.sheet(isPresented: $isShowingAddBudgetView) {
-					AddBudgetView(viewModel: .init())
-				}
-			}
-			
-			if viewModel.dashboardBudget == nil {
-				Text("You currently have no budgets.")
-			} else {
-				VStack(alignment: .leading) {
-					Text("Raw Budget Values:")
-						.fontWeight(.semibold)
-					Text("Name:\t\t\t\t\t\(viewModel.dashboardBudget?.name ?? "[NA]")")
-					Text("Amount:\t\t\t\t\(viewModel.dashboardBudget?.amount ?? -1)")
-					Text("Saving %:\t\t\t\t\(viewModel.dashboardBudget?.savingsPercentage ?? -1)")
-					Text("Start Date:\t\t\t\t\(viewModel.dashboardBudget?.startDate.shortDateTime ?? Date.distantPast.shortDateTime)")
-					Text("End Date:\t\t\t\t\(viewModel.dashboardBudget?.endDate.shortDateTime ?? Date.distantPast.shortDateTime)")
-					Text("Repeat Cycle:\t\t\t\(viewModel.dashboardBudget?.repeatCycle.rawValue ?? "[NA]")")
-					Text("Status:\t\t\t\t\(String(viewModel.dashboardBudget?.status.rawValue ?? "[NA]"))")
-						.padding(.bottom, 8)
-				}
-				
-				NavigationLink(destination: ExpensesListView(viewModel: .init())) {
-					Text("Expenses List For This Budget")
-				}
-				
-				Color.gray
-					.frame(height: 1)
-					.padding(.bottom, 8)
-				
-				Text("Calculated Budget Values:")
-					.fontWeight(.semibold)
-				
-				Text("Daily Spend Limit: \(viewModel.dailySpendLimit ?? -1)")
-				Text("Total Spendings: \(viewModel.totalSpendings ?? -1)")
-				Text("Todays Spendings: \(viewModel.todaySpendings ?? -1)")
-				Spacer()
-			}
-		}
+        ZStack {
+            LinearGradient(gradient: .init(stops: [.init(color: Color(#colorLiteral(red: 0.9019607843, green: 0.9333333333, blue: 0.9882352941, alpha: 1)), location: 0),
+                                                   .init(color: Color(#colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9803921569, alpha: 1)), location: 0.5)]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(alignment: .leading) {
+                if let budget = viewModel.dashboardBudget {
+                    HStack {
+                        Text("Hello, Abdulelah!")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                    }
+                    .padding(.bottom)
+                    
+                    HStack(alignment: .bottom, spacing: 4) {
+                        Text("SR 30.00")
+                            .font(.title)
+                        
+                        Text("+SR 1.50")
+                            .font(.footnote)
+                            .foregroundColor(.green)
+                            .padding(.bottom, 4)
+                    }
+                    
+                    Text("Today's allowance")
+                        .foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
+                        .fontWeight(.light)
+                    
+                    ChartView(viewModel: .init(rawData: budget.insights.dailySpendings), isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
+                        .frame(height: 200)
+                    
+                    Spacer()
+                }
+            }
+            .padding()
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .overlay(
+                BottomSheetView {
+                    Text("I will have content soon!")
+                }
+                .opacity(1.00)
+                .offset(y: 0.08 * screen.height)
+            )
+        }
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
+struct NewDashboardView_Previews: PreviewProvider {
     static var previews: some View {
-		DashboardView(viewModel: .init())
+		NavigationView {
+            DashboardView(viewModel: .init())
+		}
     }
 }
