@@ -86,6 +86,7 @@ final class ExpensesRepository: ObservableObject {
 	
 	private func registerSubscribers() {
 		budgetsRepository.$dashboardBudgetID
+			.receive(on: DispatchQueue.main)
 			.sink {
                 if $0 != self.currentBudgetID && $0 != nil {
                     self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)

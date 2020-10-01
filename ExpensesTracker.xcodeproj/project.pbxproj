@@ -39,7 +39,6 @@
 		EBDAAA3E24F477DE0040E1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA3D24F477DE0040E1D6 /* Assets.xcassets */; };
 		EBDAAA4124F477DE0040E1D6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA4024F477DE0040E1D6 /* Preview Assets.xcassets */; };
 		EBDAAA4424F477DE0040E1D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA4224F477DE0040E1D6 /* LaunchScreen.storyboard */; };
-		EBEA14DC2525EBFB00A1FB57 /* TimersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEA14DB2525EBFB00A1FB57 /* TimersService.swift */; };
 		EBF0483324F47A3800A0F04A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF0483224F47A3800A0F04A /* GoogleService-Info.plist */; };
 		EBF0483624F47A6400A0F04A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF0483424F47A6400A0F04A /* UserData.swift */; };
 		EBF0483724F47A6400A0F04A /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF0483524F47A6400A0F04A /* Expense.swift */; };
@@ -94,7 +93,6 @@
 		EBDAAA4024F477DE0040E1D6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EBDAAA4324F477DE0040E1D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBDAAA4524F477DE0040E1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBEA14DB2525EBFB00A1FB57 /* TimersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersService.swift; sourceTree = "<group>"; };
 		EBF0483224F47A3800A0F04A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBF0483424F47A6400A0F04A /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		EBF0483524F47A6400A0F04A /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 				EBF0484D24F47A8A00A0F04A /* AuthService.swift */,
 				EBF0484C24F47A8A00A0F04A /* FirestoreService.swift */,
 				EB8EEE712504C87000DE9287 /* UserDefaultsService.swift */,
-				EBEA14DB2525EBFB00A1FB57 /* TimersService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -424,7 +421,6 @@
 				EB22DC4824FB0E6D00EE3EAF /* EditExpenseView.swift in Sources */,
 				EB209954250166C800CD70F0 /* BudgetsRepository.swift in Sources */,
 				EB2099562501671900CD70F0 /* Budget.swift in Sources */,
-				EBEA14DC2525EBFB00A1FB57 /* TimersService.swift in Sources */,
 				EBF0483D24F47A6D00A0F04A /* SignInView.swift in Sources */,
 				EBF0485424F47A9000A0F04A /* Extensions.swift in Sources */,
 				EBF0484E24F47A8A00A0F04A /* FirestoreService.swift in Sources */,

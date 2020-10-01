@@ -29,12 +29,14 @@ final class BudgetsRepository: ObservableObject {
 	// MARK: - Combine
 	private func registerSubscribers() {
 		userDataRepository.$userData
+			.receive(on: DispatchQueue.main)
 			.sink {
                 if $0 != nil { self.loadBudgets() }
-            }
-            .store(in: &cancellables)
+		}
+		.store(in: &cancellables)
 		
 		$budgets
+			.receive(on: DispatchQueue.main)
 			.debounce(for: 1.0, scheduler: RunLoop.main)
 			.map { $0.filter { $0.status != .archived } }
             .sink { self.refreshBudgetTimers(budgets: $0) }

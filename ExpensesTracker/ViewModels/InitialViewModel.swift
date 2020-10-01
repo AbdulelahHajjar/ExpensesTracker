@@ -21,10 +21,12 @@ class InitialViewModel: ObservableObject {
 	
 	private func registerSubscribers() {
 		userDataRepository.$userData
+			.receive(on: DispatchQueue.main)
             .sink { self.showHomeView.send($0 != nil) }
 			.store(in: &cancellables)
 		
 		userDataRepository.$isDeterminingAuthState
+			.receive(on: DispatchQueue.main)
 			.debounce(for: 1.5, scheduler: RunLoop.main)
 			.assign(to: \.extendLaunchScreen, on: self)
 			.store(in: &cancellables)

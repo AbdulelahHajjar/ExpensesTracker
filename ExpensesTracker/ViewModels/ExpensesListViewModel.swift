@@ -19,6 +19,7 @@ final class ExpensesListViewModel: ObservableObject {
 	
 	private func registerSubscribers() {
 		expensesRepository.$expenses
+			.receive(on: DispatchQueue.main)
 			.map { expenses in
 				expenses.map { ExpenseCellViewModel(expense: $0) }
 			}
