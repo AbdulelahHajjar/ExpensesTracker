@@ -8,16 +8,15 @@
 
 import Foundation
 
-class SignUpViewModel: ObservableObject {
+final class SignUpViewModel: ObservableObject {
 	@Published private var userDataRepository = UserDataRepository.shared
 	
-	@Published var displayName  	= ""
+	@Published var firstName  	= ""
+    @Published var lastName = ""
 	@Published var email    = ""
 	@Published var password = ""
 	
 	func signUp(completion: @escaping (Error?) -> (Void)) {
-		userDataRepository.signUp(displayName: displayName, email: email, password: password) { error in
-			
-		}
+        userDataRepository.signUp(firstName: firstName, lastName: lastName, email: email, password: password, completion: completion)
 	}
 }

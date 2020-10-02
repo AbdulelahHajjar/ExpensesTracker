@@ -19,7 +19,7 @@ final class AddExpenseViewModel: ObservableObject {
 	var doubleAmount: Double { Double(amount) ?? -1 }
 	
 	func addExpense() {
-		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+        guard let budgetID = budgetsRepository.dashboardBudget?.id else { return }
 		let expense = Expense(id: UUID().uuidString, amount: doubleAmount, date: date)
 		expensesRepository.addExpense(expense: expense, budgetID: budgetID) { error in
 			// TODO: Error handling

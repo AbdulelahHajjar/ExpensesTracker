@@ -13,6 +13,7 @@ final class ExpensesRepository: ObservableObject {
 	static let shared                         = ExpensesRepository()
 
 	@Published private(set) var expenses      = [Expense]()
+    
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
 	@Published private var budgetsRepository = BudgetsRepository.shared
@@ -72,27 +73,30 @@ final class ExpensesRepository: ObservableObject {
 		guard let userID = userID, let budgetID = budgetID else { return }
 		
 		firestoreService.getDocuments(collection: .users_budgets_expenses(userID: userID, budgetID: budgetID), attachListener: true) { (result: Result<[Expense], Error>) in
-			DispatchQueue.main.async {
-				switch result {
-					case .success(let expenses):
-                        self.expenses = expenses
-                        print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s"), for Budget: \(String(describing: self.budgetsRepository.dashboardBudgetID))")
-					case .failure(_):
-                        self.expenses = []
-				}
-			}
+            switch result {
+                case .success(let expenses):
+                    self.setExpenses(expenses)
+                    print("ExpensesRepository: Downloaded \(expenses.count) Expense\(expenses.count == 1 ? "" : "s"), for Budget: \(String(describing: budgetID))")
+                case .failure(_):
+                    self.setExpenses([])
+            }
 		}
 	}
 	
 	private func registerSubscribers() {
-		budgetsRepository.$dashboardBudgetID
+		budgetsRepository.$dashboardBudget
 			.receive(on: DispatchQueue.main)
 			.sink {
-                if $0 != self.currentBudgetID && $0 != nil {
-                    self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0)
+                if $0?.id != self.currentBudgetID && $0 != nil {
+                    self.loadExpenses(userID: self.userDataRepository.userData?.id, budgetID: $0?.id)
                 }
-                self.currentBudgetID = $0
+                self.currentBudgetID = $0?.id
 			}
 			.store(in: &cancellables)
 	}
+    
+    // MARK: - Setters
+    private func setExpenses(_ expenses: [Expense]) {
+        DispatchQueue.main.async { self.expenses = expenses }
+    }
 }

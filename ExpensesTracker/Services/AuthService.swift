@@ -9,7 +9,7 @@
 import Firebase
 import Combine
 
-class AuthService: ObservableObject {
+final class AuthService: ObservableObject {
 	static let shared                     = AuthService()
 	
 	@Published private(set) var authState : AuthState = .undetermined
@@ -18,7 +18,7 @@ class AuthService: ObservableObject {
 	private init() { registerStateListener() }
 	
 	// MARK: - Authentication Operations
-	func signUp(displayName: String, email: String, password: String, completion: @escaping (Error?) -> (Void)) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, completion: @escaping (Error?) -> (Void)) {
 		if Auth.auth().currentUser != nil { return }
 		
 		Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -26,12 +26,12 @@ class AuthService: ObservableObject {
 				completion(error ?? FirestoreError.unknown)
 				return
 			}
-			
+            let firestoreUser = UserData(id: authUser.uid, firstName: firstName, lastName: lastName, email: email)
+
 			let profileChangeRequest = authUser.createProfileChangeRequest()
-			profileChangeRequest.displayName = displayName
+            profileChangeRequest.displayName = firestoreUser.fullName
 			profileChangeRequest.commitChanges { _ in }
 			
-			let firestoreUser = UserData(id: authUser.uid, email: email, displayName: displayName)
 			FirestoreService.shared.saveDocument(collection: .users, model: firestoreUser, completion: completion)
 		}
 	}
@@ -64,7 +64,9 @@ class AuthService: ObservableObject {
 		}
 	}
 	
+    //MARK: - Setters
 	private func setAuthState(_ authState: AuthState) {
         DispatchQueue.main.async { self.authState = authState }
 	}
 }
+

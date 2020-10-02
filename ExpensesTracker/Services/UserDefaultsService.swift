@@ -50,7 +50,7 @@ final class UserDefaultsService: ObservableObject {
 extension UserDefaults {
 	enum Keys {
 		enum Budgets: String {
-			case dashboardBudgetID = "lastViewedBudgetID"
+			case dashboardBudgetID = "dashboardBudgetID"
 		}
 	}
 }

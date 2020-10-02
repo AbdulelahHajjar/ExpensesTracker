@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @ObservedObject var viewModel: DashboardViewModel
+    @ObservedObject var viewModel: NewDashboardViewModel
     
 	@State private var firstColor = Color(#colorLiteral(red: 0, green: 0.5764705882, blue: 0.9137254902, alpha: 1))
 	@State private var secondColor = Color(#colorLiteral(red: 0.5019607843, green: 0.8156862745, blue: 0.7803921569, alpha: 1))
@@ -25,35 +25,37 @@ struct DashboardView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
-                if let budget = viewModel.dashboardBudget {
-                    HStack {
-                        Text("Hello, Abdulelah!")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                    }
-                    .padding(.bottom)
-                    
-                    HStack(alignment: .bottom, spacing: 4) {
-                        Text("SR 30.00")
-                            .font(.title)
-                        
-                        Text("+SR 1.50")
-                            .font(.footnote)
-                            .foregroundColor(.green)
-                            .padding(.bottom, 4)
-                    }
-                    
-                    Text("Today's allowance")
-                        .foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
-                        .fontWeight(.light)
-                    
-                    ChartView(viewModel: .init(rawData: budget.insights.dailySpendings), isCurvedLine: true, firstColor: firstColor, secondColor: secondColor)
-                        .frame(height: 200)
+                HStack {
+                    Text("Hello, \(viewModel.displayName ?? "NO NAME")!")
+                        .font(.title)
+                        .fontWeight(.semibold)
                     
                     Spacer()
                 }
+                .padding(.bottom)
+                
+                HStack(alignment: .bottom, spacing: 4) {
+                    Text("SR 30.00")
+                        .font(.title)
+                    
+//                    Text("+SR 1.50")
+//                        .font(.footnote)
+//                        .foregroundColor(.green)
+//                        .padding(.bottom, 4)
+                }
+                
+                Text("Today's allowance")
+                    .foregroundColor(Color(#colorLiteral(red: 0.4745098039, green: 0.4745098039, blue: 0.4745098039, alpha: 1)))
+                    .fontWeight(.light)
+                    .padding(.bottom)
+                
+                
+
+                if let viewModel = viewModel.budgetInsightsChartViewModel {
+                    BudgetInsightsChartView(viewModel: viewModel)
+                }
+                
+                Spacer()
             }
             .padding()
             .navigationBarTitle("")
@@ -62,7 +64,7 @@ struct DashboardView: View {
                 BottomSheetView {
                     Text("I will have content soon!")
                 }
-                .opacity(1.00)
+                .opacity(0.00)
                 .offset(y: 0.08 * screen.height)
             )
         }
@@ -74,5 +76,52 @@ struct NewDashboardView_Previews: PreviewProvider {
 		NavigationView {
             DashboardView(viewModel: .init())
 		}
+    }
+}
+
+struct BudgetInsightsChartView: View {
+    @ObservedObject var viewModel: BudgetInsightsChartViewModel
+    
+    var body: some View {
+        ChartView(sortedRepresentableKeys: viewModel.sortedRepresentableKeys,
+                  valuesSortedByKeys: viewModel.valuesSortedByKeys,
+                  isCurvedLine: true,
+                  firstColor: .blue,
+                  secondColor: .purple)
+            .overlay(
+                VStack {
+                    HStack {
+                        Button(action: { viewModel.goToPreviousPage() }, label: {
+                            Image(systemName: "chevron.left")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 18, height: 18)
+                        })
+                        
+                        Spacer()
+                        
+                        Text("\(viewModel.currentChartDate.shortDate) - \(viewModel.endDate.shortDate)")
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                        
+                        Button(action: { viewModel.goToNextPage() }, label: {
+                            Image(systemName: "chevron.right")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 18, height: 18)
+                        })
+
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.white.opacity(0.75))
+                    .frame(width: 240)
+                    .cornerRadius(32)
+                    .shadow(color: Color.black.opacity(0.15), radius: 10, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 8)
+                    .shadow(color: Color.black.opacity(0.10), radius: 1, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 1)
+                    Spacer()
+                }
+            )
     }
 }

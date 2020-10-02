@@ -28,8 +28,8 @@ final class DashboardViewModel: ObservableObject {
 	
 	init() { registerSubscribers() }
 	
-	func setDashboardBudget(id: String) {
-		budgetsRepository.updateDashboardBudgetID(id: id)
+	func setDashboardBudget(budget: Budget) {
+        budgetsRepository.setDashboardBudget(budget: budget)
 	}
 	
 	func deleteDashboardBudget() {
@@ -55,11 +55,8 @@ final class DashboardViewModel: ObservableObject {
 			.assign(to: \.today, on: self)
 			.store(in: &cancellables)
 		
-		budgetsRepository.$dashboardBudgetID
+		budgetsRepository.$dashboardBudget
 			.receive(on: DispatchQueue.main)
-			.map { budgetID in
-                self.activeBudgets.first { $0.id == budgetID } ?? self.activeBudgets.first
-			}
 			.assign(to: \.dashboardBudget, on: self)
 			.store(in: &cancellables)
         

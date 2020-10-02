@@ -19,7 +19,7 @@ final class ExpenseCellViewModel: ObservableObject, Identifiable {
 	}
 	
 	func deleteExpense() {
-		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+        guard let budgetID = budgetsRepository.dashboardBudget?.id else { return }
 		expensesRepository.deleteExpense(expense: expense, budgetID: budgetID) { error in
 			// TODO: Implement error handling
 		}

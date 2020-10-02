@@ -14,8 +14,8 @@ final class BudgetsRepository: ObservableObject {
 	static let shared                         = BudgetsRepository()
 	
     @Published private(set) var budgets       = [Budget]()
+	@Published private(set) var dashboardBudget: Budget? = nil
     
-	@Published private(set) var dashboardBudgetID: String? = nil
 	@Published private var firestoreService   = FirestoreService.shared
 	@Published private var userDataRepository = UserDataRepository.shared
 	@Published private var userDefaultsService = UserDefaultsService.shared
@@ -64,7 +64,7 @@ final class BudgetsRepository: ObservableObject {
         
 		firestoreService.saveDocument(collection: .users_budgets(userID: user.id), model: budget) { error in
 			if error == nil {
-                self.updateDashboardBudgetID(id: budget.id)
+                self.setDashboardBudget(budget: budget)
 			}
 			completion(error)
 		}
@@ -84,39 +84,35 @@ final class BudgetsRepository: ObservableObject {
 		guard let userID = userDataRepository.userData?.id else { return }
 		
 		firestoreService.getDocuments(collection: .users_budgets(userID: userID), attachListener: true) { (result: Result<[Budget], Error>) in
-			DispatchQueue.main.async {
-				switch result {
-				case .success(let budgets):
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let budgets):
                     self.budgets = budgets
-                    self.setDashboardBudgetID()
-					print("BudgetsRepository: Downloaded \(budgets.count) Budget\(budgets.count == 1 ? "" : "s")")
-				case .failure(_): break
-				}
-			}
+                    self.loadDashboardBudget()
+                    print("BudgetsRepository: Downloaded \(budgets.count) Budget\(budgets.count == 1 ? "" : "s")")
+                case .failure(_):
+                    self.budgets = []
+                }
+            }
 		}
 	}
 	
-	// MARK: - Helpers
-	func updateDashboardBudgetID(id: String) {
-        if dashboardBudgetID == id { return }
-		dashboardBudgetID = id
-		userDefaultsService.save(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue, value: id)
+    // MARK: - Setters
+	func setDashboardBudget(budget: Budget) {
+        if dashboardBudget?.id == budget.id { return }
+		dashboardBudget = budget
+        userDefaultsService.save(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue, value: budget.id)
 	}
 	
-	private func setDashboardBudgetID() {
-        guard let id = userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String, budgetExists(with: id) else {
-            dashboardBudgetID = budgets.first { $0.status == .active }?.id
+	private func loadDashboardBudget() {
+        guard let id = userDefaultsService.retrieve(key: UserDefaults.Keys.Budgets.dashboardBudgetID.rawValue) as? String,
+              let budget = budgets.first(where: { $0.id == id }) else {
+            #warning("If this gets called before budgets download it will always put nil, it should be called when ever new budgets come in (if there was no dashboard budget)")
+            dashboardBudget = budgets.first { $0.status == .active }
             return
         }
-        dashboardBudgetID = id
+        dashboardBudget = budget
 	}
-    
-    private func budgetExists(with id: String) -> Bool {
-        for budget in budgets.filter({ $0.status == .active }) {
-            if budget.id == id { return true }
-        }
-        return false
-    }
 	
 	// MARK: - Timers
 	private func refreshBudgetTimers(budgets: [Budget]) {
@@ -157,7 +153,9 @@ final class BudgetsRepository: ObservableObject {
 		guard var budget = sender.userInfo as? Budget else { return }
 		print("Archiving Budget \(budget) with Repeat Cycle \(budget.repeatCycle) at \(budget.endDate)")
 		budget.archive()
-		updateBudget(budget) { error in
+        
+        #warning("Handle error")
+        updateBudget(budget) { error in
 			// TODO: Handle
 		}
 	}
@@ -167,6 +165,8 @@ final class BudgetsRepository: ObservableObject {
 		guard var budget = sender.userInfo as? Budget else { return }
 		print("Activating Budget \(budget) with Repeat Cycle \(budget.repeatCycle) at \(budget.startDate)")
 		budget.activate()
+        
+        #warning("Handle error")
 		updateBudget(budget) { error in
 			// TODO: Handle
 		}
@@ -185,6 +185,8 @@ final class BudgetsRepository: ObservableObject {
 							   repeatCycle: currentBudget.repeatCycle,
 							   startDate: currentBudget.endDate)!
 		currentBudget.archive()
+        
+        #warning("Handle error")
 		updateBudget(currentBudget) { error in
             self.addBudget(newBudget) { error in
 				

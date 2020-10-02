@@ -47,11 +47,8 @@ struct BottomSheetView<Content: View>: View {
 						}
 					}
 					.onEnded { value in
-						print(value.translation.height)
-						print(isExtended)
 						withAnimation(.easeInOut(duration: 0.24)) {
 							if value.translation.height < -80 && !isExtended {
-								print("here")
 								isExtended = true
 							}
 							else if value.translation.height > 80 && isExtended {

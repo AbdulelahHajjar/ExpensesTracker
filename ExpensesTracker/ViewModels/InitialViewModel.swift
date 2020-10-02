@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import Combine
 
-class InitialViewModel: ObservableObject {
+final class InitialViewModel: ObservableObject {
 	
 	@Published private var userDataRepository = UserDataRepository.shared
 	@Published private(set) var extendLaunchScreen = true

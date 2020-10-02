@@ -10,7 +10,10 @@ import Firebase
 import FirebaseFirestoreSwift
 import Combine
 
-class FirestoreService: ObservableObject {
+#warning("Implement proper completion handler errors.")
+#warning("Implement firestore transactions.")
+
+final class FirestoreService: ObservableObject {
 	static let shared                  = FirestoreService()
 	
 	@Published private var authService = AuthService.shared

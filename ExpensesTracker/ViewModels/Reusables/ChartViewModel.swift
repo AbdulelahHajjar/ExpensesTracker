@@ -9,18 +9,20 @@
 import Foundation
 import Combine
 
-final class ChartViewModel: ObservableObject {
-    private(set) var sortedRepresentableKeys: [String] = []
-    private(set) var valuesSortedByKeys: [Double] = []
+final class BudgetInsightsChartViewModel: ObservableObject {
+    
 
     private var rawData: [Date : Double]
     private var cancellables = Set<AnyCancellable>()
     
-    init(rawData: [Date : Double]) {
-        let representableData = Dictionary(uniqueKeysWithValues: rawData.map { key, value in (key.shortDate, value) })
-        sortedRepresentableKeys = Array(rawData.keys.sorted()).map { $0.shortDate }
-        valuesSortedByKeys = sortedRepresentableKeys.compactMap { representableData[$0] }
-        self.rawData = rawData
+    init(sortedRepresentableKeys: [String], valuesSortedByKeys: Double) {
+//        let representableData = Dictionary(uniqueKeysWithValues: rawData.map { key, value in (key.shortDate, value) })
+//        sortedRepresentableKeys = Array(rawData.keys.sorted()).map { $0.shortDate }
+//        valuesSortedByKeys = sortedRepresentableKeys.compactMap { representableData[$0] }
+//        self.rawData = rawData
+        
+        self.sortedRepresentableKeys = sortedRepresentableKeys
+        self.valuesSortedByKeys = valuesSortedByKeys
     }
     
 //    func registerSubscribers() {

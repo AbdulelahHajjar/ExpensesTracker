@@ -162,6 +162,13 @@ extension Budget {
             dailySpendings[dateKey] = (dailySpendings[dateKey] ?? 0) + amount
         }
         
+        func spendingsInDay(of date: Date) -> Double? {
+            for dailySpendingsDate in Array(dailySpendings.keys) {
+                if Calendar.current.isDate(dailySpendingsDate, inSameDayAs: date) { return dailySpendings[dailySpendingsDate] }
+            }
+            return nil
+        }
+        
         
         static func generateDailySpendings(startDate: Date, endDate: Date) -> [Date : Double]? {
             var date = startDate

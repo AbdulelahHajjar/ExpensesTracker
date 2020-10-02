@@ -1,8 +1,8 @@
 import SwiftUI
-import Combine
 
-public struct ChartView: View {
-    @ObservedObject var viewModel: ChartViewModel
+struct ChartView: View {    
+    var sortedRepresentableKeys: [String]
+    var valuesSortedByKeys: [Double]
     
     var isCurvedLine : Bool
     var firstColor: Color
@@ -17,19 +17,19 @@ public struct ChartView: View {
     
     var currentKey: String? {
         guard let index = currentPointIndex else { return nil }
-        return viewModel.sortedRepresentableKeys[index]
+        return sortedRepresentableKeys[index]
     }
     
     var currentValue: Double? {
         guard let index = currentPointIndex else { return nil }
-        return viewModel.valuesSortedByKeys[index]
+        return valuesSortedByKeys[index]
     }
     
     var indicatorBoxHorizontalOffset: CGFloat {
         if currentPointIndex == 1 { return 12 }
         else if currentPointIndex == 0 { return 24 }
-        else if currentPointIndex == viewModel.sortedRepresentableKeys.count - 1 { return -24 }
-        else if currentPointIndex == viewModel.sortedRepresentableKeys.count - 2 { return -12 }
+        else if currentPointIndex == sortedRepresentableKeys.count - 1 { return -24 }
+        else if currentPointIndex == sortedRepresentableKeys.count - 2 { return -12 }
         return 0
     }
     
@@ -41,11 +41,11 @@ public struct ChartView: View {
 				linePathView
 					.overlay(
 						HStack {
-                            ForEach(viewModel.sortedRepresentableKeys.indices, id: \.self) { index in
+                            ForEach(sortedRepresentableKeys.indices, id: \.self) { index in
 								Color.black.opacity(0.1)
-									.frame(width: 1)
+                                    .frame(width: 1.0)
                                 
-                                if index != viewModel.sortedRepresentableKeys.count - 1 { Spacer() }
+                                if index != sortedRepresentableKeys.count - 1 { Spacer() }
 							}
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
@@ -101,7 +101,7 @@ public struct ChartView: View {
 				DragGesture()
 					.onChanged { value in
 						guard let nearestValueIndex = nearestValueIndex(to: nearestPointOnGraph(to: value.location)) else { return }
-                        let currentValue = viewModel.valuesSortedByKeys[nearestValueIndex]
+                        let currentValue = valuesSortedByKeys[nearestValueIndex]
                         let indicatorPosition = nearestStep(touchLocation: value.location, value: currentValue)
 						
                         if indicatorPosition != self.indicatorPosition {
@@ -123,20 +123,20 @@ public struct ChartView: View {
 
 // MARK: - Private functions
 extension ChartView {
-    var step: CGPoint { return getStep(frame: frame, data: viewModel.valuesSortedByKeys) }
+    var step: CGPoint { return getStep(frame: frame, data: valuesSortedByKeys) }
 	
 	var path: Path {
 		if isCurvedLine {
-            return Path.quadCurvedPathWithPoints(points: viewModel.valuesSortedByKeys, step: step, globalOffset: nil)
+            return Path.quadCurvedPathWithPoints(points: valuesSortedByKeys, step: step, globalOffset: nil)
 		}
-        return Path.linePathWithPoints(points: viewModel.valuesSortedByKeys, step: step)
+        return Path.linePathWithPoints(points: valuesSortedByKeys, step: step)
 	}
 	
 	var closedPath: Path {
 		if isCurvedLine {
-            return Path.quadClosedCurvedPathWithPoints(points: viewModel.valuesSortedByKeys, step: step, globalOffset: nil)
+            return Path.quadClosedCurvedPathWithPoints(points: valuesSortedByKeys, step: step, globalOffset: nil)
 		}
-        return Path.closedLinePathWithPoints(points: viewModel.valuesSortedByKeys, step: step)
+        return Path.closedLinePathWithPoints(points: valuesSortedByKeys, step: step)
 	}
 	
 	private func nearestPointOnGraph(to point: CGPoint) -> CGPoint {
@@ -144,14 +144,14 @@ extension ChartView {
 	}
 	
 	private func nearestValue(to point: CGPoint) -> Double? {
-        guard let index = nearestValueIndex(to: point), index < viewModel.valuesSortedByKeys.count, index >= 0 else { return nil }
-        return viewModel.valuesSortedByKeys[index]
+        guard let index = nearestValueIndex(to: point), index < valuesSortedByKeys.count, index >= 0 else { return nil }
+        return valuesSortedByKeys[index]
 	}
     
     private func nearestValueIndex(to point: CGPoint) -> Int? {
         if step.x == 0 { return nil }
         let index = Int(round((point.x) / step.x))
-        if (index >= 0 && index < viewModel.valuesSortedByKeys.count) {
+        if (index >= 0 && index < valuesSortedByKeys.count) {
             return index
         }
         return nil
@@ -217,11 +217,11 @@ extension ChartView {
 	}
 }
 
-struct Chart_Previews: PreviewProvider {
-	static var previews: some View {
-        ChartView(viewModel: .init(rawData: [Date() : 1.0, Date().byAddingDays(1) : 2.0]), isCurvedLine: true, firstColor: .blue, secondColor: .purple)
-	}
-}
+//struct Chart_Previews: PreviewProvider {
+//	static var previews: some View {
+//        ChartView(viewModel: .init(rawData: [Date() : 1.0, Date().byAddingDays(1) : 2.0, Date().byAddingDays(2) : 1.0]), isCurvedLine: true, firstColor: .blue, secondColor: .purple)
+//	}
+//}
 
 extension Dictionary where Value: Equatable {
     func someKey(forValue val: Value) -> Key? {

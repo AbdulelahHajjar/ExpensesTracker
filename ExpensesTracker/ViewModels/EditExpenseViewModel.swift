@@ -25,7 +25,7 @@ final class EditExpenseViewModel: ObservableObject {
 	}
 	
 	func updateExpense() {
-		guard let budgetID = budgetsRepository.dashboardBudgetID else { return }
+        guard let budgetID = budgetsRepository.dashboardBudget?.id else { return }
 		expense.amount = Double(amount) ?? -1
         expense.updateDate(date)
 		expensesRepository.updateExpense(expense: expense, budgetID: budgetID) { error in
