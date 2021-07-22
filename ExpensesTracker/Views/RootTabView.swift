@@ -11,6 +11,12 @@ import SwiftUI
 struct RootTabView: View {
     var body: some View {
 		TabView {
+            BudgetsView()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Budgets")
+                }
+            
             DashboardView(viewModel: .init())
 				.tabItem {
 					Image(systemName: "house")

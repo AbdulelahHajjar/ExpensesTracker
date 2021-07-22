@@ -40,6 +40,7 @@
 		EBDAAA3E24F477DE0040E1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA3D24F477DE0040E1D6 /* Assets.xcassets */; };
 		EBDAAA4124F477DE0040E1D6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA4024F477DE0040E1D6 /* Preview Assets.xcassets */; };
 		EBDAAA4424F477DE0040E1D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDAAA4224F477DE0040E1D6 /* LaunchScreen.storyboard */; };
+		EBE3FB852605762400828011 /* BudgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3FB842605762400828011 /* BudgetsView.swift */; };
 		EBF0483324F47A3800A0F04A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBF0483224F47A3800A0F04A /* GoogleService-Info.plist */; };
 		EBF0483624F47A6400A0F04A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF0483424F47A6400A0F04A /* UserData.swift */; };
 		EBF0483724F47A6400A0F04A /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF0483524F47A6400A0F04A /* Expense.swift */; };
@@ -95,6 +96,7 @@
 		EBDAAA4024F477DE0040E1D6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EBDAAA4324F477DE0040E1D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBDAAA4524F477DE0040E1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBE3FB842605762400828011 /* BudgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsView.swift; sourceTree = "<group>"; };
 		EBF0483224F47A3800A0F04A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBF0483424F47A6400A0F04A /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		EBF0483524F47A6400A0F04A /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				EB2F4A2A2505293B00BC94EC /* ExpensesListView.swift */,
 				EB44A22825188D4200A20B82 /* DashboardView.swift */,
 				EB87E40E25246BE000CF931A /* TemporaryInfoView.swift */,
+				EBE3FB842605762400828011 /* BudgetsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				EBF0483724F47A6400A0F04A /* Expense.swift in Sources */,
 				EBF0483C24F47A6D00A0F04A /* SignUpView.swift in Sources */,
 				EBF0483624F47A6400A0F04A /* UserData.swift in Sources */,
+				EBE3FB852605762400828011 /* BudgetsView.swift in Sources */,
 				EB87E40F25246BE000CF931A /* TemporaryInfoView.swift in Sources */,
 				EBF0484A24F47A8300A0F04A /* UserDataRepository.swift in Sources */,
 				EB27213B250578CB000F5B88 /* ExpenseCellViewModel.swift in Sources */,

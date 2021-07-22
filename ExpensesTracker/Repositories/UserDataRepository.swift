@@ -50,12 +50,12 @@ final class UserDataRepository: ObservableObject {
 	private func registerSubscribers() {
 		authService.$authState
 			.receive(on: DispatchQueue.main)
-			.sink {
-				switch $0 {
+			.sink { state in
+				switch state {
                     case .signedIn(let uid): self.loadUserData(uid: uid)
                     default: self.deInitializeUser()
 				}
-                self.isDeterminingAuthState = $0 == .undetermined ? true : false
+                self.isDeterminingAuthState = state == .undetermined ? true : false
 			}
 			.store(in: &cancellables)
 	}
